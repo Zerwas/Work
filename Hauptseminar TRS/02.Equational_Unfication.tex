@@ -1,0 +1,14 @@
+\section{Equational Unification}
+\begin{definition}
+An \textbf{E-unification Problem} over $\Sigma$ is a finite set $S$ of the form $S=\left\lbrace s_1\approxq_{E} t_1,\dots,s_n\approxq_{E} t_n\right\rbrace $ with $s_1,\dots,s_n,t_1,\dots,t_n \in T(\Sigma,V)$, V being a countable set of Variables.\\
+A substitution $\sigma$ is an \textbf{E-unifier} of $S$ iff $ \sigma(s_i)\approx_E \sigma(t_i)$ for all $1\leq i \leq n$.
+The set of all E-unifiers of $S$ is denoted by $\mathcal{U}_E(S)$. S is \textbf{E-unifiable} iff $\mathcal{U}_E(S)\neq \emptyset$.
+\end{definition}
+\begin{definition}
+Let $S$ be an E-unification problem over $\Sigma$.
+\begin{itemize}
+\item S is an \textbf{elementary} E-unification problem iff $\mathcal{S}ig(E)=\Sigma$
+\item S is an E-unification problem \textbf{with constants} iff $\Sigma-\mathcal{S}ig(E)\subseteq\Sigma^{(0)}$
+\item S is an \textbf{general} E-unification problem iff $\Sigma-\mathcal{S}ig(E)$ contains an at least unary function symbol.
+\end{itemize}
+\end{definition}
