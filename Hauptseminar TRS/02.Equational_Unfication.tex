@@ -1,5 +1,5 @@
 \section{Equational Unification}
-In the following let $E$ be a set of identities of the form $\left\lbrace  e_1\approx f_1,\dots,e_n\approx f_n \right\rbrace$. Furthermore let $\mathcal{S}ig(E)$ denote the set of all function symbols occurring in $E$. 
+In the following let $E$ be a set of identities of the form $\left\lbrace  e_1\approx f_1,\dots,e_n\approx f_n \right\rbrace$. Furthermore let $\mathcal{S}ig(E)$ denote the set of all function symbols occurring in $E$. Let $\Sigma$ be a finite set of function symbols and a superset of $\mathcal{S}ig(E)$.
 \begin{definition}
 An \textbf{$E$-unification Problem} over $\Sigma$ is a finite set $S$ of the form $S=\left\lbrace s_1\approxq_{E} t_1,\dots,s_n\approxq_{E} t_n\right\rbrace $ with $s_1,\dots,s_n,t_1,\dots,t_n \in T(\Sigma,V)$, $V$ being a countable set of Variables.\\
 A substitution $\sigma$ is an \textbf{$E$-unifier} of $S$ iff $ \sigma(s_i)\approx_E \sigma(t_i)$ for all $1\leq i \leq n$.
@@ -13,3 +13,7 @@ Let $S$ be an $E$-unification problem over $\Sigma$.
 \item $S$ is an \textbf{general} $E$-unification problem iff $\Sigma-\mathcal{S}ig(E)$ contains an at least unary function symbol.
 \end{itemize}
 \end{definition}
+\begin{definition}
+Let $X$ be a set of Variables. A substitution $\sigma$ is \textbf{more general} modulo $\approx_E$ than a substitution $\sigma'$ on $X$ iff there is a substitution $\delta$ such that $\delta(\sigma(x))\approx_E\sigma'(x)$ for all $x \in X$. We denote this by $\sigma\moreGeneral\sigma'$.
+\end{definition}
+$\moreGeneral$ is a is a quasi order since it obviously is reflexive and transitive. But why do we only demand equality modulo $\approx_E$ on $X$ and not on all Variables like we did in syntactic unification? Note that by the restriction to Variables in $X$ more substitutions are comparable with respect to $\moreGeneral$ since we do not need equality modulo $\approx_E$ on all Variables. Lets denote the Variables occurring in an $E$-unification problem $S$ by $\mathcal{V}ar(S)$. If $X=\mathcal{V}ar(S)$
