@@ -5,20 +5,22 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
 
 \newcommand{\approxq}{\stackrel{?}{\approx}}
 \newcommand{\moreGeneral}{\lesssim^X_E}
+\newcommand{\eqClass}{\sim^X_E}
 
 %opening
 \title{}
 \author{}
-\theoremstyle{definition}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 
 \begin{document}
 	\tableofcontents \newpage
 	\input{02.Equational_Unfication.tex}
-
 \end{document}

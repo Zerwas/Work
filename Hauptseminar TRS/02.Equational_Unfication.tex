@@ -21,29 +21,29 @@ Let $X$ be a set of variables. A substitution $\sigma$ is \textbf{more general} 
 \end{definition}
 $\moreGeneral$ is a is a quasi order since it obviously is reflexive and transitive. But why do we only demand equality modulo $\approx_E$ on $X$ and not on all Variables like we did in syntactic unification? Note that by the restriction to Variables in $X$ more substitutions are comparable with respect to $\moreGeneral$ since we do not demand equality modulo $\approx_E$ on all Variables. Lets denote the Variables occurring in an $E$-unification problem $S$ by $\mathcal{V}ar(S)$. It is easy to see that if $X=\mathcal{V}ar(S)$, $\sigma'$ is an $E$-unifier of $S$ and $\sigma\moreGeneral\sigma'$ then $\sigma$ is also an $E$-unifier of $S$. This only shows that restriction to $X$ does not do any damage but the reason it is useful is that there are $E$-unification problems $S$ for which any $minimal\ complete\ set\ of\ E$-$unifiers$ has to contain Variables not occurring in $S$. Lets consider a small example, let $\sigma:=\left\lbrace x\mapsto f(y)\right\rbrace$ be in $\mathcal{M}$ a $minimal\ complete\ set\ of\ E$-$unifiers$ of $S$ with $\mathcal{V}ar(S)=\left\lbrace x\right\rbrace$ and $\left\lbrace a\approx x\right\rbrace \notin E$. Clearly $\sigma':=\left\lbrace x\mapsto f(a)\right\rbrace$ is also an $E$-unifier of $S$ but $\sigma$ and $\sigma'$ are incomparable w.r.t. $\lesssim^{\left\lbrace x,y\right\rbrace }_E$. The substitution $\delta:=\left\lbrace y\mapsto a\right\rbrace $ does not work here since $\delta(\sigma(y))=a \not\approx_E y=\sigma'(y)$ which means there has to be another unifier $\sigma''$ in $\mathcal{M}$ with $\sigma''\lesssim^{\left\lbrace x,y\right\rbrace }_E\sigma$. But if we restrict $X$ to $\left\lbrace x\right\rbrace $ we only need that $\delta(\sigma(x))=f(a) \approx_E f(a)=\sigma'(x)$ so $\sigma\lesssim^{\left\lbrace x\right\rbrace }_E\sigma'$ holds. We see that $minimal\ complete\ sets\ of\ E$-$unifiers$ can become unnecessary large if we consider all Variables. Since we have talked about these sets a lot lets define them formally.
 \begin{definition}
-Let $S$ be an $E$-unification problem over $\Sigma$ and let $X:=\mathcal{V}ar(S)$. A \textbf{complete set of $E$-unifiers} of $S$ is a set of substitutions $\mathcal{C}$ that satisfies the following properties.
+Let $S$ be an $E$-unification problem over $\Sigma$ and let $X:=\mathcal{V}ar(S)$. An \textbf{$E$-complete} set of $S$ is a set of substitutions $\mathcal{C}$ that satisfies the following properties.
 \begin{itemize}
 \item each $\sigma \in \mathcal{C}$ is an $E$-unifier of $S$
 \item for all $\theta \in\mathcal{U}_E(S)$ there exists a $\sigma \in \mathcal{C}$ such that $\sigma\moreGeneral\theta$
 \end{itemize}
-A \textbf{minimal complete set of $E$-unifiers} is a complete set of $E$-unifiers $\mathcal{M}$ that satisfies the additional property
+An \textbf{$E$-minimal $E$-complete} set is an $E$-complete set  $\mathcal{M}$ that satisfies the additional property
 \begin{itemize}
 \item for all $\sigma,\sigma'\in\mathcal{M},\ \sigma\moreGeneral\sigma'$ implies $\sigma=\sigma'$.
 \end{itemize}
-The substitution $\sigma$ is a \textbf{most general $E$-unifier} (mgu) of $S$ iff $\left\lbrace \sigma\right\rbrace$ is a minimal complete set of $E$-unifiers of $S$.
+The substitution $\sigma$ is a \textbf{most general $E$-unifier} (mgu) of $S$ iff $\left\lbrace \sigma\right\rbrace$ is an $E$-minimal $E$-complete set of $S$.
 \end{definition}
-Now let us consider an example in which a minimal complete set of $E$-unifiers contains infinitely many elements. Let $A:=\left\lbrace x+(y+z)\approx (x+y)+z\right\rbrace $ be a set of identities and $S:=\left\lbrace x+a\approxq_A a+x\right\rbrace$ an $A$-unification problem over $\Sigma:=\left\lbrace +,a\right\rbrace$. For $n>0$, we define substitutions $\sigma_n$ inductively as follows:
-\begin{align}
-\sigma_1&:=\left\lbrace x\mapsto a\right\rbrace\notag\\
-\sigma_{n+1}&:=\left\lbrace x\mapsto a+\sigma_n(x)\right\rbrace\notag
-\end{align}
+Now let us consider an example in which an $E$-minimal $E$-complete set contains infinitely many elements. Let $A:=\left\lbrace x+(y+z)\approx (x+y)+z\right\rbrace $ be a set of identities and $S:=\left\lbrace x+a\approxq_A a+x\right\rbrace$ an $A$-unification problem over $\Sigma:=\left\lbrace +,a\right\rbrace$. For $n>0$, we define substitutions $\sigma_n$ inductively as follows:
+\begin{align*}
+\sigma_1&:=\left\lbrace x\mapsto a\right\rbrace\\
+\sigma_{n+1}&:=\left\lbrace x\mapsto a+\sigma_n(x)\right\rbrace
+\end{align*}
 Since $A$ axiomatizes associativity we can omit the brackets and give an explicit definition of $\sigma_n$.
-\begin{align}
-\sigma_n:=\lbrace\underbrace{a+\dots+a}_{n\times a} \rbrace\notag
-\end{align}
+\begin{align*}
+\sigma_n:=\lbrace\underbrace{a+\dots+a}_{n\times a} \rbrace
+\end{align*}
 Now it is easy to see that all $\sigma_n$ are $A$-unifiers of $S$.
-Lets consider an arbitrary $A$-unifier $\theta$ of $S$. $\theta(x)$ has the form $\theta(x):=x_1+\dots+x_n$ where the $x_i$ are $a$ or a variable.
-Since $\theta$ is an $A$-unifier os $S$ we have that:
+Lets consider an arbitrary $A$-unifier $\theta$ of $S$. $\theta(x)$ has the form $\theta(x):=x_1+\dots+x_n$ where the $x_i's$ are either $a$ or a variable.
+Since $\theta$ is an $A$-unifier of $S$ we have that:
 \begin{align*}
 &&\theta(x)+a&\approx_A a+\theta(x)\\
 && x_1+\dots+x_n+a&\approx_A a+x_1+\dots+x_n\\
@@ -53,6 +53,33 @@ Since $\theta$ is an $A$-unifier os $S$ we have that:
 &\implies&\underbrace{a+\dots+a}_{n+1\times a}&\approx_A \underbrace{a+\dots+a}_{n+1\times a}
 \end{align*}
 So $\theta(x)=\sigma_n(x)$ which implies $\sigma\lesssim^{\left\lbrace x\right\rbrace }_A\theta$.
-Since we picked $\theta$ arbitrarily this yields completeness of the set $\mathcal{M}:=\bigcup_{n>0}\left\lbrace  \sigma_n\right\rbrace $.
-All $\sigma_n$ are distinct and map x to ground terms. Hence they are pairwise incomparable with respect to $\lesssim^{\left\lbrace x\right\rbrace }_A$. This shows minimality of $\mathcal{M}$.
-We see that minimal complete sets of $E$-unifiers do not need to have finite cardinality.
+Since we picked $\theta$ arbitrarily this yields $A$-completeness of the set $\mathcal{M}:=\bigcup_{n>0}\left\lbrace  \sigma_n\right\rbrace $.
+All $\sigma_n$ are distinct and map x to ground terms. Hence they are pairwise incomparable with respect to $\lesssim^{\left\lbrace x\right\rbrace }_A$. This yields $A$-minimality of $\mathcal{M}$.
+We see that $E$-minimal $E$-complete sets do not need to have finite cardinality.
+%equivalence class induced by <=
+\begin{lemma}
+Let $\mathcal{M}_1$ and $\mathcal{M}_2$ be $E$-minimal $E$-complete sets of $S$. Then there exists a bijective mapping $B:\mathcal{M}_1\mapsto\mathcal{M}_2$ such that $\sigma\eqClass B(\sigma)$ for all $\sigma\in\mathcal{M}_1$.
+\end{lemma}
+\begin{proof}
+Since $\mathcal{M}_1\subseteq\mathcal{U}_E(S)$ and $\mathcal{M}_2$ is $E$-complete
+\begin{center}
+ \begin{tikzpicture}
+ \newcommand{\vLength}{1.5}
+	\tikzset{vertex/.style = {circle,draw,fill=black,minimum size=4pt,inner sep=0pt}}
+	\tikzstyle{edge} = [->,> = latex']
+	\tikzstyle{edgeThick} = [->,> = latex',draw=black, ultra thick]
+	%M_1
+	\node[vertex] (00) at (0,\vLength) [label=left:$\mathcal{M}_1:$,label=above:$\sigma_1$] {};
+	\node[vertex] (01) at (1,\vLength) {};
+	\node[vertex] (02) at (2,\vLength) {};
+	%M_2
+	\node[vertex] (10) at (0,0) [label=left:$\mathcal{M}_2:$] {};
+	\node[vertex] (11) at (1,0) [label=below:$B(\sigma_1)$] {};
+	\node[vertex] (12) at (2,0) {};
+	%mapping B
+	\draw[edgeThick] (00) to (11);
+	\draw[edge] (01) to (10);
+	\draw[edge] (02) to (12);
+\end{tikzpicture}
+\end{center}
+\end{proof}
