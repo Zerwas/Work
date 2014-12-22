@@ -58,28 +58,78 @@ All $\sigma_n$ are distinct and map x to ground terms. Hence they are pairwise i
 We see that $E$-minimal $E$-complete sets do not need to have finite cardinality.
 %equivalence class induced by <=
 \begin{lemma}
-Let $\mathcal{M}_1$ and $\mathcal{M}_2$ be $E$-minimal $E$-complete sets of $S$. Then there exists a bijective mapping $B:\mathcal{M}_1\mapsto\mathcal{M}_2$ such that $\sigma\eqClass B(\sigma)$ for all $\sigma\in\mathcal{M}_1$.
+Let $\mathcal{M}_1$ and $\mathcal{M}_2$ be $E$-minimal $E$-complete sets of $S$. Then there exists a bijective mapping $B:\mathcal{M}_1\mapsto\mathcal{M}_2$ such that $\sigma_1\eqClass B(\sigma_1)$ for all $\sigma_1\in\mathcal{M}_1$.
 \end{lemma}
 \begin{proof}
-Since $\mathcal{M}_1\subseteq\mathcal{U}_E(S)$ and $\mathcal{M}_2$ is $E$-complete
+We define a mapping $B:\mathcal{M}_1\mapsto\mathcal{M}_2$ such that $B(\sigma_1)\moreGeneral\sigma_1$ for all $\sigma_1\in\mathcal{M}_1$. This is possible since $\mathcal{M}_1\subseteq\mathcal{U}_E(S)$ and $E$-completeness of $\mathcal{M}_2$ yields that for every $\sigma_1\in\mathcal{M}_1$ there exists a $\sigma_2\in\mathcal{M}_2$ such that $\sigma_2\moreGeneral\sigma_1$. We define $B':\mathcal{M}_2\mapsto\mathcal{M}_1$ in a similar way.
 \begin{center}
  \begin{tikzpicture}
  \newcommand{\vLength}{1.5}
 	\tikzset{vertex/.style = {circle,draw,fill=black,minimum size=4pt,inner sep=0pt}}
-	\tikzstyle{edge} = [->,> = latex']
-	\tikzstyle{edgeThick} = [->,> = latex',draw=black, ultra thick]
+	\tikzstyle{edge} = [->,> = latex',thin]
+	\tikzstyle{edgeThick} = [->,> = latex', ultra thick]
 	%M_1
-	\node[vertex] (00) at (0,\vLength) [label=left:$\mathcal{M}_1:$,label=above:$\sigma_1$] {};
+	\node[vertex] (00) at (0,\vLength) [label=left:$\mathcal{M}_1:$] {};
 	\node[vertex] (01) at (1,\vLength) {};
-	\node[vertex] (02) at (2,\vLength) {};
+	\node[vertex] (02) at (2,\vLength) [label=above:\small{$\sigma_1$}] {};
+	\node[vertex] (03) at (3,\vLength) {};
+	\node[vertex] (04) at (4,\vLength) {};
 	%M_2
 	\node[vertex] (10) at (0,0) [label=left:$\mathcal{M}_2:$] {};
-	\node[vertex] (11) at (1,0) [label=below:$B(\sigma_1)$] {};
+	\node[vertex] (11) at (1,0) {};
 	\node[vertex] (12) at (2,0) {};
+	\node[vertex] (13) at (3,0) [label=right:\hspace{-4pt}\small{$B(\sigma_1)$}] {};
+	\node[vertex] (14) at (4,0) {};
+	%M_1 bottom
+	\node[vertex] (20) at (0,-\vLength)[label=left:$\mathcal{M}_1:$] {};
+	\node[vertex] (21) at (1,-\vLength) {};
+	\node[vertex] (22) at (2,-\vLength) [label=below:\small{$B'(B(\sigma_1))$}] {};
+	\node[vertex] (23) at (3,-\vLength) {};
+	\node[vertex] (24) at (4,-\vLength) {};
 	%mapping B
-	\draw[edgeThick] (00) to (11);
+	\draw[edge] (00) to (11);
 	\draw[edge] (01) to (10);
-	\draw[edge] (02) to (12);
+	\draw[edgeThick] (02) to (13);
+	\draw[edge] (03) to (14);
+	\draw[edge] (04) to (12);
+	%mapping B'
+	\draw[edge] (11) to (20);
+	\draw[edge] (10) to (21);
+	\draw[edgeThick] (13) to (22);
+	\draw[edge] (14) to (23);
+	\draw[edge] (12) to (24);
+	
+	\node[rotate=90] (B) at (4.5,0.5*\vLength) {$\moreGeneral$};
+	\node[rotate=90] (B') at (4.5,-0.5*\vLength) {$\moreGeneral$};
+\end{tikzpicture}
+\end{center}
+Since by definition $B'(B(\sigma_1))\moreGeneral B(\sigma_1)\moreGeneral\sigma_1$ $E$-minimality of $\mathcal{M}_1$ implies that $B'(B(\sigma_1))=\sigma_1$ for all $\sigma_1\in\mathcal{M}_1$. Symmetrically, $B(B'(\sigma_2))=\sigma_2$ for all $\sigma_2\in\mathcal{M}_2$.
+\begin{center}
+ \begin{tikzpicture}
+ \newcommand{\vLength}{1.5}
+	\tikzset{vertex/.style = {circle,draw,fill=black,minimum size=4pt,inner sep=0pt}}
+	\tikzstyle{edge} = [<->,> = latex',thin]
+	\tikzstyle{edgeThick} = [<->,> = latex', ultra thick]
+	%M_1
+	\node[vertex] (00) at (0,\vLength) [label=left:$\mathcal{M}_1:$] {};
+	\node[vertex] (01) at (1,\vLength) {};
+	\node[vertex] (02) at (2,\vLength) [label=above:\tiny{$\sigma_1=B'(B(\sigma_1))$}] {};
+	\node[vertex] (03) at (3,\vLength) {};
+	\node[vertex] (04) at (4,\vLength) {};
+	%M_2
+	\node[vertex] (10) at (0,0) [label=left:$\mathcal{M}_2:$] {};
+	\node[vertex] (11) at (1,0) {};
+	\node[vertex] (12) at (2,0) {};
+	\node[vertex] (13) at (3,0) [label=below:\small{$B(\sigma_1)$}] {};
+	\node[vertex] (14) at (4,0) {};
+	%mapping B
+	\draw[edge] (00) to (11);
+	\draw[edge] (01) to (10);
+	\draw[edgeThick] (02) to (13);
+	\draw[edge] (03) to (14);
+	\draw[edge] (04) to (12);
+	
+	\node[rotate=90] (B) at (4.5,0.5*\vLength) {$\eqClass$};
 \end{tikzpicture}
 \end{center}
 \end{proof}
