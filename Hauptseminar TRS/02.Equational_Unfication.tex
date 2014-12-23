@@ -1,7 +1,7 @@
 \section{Equational Unification}
 In the following let $E$ be a set of identities of the form $\left\lbrace  e_1\approx f_1,\dots,e_n\approx f_n \right\rbrace$. Furthermore let $\mathcal{S}ig(E)$ denote the set of all function symbols occurring in $E$. Let $\Sigma$ be a finite set of function symbols and a superset of $\mathcal{S}ig(E)$.
 \begin{definition}
-An \textbf{$E$-unification Problem} over $\Sigma$ is a finite set $S$ of the form $S=\left\lbrace s_1\approxq_{E} t_1,\dots,s_n\approxq_{E} t_n\right\rbrace $ with $s_1,\dots,s_n,t_1,\dots,t_n \in T(\Sigma,V)$, $V$ being a countable set of Variables.\\
+An \textbf{$E$-unification problem} over $\Sigma$ is a finite set $S$ of the form $S=\left\lbrace s_1\approxq_{E} t_1,\dots,s_n\approxq_{E} t_n\right\rbrace $ with $s_1,\dots,s_n,t_1,\dots,t_n \in T(\Sigma,V)$, $V$ being a countable set of Variables.\\
 A substitution $\sigma$ is an \textbf{$E$-unifier} of $S$ iff $ \sigma(s_i)\approx_E \sigma(t_i)$ for all $1\leq i \leq n$.
 The set of all $E$-unifiers of $S$ is denoted by $\mathcal{U}_E(S)$. $S$ is \textbf{$E$-unifiable} iff $\mathcal{U}_E(S)\neq \emptyset$.
 \end{definition}
@@ -103,7 +103,7 @@ We define a mapping $B:\mathcal{M}_1\mapsto\mathcal{M}_2$ such that $B(\sigma_1)
 	\node[rotate=90] (B') at (4.5,-0.5*\vLength) {$\moreGeneral$};
 \end{tikzpicture}
 \end{center}
-Since by definition $B'(B(\sigma_1))\moreGeneral B(\sigma_1)\moreGeneral\sigma_1$ $E$-minimality of $\mathcal{M}_1$ implies that $B'(B(\sigma_1))=\sigma_1$ for all $\sigma_1\in\mathcal{M}_1$. Symmetrically, $B(B'(\sigma_2))=\sigma_2$ for all $\sigma_2\in\mathcal{M}_2$.
+Since by definition $B'(B(\sigma_1))\moreGeneral B(\sigma_1)\moreGeneral\sigma_1$ $E$-minimality of $\mathcal{M}_1$ implies that $B'(B(\sigma_1))=\sigma_1$ for all $\sigma_1\in\mathcal{M}_1$. Symmetrically, $B(B'(\sigma_2))=\sigma_2$ for all $\sigma_2\in\mathcal{M}_2$. It follows that $B$ is a bijection and $B'=B^{-1}$.
 \begin{center}
  \begin{tikzpicture}
  \newcommand{\vLength}{1.5}
@@ -133,3 +133,15 @@ Since by definition $B'(B(\sigma_1))\moreGeneral B(\sigma_1)\moreGeneral\sigma_1
 \end{tikzpicture}
 \end{center}
 \end{proof}
+The most interesting consequence from this Lemma is that $E$-minimal $E$-complete sets of the same $S$ always have the same cardinality. This allows us to classify equational theories $\approx_E$ by the existence and possible cardinalities of $E$-minimal $E$-complete sets of $E$-unification problems.
+\begin{definition}
+The equational theory $\approx_E$ is of \textbf{unification type}
+\begin{itemize}
+\item[\textbf{unitary}] iff for all $E$-unification problems $S$ there exists an $E$-minimal $E$-complete set of cardinality $\leq 1$.
+%if S has no solution M=\emptyset
+\item[\textbf{finitary}] iff for all $E$-unification problems $S$ there exists an $E$-minimal $E$-complete set with finite cardinality.
+\item[\textbf{infinitary}] iff for all $E$-unification problems $S$ there exists an $E$-minimal $E$-complete set, and there exists an $E$-unification problem for which this set is infinite.
+\item[\textbf{zero}] iff there exists an $E$-unification problem that does not have an $E$-minimal $E$-complete set.
+\end{itemize}
+\end{definition}
+Note that if the $E$-unification problem $S$ has no $E$-unifiers then the empty set is an $E$-minimal $E$-complete set of $S$. $\emptyset$ is $E$-complete because there are no $\sigma\in\emptyset$ and $\mathcal{U}_E$ is empty. $E$-minimality holds trivially.
