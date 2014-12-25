@@ -1,1 +1,54 @@
 \section{Boolean Rings}
+%intro
+\[B:=\left\lbrace 
+\begin{aligned}
+x+y&\approx y+x,& x*y&\approx y*x,\\
+(x+y)+z&\approx x+(y+z),& (x*y)*z&\approx x*(y*z),\\
+x+x&\approx 0,& x*x&\approx x,\\
+0+x&\approx x,& 0*x&\approx 0,\\
+x*(y+z)&\approx (x*y)+(x*z),& 1*x&\approx x
+\end{aligned}
+\right\rbrace \]
+Since $+$ and $*$ are associative we can omit most of the brackets. Furthermore we often write $xy$ instead of $x*y$.
+Lets consider a semantic interpretation of $B$ the two element boolean ring $\mathcal{B}_2$ with the carrier set \textbf{2}$:=\left\lbrace 0,1\right\rbrace$ where $*$ is "and" and $+$ is "exclusive or". 
+%B_2
+To see that there are other models of $B$ lets consider the powerset interpretation $\mathcal{P}_S$:
+\begin{align*}
+\Delta^{\mathcal{P}_S}&:=2^S\\
+(x+y)^{\mathcal{P}_S}&:=x^{\mathcal{P}_S}\Delta y^{\mathcal{P}_S}& (x*y)&:=x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\\
+0^{\mathcal{P}_S}&:=\emptyset& 1^{\mathcal{P}_S}&:=S
+\end{align*}.
+Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference of x and y. It is easy to see why $\mathcal{P}_S$ is a model of $B$. Lets just consider distributivity in a bit more detail.
+\begin{center}
+\def\CircleX{(0.5,0.866) circle (0.8)}
+\def\CircleY{(0,0) circle (0.8)}
+\def\CircleZ{(1,0) circle (0.8)}
+\begin{tikzpicture}[fill=gray]
+% left hand
+\begin{scope}
+\clip (-2,-2) rectangle (2,2)
+      \CircleZ;
+\fill \CircleY;
+\end{scope}
+% right hand
+\begin{scope}
+\clip (-2,-2) rectangle (2,2)
+      \CircleY;
+\fill \CircleZ;
+\end{scope}
+\begin{scope}
+      \clip \CircleY
+      		\CircleZ;
+      \fill[red] \CircleX;
+\end{scope}
+\begin{scope}
+      \clip \CircleY
+      \fill[black] \CircleZ;
+\end{scope}
+% outline
+\draw \CircleX  node {$x$}
+      \CircleY  node {$y$}
+      \CircleZ  node {$z$}
+      (-2,-1.5) rectangle (3,2.366) node [text=black,above] {$S$};
+\end{tikzpicture}
+\end{center}
