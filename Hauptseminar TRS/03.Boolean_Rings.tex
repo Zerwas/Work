@@ -10,15 +10,22 @@ x*(y+z)&\approx (x*y)+(x*z),& 1*x&\approx x
 \end{aligned}
 \right\rbrace \]
 Since $+$ and $*$ are associative we can omit most of the brackets. Furthermore we often write $xy$ instead of $x*y$.
-Lets consider a semantic interpretation of $B$ the two element boolean ring $\mathcal{B}_2$ with the carrier set \textbf{2}$:=\left\lbrace 0,1\right\rbrace$ where $*$ is "and" and $+$ is "exclusive or". 
+Lets consider a semantic interpretation of $B$ the two element boolean ring $\mathcal{B}_2$ with the carrier set \textbf{2}$:=\left\lbrace 0,1\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright and $+$ is \textquotedblleft exclusive or\textquotedblright. 
 %B_2
-To see that there are other models of $B$ lets consider the powerset interpretation $\mathcal{P}_S$:
+Lets consider another model of $B$ the powerset interpretation $\mathcal{P}_S$ with the carrier set $2^S$:
 \begin{align*}
-\Delta^{\mathcal{P}_S}&:=2^S\\
 (x+y)^{\mathcal{P}_S}&:=x^{\mathcal{P}_S}\Delta y^{\mathcal{P}_S}& (x*y)&:=x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\\
 0^{\mathcal{P}_S}&:=\emptyset& 1^{\mathcal{P}_S}&:=S
-\end{align*}.
-Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference of x and y. It is easy to see why $\mathcal{P}_S$ is a model of $B$. Lets just consider distributivity in a bit more detail.
+\end{align*}
+Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference of x and y. It is easy to see why $\mathcal{P}_S$ is a model of $B$. Lets just consider distributivity in detail.
+\begin{align*}
+(x*(y+z))^{\mathcal{P}_S}&=x^{\mathcal{P}_S}\cap(y^{\mathcal{P}_S}\Delta z^{\mathcal{P}_S})\\
+&=x^{\mathcal{P}_S}\cap((y^{\mathcal{P}_S}\setminus z^{\mathcal{P}_S})\cup(z^{\mathcal{P}_S}\setminus y^{\mathcal{P}_S}))\\
+&=((x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S})\setminus z^{\mathcal{P}_S})\cup((x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S})\setminus y^{\mathcal{P}_S})\\
+&=((x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S})\setminus (x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}))\cup((x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S})\setminus (x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}))\\
+&=(x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S})\Delta (x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S})\\
+&=((x*y)+(x*z))^{\mathcal{P}_S}
+\end{align*}
 \def\f{1.3}
 \def\CircleX{(\f*0.5,\f*0.866) circle (\f*0.8)}
 \def\CircleY{(\f*0,0) circle (\f*0.8)}
@@ -40,7 +47,7 @@ Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference 
 \begin{scope}
 \clip (-2,-1.5) rectangle (3,2.366)
       \CircleY;
-\fill[pattern=north west lines] \CircleZ;
+\fill[pattern=north east lines] \CircleZ;
 \end{scope}
 % fill y \cap z white
 \begin{scope}
@@ -48,10 +55,11 @@ Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference 
       \fill[white] \CircleZ;
 \end{scope}
 % draw circles
-\draw \CircleX  node {$x^{\mathcal{P}_S}$}
-      \CircleY  node {$y^{\mathcal{P}_S}$}
-      \CircleZ  node {$z^{\mathcal{P}_S}$}
-      (-2,-1.5) rectangle (3,2.366) (-2,2.1) node [text=black,right] {$S$};
+\draw \CircleX  node [above] {$x^{\mathcal{P}_S}$}
+      \CircleY  node [left] {$y^{\mathcal{P}_S}$}
+      \CircleZ  node [right] {$z^{\mathcal{P}_S}$}
+      (-2,-1.5) rectangle (3,2.366) (-2,2.366) node [below right] {$S$}
+      (-2,-1.5) node [below right] {$(x*(y+z))^{\mathcal{P}_S}$};
 \end{tikzpicture}
 &
 \begin{tikzpicture}[fill=gray]
@@ -76,9 +84,12 @@ Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference 
       \fill[pattern=north east lines] \CircleY;
 \end{scope}
 % draw circles
-\draw \CircleX  node {$x^{\mathcal{P}_S}$}
-      \CircleY  node {$y^{\mathcal{P}_S}$}
-      \CircleZ  node {$z^{\mathcal{P}_S}$}
-      (-2,-1.5) rectangle (3,2.366) (-2,2.1) node [text=black,right] {$S$};
+\draw \CircleX  node [above] {$x^{\mathcal{P}_S}$}
+      \CircleY  node [left] {$y^{\mathcal{P}_S}$}
+      \CircleZ  node [right] {$z^{\mathcal{P}_S}$}
+      (-2,-1.5) rectangle (3,2.366) (-2,2.366) node [below right] {$S$}
+      (-2,-1.5) node [below right] {$((x*y)+(x*z))^{\mathcal{P}_S}$};;
 \end{tikzpicture}
 \end{tabular*}
+This small example should just show that there are other models of $B$ with rather common interpretations of + and * apart from $\mathcal{B}_2$. Note that if $|S|=1$ then $\mathcal{P}_S$ and $\mathcal{B}_2$ are isomorph.
+%correct word? or isomorphic
