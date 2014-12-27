@@ -1,95 +1,130 @@
 \section{Boolean Rings}
 %intro
 \[B:=\left\lbrace 
-\begin{aligned}
-x+y&\approx y+x,& x*y&\approx y*x,\\
-(x+y)+z&\approx x+(y+z),& (x*y)*z&\approx x*(y*z),\\
-x+x&\approx 0,& x*x&\approx x,\\
-0+x&\approx x,& 0*x&\approx 0,\\
-x*(y+z)&\approx (x*y)+(x*z),& 1*x&\approx x
-\end{aligned}
-\right\rbrace \]
-Since $+$ and $*$ are associative we can omit most of the brackets. Furthermore we often write $xy$ instead of $x*y$.
-Lets consider a semantic interpretation of $B$ the two element boolean ring $\mathcal{B}_2$ with the carrier set \textbf{2}$:=\left\lbrace 0,1\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright and $+$ is \textquotedblleft exclusive or\textquotedblright. 
-%B_2
-Lets consider another model of $B$ the powerset interpretation $\mathcal{P}_S$ with the carrier set $2^S$:
-\begin{align*}
-(x+y)^{\mathcal{P}_S}&:=x^{\mathcal{P}_S}\Delta y^{\mathcal{P}_S}& (x*y)&:=x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\\
-0^{\mathcal{P}_S}&:=\emptyset& 1^{\mathcal{P}_S}&:=S
-\end{align*}
-Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference of x and y. It is easy to see why $\mathcal{P}_S$ is a model of $B$. Lets just consider distributivity in detail.
-\begin{align*}
-(x*(y+z))^{\mathcal{P}_S}&=x^{\mathcal{P}_S}\cap(y^{\mathcal{P}_S}\Delta z^{\mathcal{P}_S})\\
-&=x^{\mathcal{P}_S}\cap((y^{\mathcal{P}_S}\setminus z^{\mathcal{P}_S})\cup(z^{\mathcal{P}_S}\setminus y^{\mathcal{P}_S}))\\
-&=((x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S})\setminus z^{\mathcal{P}_S})\cup((x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S})\setminus y^{\mathcal{P}_S})\\
-&=((x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S})\setminus (x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}))\cup((x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S})\setminus (x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}))\\
-&=(x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S})\Delta (x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S})\\
-&=((x*y)+(x*z))^{\mathcal{P}_S}
-\end{align*}
-\def\f{1.3}
-\def\CircleX{(\f*0.5,\f*0.866) circle (\f*0.8)}
-\def\CircleY{(\f*0,0) circle (\f*0.8)}
-\def\CircleZ{(\f*1,0) circle (\f*0.8)}
-\begin{tabular*}{\textwidth}{cc}
-\begin{tikzpicture}[fill=gray]
-\begin{scope}
-      \clip \CircleY
-      		\CircleZ;
-      \fill \CircleX;
-\end{scope}
-% left hand
-\begin{scope}
-\clip (-2,-1.5) rectangle (3,2.366)
-      \CircleZ;
-\fill[pattern=north east lines] \CircleY;
-\end{scope}
-% right hand
-\begin{scope}
-\clip (-2,-1.5) rectangle (3,2.366)
-      \CircleY;
-\fill[pattern=north east lines] \CircleZ;
-\end{scope}
-% fill y \cap z white
-\begin{scope}
-      \clip \CircleY;
-      \fill[white] \CircleZ;
-\end{scope}
-% draw circles
-\draw \CircleX  node [above] {$x^{\mathcal{P}_S}$}
-      \CircleY  node [left] {$y^{\mathcal{P}_S}$}
-      \CircleZ  node [right] {$z^{\mathcal{P}_S}$}
-      (-2,-1.5) rectangle (3,2.366) (-2,2.366) node [below right] {$S$}
-      (-2,-1.5) node [below right] {$(x*(y+z))^{\mathcal{P}_S}$};
-\end{tikzpicture}
-&
-\begin{tikzpicture}[fill=gray]
-\begin{scope}
-      \clip \CircleY
-      		\CircleZ;
-      \fill \CircleX;
-\end{scope}
-% fill y \cap z white
-\begin{scope}
-      \clip \CircleY;
-      \fill[white] \CircleZ;
-\end{scope}
-% fill z /cap x 
-\begin{scope}
-	  \clip \CircleX;
-      \fill[pattern=north west lines] \CircleZ;
-\end{scope}
-% fill y /cap x 
-\begin{scope}
-	  \clip \CircleX;
-      \fill[pattern=north east lines] \CircleY;
-\end{scope}
-% draw circles
-\draw \CircleX  node [above] {$x^{\mathcal{P}_S}$}
-      \CircleY  node [left] {$y^{\mathcal{P}_S}$}
-      \CircleZ  node [right] {$z^{\mathcal{P}_S}$}
-      (-2,-1.5) rectangle (3,2.366) (-2,2.366) node [below right] {$S$}
-      (-2,-1.5) node [below right] {$((x*y)+(x*z))^{\mathcal{P}_S}$};;
-\end{tikzpicture}
-\end{tabular*}
-This small example should just show that there are other models of $B$ with rather common interpretations of + and * apart from $\mathcal{B}_2$. Note that if $|S|=1$ then $\mathcal{P}_S$ and $\mathcal{B}_2$ are isomorph.
-%correct word? or isomorphic
+	\begin{aligned}
+		x+y     & \approx y+x,         & x*y     & \approx y*x,     \\
+		(x+y)+z & \approx x+(y+z),     & (x*y)*z & \approx x*(y*z), \\
+		x+x     & \approx 0,           & x*x     & \approx x,       \\
+		0+x     & \approx x,           & 0*x     & \approx 0,       \\
+		x*(y+z) & \approx (x*y)+(x*z), & 1*x     & \approx x        
+	\end{aligned}
+	\right\rbrace \]
+	Since $+$ and $*$ are associative we can omit most of the brackets. Furthermore we often write $xy$ instead of $x*y$.
+	Lets consider an interpretation of $B$ the two element boolean ring $\mathcal{B}_2$ with the carrier set \textbf{2}$:=\left\lbrace 0,1\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright\ and $+$ is \textquotedblleft exclusive or\textquotedblright:
+	\begin{align*}
+		(x+y)^{\mathcal{B}_2} & :=\left( x^{\mathcal{B}_2}\wedge\neg y^{\mathcal{B}_2}\right)  \vee \left( \neg x^{\mathcal{B}_2}\wedge y^{\mathcal{B}_2}\right) & (x*y)^{\mathcal{B}_2} & :=x^{\mathcal{B}_2}\wedge y^{\mathcal{B}_2} \\
+		0^{\mathcal{B}_2}     & :=0                                 & 1^{\mathcal{B}_2} & :=1                                      
+	\end{align*}
+	% treat 0,1 as ground
+	It is easy to see that $\mathcal{B}_2$ is indeed a model of $B$. Furthermore we can transform a term back from an Boolean algebra into Boolean ring theory:
+	\begin{align*}
+		x \wedge y&\mapsto x*y\\
+		x\vee y&\mapsto x+y+x*y\\
+		\neg x&\mapsto x*(x+1)
+	\end{align*}
+	We work with + and * instead of $\vee,\wedge$ and $\neg$ because in Boolean rings we have a very convenient normal form which makes the following proofs easier.\\
+	% maybe rephrase
+	Lets consider another model of $B$ the powerset interpretation $\mathcal{P}_S$ with the carrier set $2^S$:
+	\begin{align*}
+		(x+y)^{\mathcal{P}_S} & :=x^{\mathcal{P}_S}\Delta y^{\mathcal{P}_S} & (x*y)^{\mathcal{P}_S} & :=x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S} \\
+		0^{\mathcal{P}_S}     & :=\emptyset                                 & 1^{\mathcal{P}_S} & :=S                                       
+	\end{align*}
+	Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference of x and y. It is easy to see why $\mathcal{P}_S$ is a model of $B$. Lets just consider distributivity in detail.
+	\begin{align*}
+		\left( x*\left( y+z\right) \right) ^{\mathcal{P}_S} & =x^{\mathcal{P}_S}\cap\left( y^{\mathcal{P}_S}\Delta z^{\mathcal{P}_S}\right)                                                                                                                                  \\
+		                          & =x^{\mathcal{P}_S}\cap\left( \left( y^{\mathcal{P}_S}\setminus z^{\mathcal{P}_S}\right) \cup\left( z^{\mathcal{P}_S}\setminus y^{\mathcal{P}_S}\right) \right)                                                                           \\
+		                          & =\left( \left( x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\right) \setminus z^{\mathcal{P}_S}\right) \cup\left( \left( x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}\right) \setminus y^{\mathcal{P}_S}\right)                                                  \\
+		                          & =\left( \left( x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\right) \setminus \left( x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}\right) \right) \cup\left( \left( x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}\right) \setminus \left( x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\right) \right)  \\
+		                          & =\left( x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\right) \Delta \left( x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}\right)                                                                                                         \\
+		                          & =\left( \left( x*y\right) +\left( x*z\right)\right)^{\mathcal{P}_S}                                                                                                                                                                    
+	\end{align*}
+	Here is a less formal explanation for why this identity holds in $\mathcal{P}_S$.\\
+	\def\f{1.3}
+	\def\CircleX{(\f*0.5,\f*0.866) circle (\f*0.8)}
+	\def\CircleY{(\f*0,0) circle (\f*0.8)}
+	\def\CircleZ{(\f*1,0) circle (\f*0.8)}
+	\begin{tabular*}{\textwidth}{cc}
+		\begin{tikzpicture}[fill=gray]
+			\begin{scope}
+				\clip \CircleY
+				\CircleZ;
+				\fill \CircleX;
+			\end{scope}
+			% left hand
+			\begin{scope}
+				\clip (-2,-1.5) rectangle (3,2.366)
+				\CircleZ;
+				\fill[pattern=north east lines] \CircleY;
+			\end{scope}
+			% right hand
+			\begin{scope}
+				\clip (-2,-1.5) rectangle (3,2.366)
+				\CircleY;
+				\fill[pattern=north east lines] \CircleZ;
+			\end{scope}
+			% fill y \cap z white
+			\begin{scope}
+				\clip \CircleY;
+				\fill[white] \CircleZ;
+			\end{scope}
+			% draw circles
+			\draw \CircleX  node [above] {$x^{\mathcal{P}_S}$}
+			\CircleY  node [left] {$y^{\mathcal{P}_S}$}
+			\CircleZ  node [right] {$z^{\mathcal{P}_S}$}
+			(-2,-1.5) rectangle (3,2.366) (-2,2.366) node [below right] {$S$}
+			(-2,-1.5) node [below right] {$(x*(y+z))^{\mathcal{P}_S}$};
+		\end{tikzpicture}
+		&
+		\begin{tikzpicture}[fill=gray]
+			\begin{scope}
+				\clip \CircleY
+				\CircleZ;
+				\fill \CircleX;
+			\end{scope}
+			% fill y \cap z white
+			\begin{scope}
+				\clip \CircleY;
+				\fill[white] \CircleZ;
+			\end{scope}
+			% fill z /cap x 
+			\begin{scope}
+				\clip \CircleX;
+				\fill[pattern=north west lines] \CircleZ;
+			\end{scope}
+			% fill y /cap x 
+			\begin{scope}
+				\clip \CircleX;
+				\fill[pattern=north east lines] \CircleY;
+			\end{scope}
+			% draw circles
+			\draw \CircleX  node [above] {$x^{\mathcal{P}_S}$}
+			\CircleY  node [left] {$y^{\mathcal{P}_S}$}
+			\CircleZ  node [right] {$z^{\mathcal{P}_S}$}
+			(-2,-1.5) rectangle (3,2.366) (-2,2.366) node [below right] {$S$}
+			(-2,-1.5) node [below right] {$((x*y)+(x*z))^{\mathcal{P}_S}$};;
+		\end{tikzpicture}
+	\end{tabular*}
+	This small example should just show that there are other models of $B$ with rather common interpretations of + and * apart from $\mathcal{B}_2$. Note that if $|S|=1$ then $\mathcal{P}_S$ and $\mathcal{B}_2$ are isomorphic.
+	%correct word?
+	%TODO we only consider terms over 0,1,+,*
+	\subsection{Polynomials}
+	\begin{definition}
+	A product of distinct variables is a \textbf{monomial} (e.g.$\ xyz$). And a sum of distinct monomials is a \textbf{polynomial} (e.g.$\ x+xy+yz$).
+	\end{definition}
+	We compare monomials and polynomials modulo commutativity and associativity. So two monomials are distinct iff the sets of variables occurring in them are distinct and two polynomials are distinct iff the sets of their monomials are distinct.
+	Here are some examples for clarification:
+	\begin{align*}
+	yxz&=zyx& xy+yz&=zy+xy\\
+	yx&\neq yxz& xy+yz&\neq xy
+	\end{align*}
+	Note that we did not introduce a new symbol for equality of polynomials and just use the same as for syntactic equality since it will be clear from the context which one we mean. Now we can transform every term over $\left\lbrace 0,1,+,*\right\rbrace$ into a (w.r.t. equality of polynomials) unique $\approx_B$-equivalent polynomial, its \textbf{polynomial form}. Since 1 is the neutral element of * we write 1 for the polynomial containing only the empty monomial correspondingly we identify 0 with the empty polynomial. Now the polynomial form can be computed recursively as follows:\\
+	\begin{description}
+	\item[$x,0,1:$] This is the base case, variables and the constants 0 and 1 are already polynomials.\\
+	\item[$t_1+t_2:$] Let $p_1$ and $p_2$ be the polynomial forms of $t_1$ and $t_2$ the polynomial form of $t_1+t_2$ is obtained by removing all pairs of equivalent monomials from $p_1+p_2$. Since we have $\left\lbrace0+x\approx x,x+x\approx0\right\rbrace\in B$  this rule preserves $\approx_E$-equivalence.\\
+	%explain 0?
+	\item[$t_1*t_2:$]  Let $p_1=m_1+\dots+m_k$ and $p_2=n_1+\dots+n_l$ be the polynomial forms of $t_1$ and $t_2$. The polynomial form of $t_1*t_2$ is obtained by removing all pairs of equivalent monomials from $p_1*p_2$ which when multiplied out is the sum
+	\begin{align*}
+	m_1*n_1+\dots+m_1*n_l+\dots+m_k*n_1+\dots+m_k*n_l
+	\end{align*} 
+	where the product of two monomials $m=x_1\dots x_r$ and $n=y_1\dots y_s$ is the monomial obtained by removing repeated occurrences of the same variable from $x_1\dots x_r y_1\dots y_s$. Since we have $\left\lbrace x*x\approx x\right\rbrace\in B$  this rule preserves $\approx_E$-equivalence. Note that if $t_1=1$ then we multiply every monomial in $p_2$ with the empty monomial which does not change anything so the result is as expected just $p_2$.
+	\end{description}

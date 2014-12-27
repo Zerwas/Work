@@ -139,13 +139,13 @@ $\sigma\eqClass\sigma'$ iff $\sigma\moreGeneral\sigma'$ and $\sigma'\moreGeneral
 The most interesting consequence from this Lemma is that $E$-minimal $E$-complete sets of the same $S$ always have the same cardinality. This allows us to classify equational theories $\approx_E$ by the existence and possible cardinalities of $E$-minimal $E$-complete sets of $E$-unification problems.
 \begin{definition}
 	The equational theory $\approx_E$ is of \textbf{unification type}
-	\begin{itemize}
+	\begin{description}
 		\item[\textbf{unitary}] iff for all $E$-unification problems $S$ there exists an $E$-minimal $E$-complete set of cardinality $\leq 1$.
 		      %if S has no solution M=\emptyset
 		\item[\textbf{finitary}] iff for all $E$-unification problems $S$ there exists an $E$-minimal $E$-complete set with finite cardinality.
 		\item[\textbf{infinitary}] iff for all $E$-unification problems $S$ there exists an $E$-minimal $E$-complete set, and there exists an $E$-unification problem for which this set is infinite.
 		\item[\textbf{zero}] iff there exists an $E$-unification problem that does not have an $E$-minimal $E$-complete set.
-	\end{itemize}
+	\end{description}
 \end{definition}
 Note that if the $E$-unification problem $S$ has no $E$-unifiers then the empty set is an $E$-minimal $E$-complete set of $S$. $\emptyset$ is $E$-complete because there are no $\sigma\in\emptyset$ and $\mathcal{U}_E$ is empty. $E$-minimality holds trivially. This is the reason we allow the cardinalities 0 and 1 in the $unitary$ case.
 An example for a $finitary$ theory that is not $unitary$ is $\mathcal{C}:=\left\lbrace f(x,y)\approx f(y,x)\right\rbrace$ which axiomatizes commutativity.
