@@ -13,7 +13,7 @@
 	Lets consider an interpretation of $B$ the two element boolean ring $\BTwo$ with the carrier set \textbf{2}$:=\left\lbrace 0,1\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright\ and $+$ is \textquotedblleft exclusive or\textquotedblright:
 	\begin{align*}
 		(x+y)^\BTwo & :=\left( x^\BTwo\wedge\neg y^\BTwo\right)  \vee \left( \neg x^\BTwo\wedge y^\BTwo\right) & (x*y)^\BTwo & :=x^\BTwo\wedge y^\BTwo \\
-		0^\BTwo     & :=0            & 1^\BTwo     & :=1                     
+		0^\BTwo     & :=0                                                                                      & 1^\BTwo     & :=1                     
 	\end{align*}
 	% treat 0,1 as ground
 	It is easy to see that $\BTwo$ is indeed a model of $B$. Furthermore we can transform a term back from an Boolean algebra into Boolean ring theory:
@@ -24,21 +24,21 @@
 	\end{align*}
 	We work with + and * instead of $\vee,\wedge$ and $\neg$ because in Boolean rings we have a very convenient normal form which makes the following proofs easier.\\
 	% maybe rephrase
-	Lets consider another model of $B$ the powerset interpretation $\mathcal{P}_S$ with the carrier set $2^S$:
+	Lets consider another model of $B$ the powerset interpretation $\PSet$ with the carrier set $2^S$:
 	\begin{align*}
-		(x+y)^{\mathcal{P}_S} & :=x^{\mathcal{P}_S}\Delta y^{\mathcal{P}_S} & (x*y)^{\mathcal{P}_S} & :=x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S} \\
-		0^{\mathcal{P}_S}     & :=\emptyset                                 & 1^{\mathcal{P}_S}     & :=S                                       
+		(x+y)^\PSet & :=x^\PSet\Delta y^\PSet & (x*y)^\PSet & :=x^\PSet\cap y^\PSet \\
+		0^\PSet     & :=\emptyset             & 1^\PSet     & :=S                   
 	\end{align*}
-	Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference of x and y. It is easy to see why $\mathcal{P}_S$ is a model of $B$. Lets just consider distributivity in detail.
+	Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference of x and y. It is easy to see why $\PSet$ is a model of $B$. Lets just consider distributivity in detail.
 	\begin{align*}
-		\left( x*\left( y+z\right) \right) ^{\mathcal{P}_S} & =x^{\mathcal{P}_S}\cap\left( y^{\mathcal{P}_S}\Delta z^{\mathcal{P}_S}\right)                                                                                                                                                                                                  \\
-		                                                    & =x^{\mathcal{P}_S}\cap\left( \left( y^{\mathcal{P}_S}\setminus z^{\mathcal{P}_S}\right) \cup\left( z^{\mathcal{P}_S}\setminus y^{\mathcal{P}_S}\right) \right)                                                                                                                 \\
-		                                                    & =\left( \left( x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\right) \setminus z^{\mathcal{P}_S}\right) \cup\left( \left( x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}\right) \setminus y^{\mathcal{P}_S}\right)                                                                           \\
-		                                                    & =\left( \left( x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\right) \setminus \left( x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}\right) \right) \cup\left( \left( x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}\right) \setminus \left( x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\right) \right) \\
-		                                                    & =\left( x^{\mathcal{P}_S}\cap y^{\mathcal{P}_S}\right) \Delta \left( x^{\mathcal{P}_S}\cap z^{\mathcal{P}_S}\right)                                                                                                                                                            \\
-		                                                    & =\left( \left( x*y\right) +\left( x*z\right)\right)^{\mathcal{P}_S}                                                                                                                                                                                                            
+		\left( x*\left( y+z\right) \right) ^\PSet & =x^\PSet\cap\left( y^\PSet\Delta z^\PSet\right)                                                                                                                                                \\
+		                                          & =x^\PSet\cap\left( \left( y^\PSet\setminus z^\PSet\right) \cup\left( z^\PSet\setminus y^\PSet\right) \right)                                                                                   \\
+		                                          & =\left( \left( x^\PSet\cap y^\PSet\right) \setminus z^\PSet\right) \cup\left( \left( x^\PSet\cap z^\PSet\right) \setminus y^\PSet\right)                                                       \\
+		                                          & =\left( \left( x^\PSet\cap y^\PSet\right) \setminus \left( x^\PSet\cap z^\PSet\right) \right) \cup\left( \left( x^\PSet\cap z^\PSet\right) \setminus \left( x^\PSet\cap y^\PSet\right) \right) \\
+		                                          & =\left( x^\PSet\cap y^\PSet\right) \Delta \left( x^\PSet\cap z^\PSet\right)                                                                                                                    \\
+		                                          & =\left( \left( x*y\right) +\left( x*z\right)\right)^\PSet                                                                                                                                      
 	\end{align*}
-	Here is a less formal explanation for why this identity holds in $\mathcal{P}_S$.\\
+	Here is a less formal explanation for why this identity holds in $\PSet$.\\
 	\def\f{1.3}
 	\def\CircleX{(\f*0.5,\f*0.866) circle (\f*0.8)}
 	\def\CircleY{(\f*0,0) circle (\f*0.8)}
@@ -68,11 +68,11 @@
 				\fill[white] \CircleZ;
 			\end{scope}
 			% draw circles
-			\draw \CircleX  node [above] {$x^{\mathcal{P}_S}$}
-			\CircleY  node [left] {$y^{\mathcal{P}_S}$}
-			\CircleZ  node [right] {$z^{\mathcal{P}_S}$}
+			\draw \CircleX  node [above] {$x^\PSet$}
+			\CircleY  node [left] {$y^\PSet$}
+			\CircleZ  node [right] {$z^\PSet$}
 			(-2,-1.5) rectangle (3,2.366) (-2,2.366) node [below right] {$S$}
-			(-2,-1.5) node [below right] {$(x*(y+z))^{\mathcal{P}_S}$};
+			(-2,-1.5) node [below right] {$(x*(y+z))^\PSet$};
 		\end{tikzpicture}
 		&
 		\begin{tikzpicture}[fill=gray]
@@ -97,14 +97,14 @@
 				\fill[pattern=north east lines] \CircleY;
 			\end{scope}
 			% draw circles
-			\draw \CircleX  node [above] {$x^{\mathcal{P}_S}$}
-			\CircleY  node [left] {$y^{\mathcal{P}_S}$}
-			\CircleZ  node [right] {$z^{\mathcal{P}_S}$}
+			\draw \CircleX  node [above] {$x^\PSet$}
+			\CircleY  node [left] {$y^\PSet$}
+			\CircleZ  node [right] {$z^\PSet$}
 			(-2,-1.5) rectangle (3,2.366) (-2,2.366) node [below right] {$S$}
-			(-2,-1.5) node [below right] {$((x*y)+(x*z))^{\mathcal{P}_S}$};;
+			(-2,-1.5) node [below right] {$((x*y)+(x*z))^\PSet$};;
 		\end{tikzpicture}
 	\end{tabular*}
-	This small example should just show that there are other models of $B$ with rather common interpretations of + and * apart from $\BTwo$. Note that if $|S|=1$ then $\mathcal{P}_S$ and $\BTwo$ are isomorphic.
+	This small example should just show that there are other models of $B$ with rather common interpretations of + and * apart from $\BTwo$. Note that if $|S|=1$ then $\PSet$ and $\BTwo$ are isomorphic.
 	%correct word?
 	%TODO we only consider terms over 0,1,+,*
 	\subsection{Polynomials}
@@ -149,27 +149,29 @@
 	\end{proof}
 	Consider as example $s:=(y+1)(x+y)+(y+1)x$ and $t:=0$.
 	\begin{description}
-		\item[$\BTwo\models s\approx t$] 
-		\begin{align*}
-			s^\BTwo & =\left( \left( y+1\right)\left( x+y\right)+\left( y+1\right)x\right)^\BTwo                                                                                                                                                                          \\
-			        & =\left( \left( \left( y+1\right)\left( x+y\right)\right)^{\BTwo}\wedge \neg \left( \left( y+1\right)x\right)^\BTwo\right)\vee\left( \neg \left( \left( y+1\right)\left( x+y\right)\right)^\BTwo\wedge \left( \left( y+1\right)x\right)^\BTwo\right) \\
-			        & =\left( \left( y+1\right)^\BTwo\wedge\left( x+y\right)^\BTwo\wedge \neg \left( \left( y+1\right)x\right)^\BTwo\right)\vee\dots                                                                                                                      \\
-			        & =\left( \neg y^\BTwo\wedge\left( x+y\right)^\BTwo\wedge \neg \left( \left( y+1\right)x\right)^\BTwo\right)\vee\dots                                                                                                                                 \\
-			        & =\left( \neg y^\BTwo\wedge\left( \left( x^\BTwo\wedge\neg y^\BTwo\right)\vee\left( \neg x^\BTwo\wedge y^\BTwo\right)\right)\wedge \neg \left( \left( y+1\right)^\BTwo\wedge x^\BTwo\right)\right)\vee\dots                                          \\
-			        & =\left( \left( x^\BTwo\wedge\neg y^\BTwo\right)\wedge \neg \left( \neg y^\BTwo\wedge x^\BTwo\right)\right)\vee\dots                                                                                                                                 \\
-			        & =\left( \left( x^\BTwo\wedge\neg y^\BTwo\right)\wedge \neg \left( \neg y^\BTwo\wedge x^\BTwo\right)\right)\vee\left( \neg\left( x^\BTwo\wedge\neg y^\BTwo\right)\wedge \left( \neg y^\BTwo\wedge x^\BTwo\right)\right)                              \\
-			        & =\left( x^\BTwo\wedge\left( \neg y^\BTwo\wedge \left( y^\BTwo\vee\neg x^\BTwo\right)\right)\right)\vee\left( \left( \left( \neg x^\BTwo\vee y^\BTwo\right)\wedge \neg y^\BTwo\right)\wedge x^\BTwo\right)                                           \\
-			        & =\left( x^\BTwo\wedge\neg y^\BTwo\wedge \neg x^\BTwo\right)\vee\left( \neg x^\BTwo\wedge \neg y^\BTwo\wedge x^\BTwo\right)                                                                                                                          \\
-			        & =0\wedge 0                                                                                                                                                                                                                                          \\
-			        & =t^\BTwo                                                                                                                                                                                                                                            
-		\end{align*}
-		\item[$s{\downarrow_P}=t{\downarrow_P}$] 
-		\item[$s\approx_B t$] 
-		\begin{align*}
-			s & \approx_B (y+1)(x+y)+(y+1)x \\
-			  & \approx_B (y+1)(x+y+x)      \\
-			  & \approx_B y+y               \\
-			  & \approx_B 0                 \\
-			  & \approx_B t                 \\
-		\end{align*}
-	\end{description}
+			\item[1] $\BTwo$ is a model of $s\approx t$.
+			\begin{align*}
+				s^\BTwo & =\left( \left( y+1\right)\left( x+y\right)+\left( y+1\right)x\right)^\BTwo       \\
+				& =\left( s_1^\BTwo\wedge \neg s_2^\BTwo\right)\vee\left( \neg s_1^\BTwo\wedge s_2^\BTwo\right) \\
+				&\hspace{8pt}\begin{aligned}
+				s_1 & =\left( y+1\right)^\BTwo\wedge\left( x+y\right)^\BTwo & s_2 & =   \left( y+1\right)^\BTwo\wedge x^\BTwo \\
+				    & =\neg y^\BTwo\wedge\left( x+y\right)^\BTwo            &     & = \neg y^\BTwo\wedge x^\BTwo              \\
+				&=\neg y^\BTwo\wedge\left( \left( x^\BTwo\wedge\neg y^\BTwo\right)\vee\left( \neg x^\BTwo\wedge y^\BTwo\right)\right)\\
+				& = x^\BTwo\wedge\neg y^\BTwo
+				\end{aligned}\\
+				s^\BTwo & =\left( \left( x^\BTwo\wedge\neg y^\BTwo\right)\wedge \neg \left( \neg y^\BTwo\wedge x^\BTwo\right)\right)\vee\left( \neg\left( x^\BTwo\wedge\neg y^\BTwo\right)\wedge \left( \neg y^\BTwo\wedge x^\BTwo\right)\right) \\
+				& =\left( x^\BTwo\wedge\left( \neg y^\BTwo\wedge \left( y^\BTwo\vee\neg x^\BTwo\right)\right)\right)\vee\left( \left( \left( \neg x^\BTwo\vee y^\BTwo\right)\wedge \neg y^\BTwo\right)\wedge x^\BTwo\right)              \\
+				& =\left( x^\BTwo\wedge\neg y^\BTwo\wedge \neg x^\BTwo\right)\vee\left( \neg x^\BTwo\wedge \neg y^\BTwo\wedge x^\BTwo\right)                                                                                             \\
+				& =0\vee 0\\
+				& =t^\BTwo 
+			\end{align*}
+			\item[2] The polynomial forms $s{\downarrow_P}$ and $t{\downarrow_P}$ are equal.
+			\item[3] $s\approx_B t$ is a consequence of $B$.
+			\begin{align*}
+				s & \approx_B (y+1)(x+y)+(y+1)x \\
+				  & \approx_B (y+1)(x+y+x)      \\
+				  & \approx_B y+y               \\
+				  & \approx_B 0                 \\
+				  & \approx_B t                 \\
+			\end{align*}
+		\end{description}
