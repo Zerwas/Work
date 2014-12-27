@@ -10,13 +10,13 @@
 	\end{aligned}
 	\right\rbrace \]
 	Since $+$ and $*$ are associative we can omit most of the brackets. Furthermore we often write $xy$ instead of $x*y$.
-	Lets consider an interpretation of $B$ the two element boolean ring $\mathcal{B}_2$ with the carrier set \textbf{2}$:=\left\lbrace 0,1\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright\ and $+$ is \textquotedblleft exclusive or\textquotedblright:
+	Lets consider an interpretation of $B$ the two element boolean ring $\BTwo$ with the carrier set \textbf{2}$:=\left\lbrace 0,1\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright\ and $+$ is \textquotedblleft exclusive or\textquotedblright:
 	\begin{align*}
-		(x+y)^{\mathcal{B}_2} & :=\left( x^{\mathcal{B}_2}\wedge\neg y^{\mathcal{B}_2}\right)  \vee \left( \neg x^{\mathcal{B}_2}\wedge y^{\mathcal{B}_2}\right) & (x*y)^{\mathcal{B}_2} & :=x^{\mathcal{B}_2}\wedge y^{\mathcal{B}_2} \\
-		0^{\mathcal{B}_2}     & :=0                                 & 1^{\mathcal{B}_2} & :=1                                      
+		(x+y)^\BTwo & :=\left( x^\BTwo\wedge\neg y^\BTwo\right)  \vee \left( \neg x^\BTwo\wedge y^\BTwo\right) & (x*y)^\BTwo & :=x^\BTwo\wedge y^\BTwo \\
+		0^\BTwo     & :=0                                 & 1^\BTwo & :=1                                      
 	\end{align*}
 	% treat 0,1 as ground
-	It is easy to see that $\mathcal{B}_2$ is indeed a model of $B$. Furthermore we can transform a term back from an Boolean algebra into Boolean ring theory:
+	It is easy to see that $\BTwo$ is indeed a model of $B$. Furthermore we can transform a term back from an Boolean algebra into Boolean ring theory:
 	\begin{align*}
 		x \wedge y&\mapsto x*y\\
 		x\vee y&\mapsto x+y+x*y\\
@@ -104,7 +104,7 @@
 			(-2,-1.5) node [below right] {$((x*y)+(x*z))^{\mathcal{P}_S}$};;
 		\end{tikzpicture}
 	\end{tabular*}
-	This small example should just show that there are other models of $B$ with rather common interpretations of + and * apart from $\mathcal{B}_2$. Note that if $|S|=1$ then $\mathcal{P}_S$ and $\mathcal{B}_2$ are isomorphic.
+	This small example should just show that there are other models of $B$ with rather common interpretations of + and * apart from $\BTwo$. Note that if $|S|=1$ then $\mathcal{P}_S$ and $\BTwo$ are isomorphic.
 	%correct word?
 	%TODO we only consider terms over 0,1,+,*
 	\subsection{Polynomials}
@@ -128,3 +128,49 @@
 	\end{align*} 
 	where the product of two monomials $m=x_1\dots x_r$ and $n=y_1\dots y_s$ is the monomial obtained by removing repeated occurrences of the same variable from $x_1\dots x_r y_1\dots y_s$. Since we have $\left\lbrace x*x\approx x\right\rbrace\in B$  this rule preserves $\approx_E$-equivalence. Note that if $t_1=1$ then we multiply every monomial in $p_2$ with the empty monomial which does not change anything so the result is as expected just $p_2$.
 	\end{description}
+	The polynomial form of $t$ is denoted by $t{\downarrow_P}$.
+	%t=_B t|P
+	%example
+	\begin{theorem}
+	The following statements are equivalent:
+	\begin{enumerate}
+	\item $\BTwo\models s\approx t,$
+	\item $s{\downarrow_P}=t{\downarrow_P},$
+	\item $s\approx_B t.$
+	\end{enumerate}
+	\end{theorem}
+	%TODO lemma 4.2 somewhere here
+	\begin{proof} tr
+	\begin{description}
+	\item[$1\Rightarrow 2$] asd
+	\item[$2\Rightarrow 3$] asdf
+	\item[$3\Rightarrow 1$] dth
+	\end{description}
+	\end{proof}
+	Consider as example $s:=(y+1)(x+y)+(y+1)x$ and $t:=0$.
+	\begin{description}
+	\item[$\BTwo\models s\approx t$] 
+		\begin{align*}
+		s^\BTwo&=((y+1)(x+y)+(y+1)x)^\BTwo\\
+		&=(((y+1)(x+y))^{\BTwo}\wedge \neg ((y+1)x)^\BTwo)\vee(\neg ((y+1)(x+y))^\BTwo\wedge ((y+1)x)^\BTwo)\\
+		&=((y+1)^\BTwo\wedge(x+y)^\BTwo\wedge \neg ((y+1)x)^\BTwo)\vee\dots\\
+		&=(\neg y^\BTwo\wedge(x+y)^\BTwo\wedge \neg ((y+1)x)^\BTwo)\vee\dots\\
+		&=(\neg y^\BTwo\wedge((x^\BTwo\wedge\neg y^\BTwo)\vee(\neg x^\BTwo\wedge y^\BTwo))\wedge \neg ((y+1)^\BTwo\wedge x^\BTwo))\vee\dots\\
+		&=((x^\BTwo\wedge\neg y^\BTwo)\wedge \neg (\neg y^\BTwo\wedge x^\BTwo))\vee\dots\\
+		&=((x^\BTwo\wedge\neg y^\BTwo)\wedge \neg (\neg y^\BTwo\wedge x^\BTwo))\vee(\neg(x^\BTwo\wedge\neg y^\BTwo)\wedge (\neg y^\BTwo\wedge x^\BTwo))\\
+		&=(x^\BTwo\wedge(\neg y^\BTwo\wedge (y^\BTwo\vee\neg x^\BTwo)))\vee(((\neg x^\BTwo\vee y^\BTwo)\wedge \neg y^\BTwo)\wedge x^\BTwo)\\
+		&=(x^\BTwo\wedge\neg y^\BTwo\wedge \neg x^\BTwo)\vee(\neg x^\BTwo\wedge \neg y^\BTwo\wedge x^\BTwo)\\
+		&=0\wedge 0\\
+		&=t^\BTwo
+		\end{align*}
+	\item[$s{\downarrow_P}=t{\downarrow_P}$] 
+	\item[$s\approx_B t$] 
+		\begin{align*}
+		s&\approx_B (y+1)(x+y)+(y+1)x\\
+		&\approx_B (y+1)(x+y+x)\\
+		&\approx_B y+y\\
+		&\approx_B 0\\
+		&\approx_B t\\
+		\end{align*}
+	\end{description}
+	
