@@ -117,10 +117,12 @@
 		yxz & =zyx     & xy+yz & =zy+xy  \\
 		yx  & \neq yxz & xy+yz & \neq xy 
 	\end{align*}
-	Note that we did not introduce a new symbol for equality of polynomials and just use the same as for syntactic equality since it will be clear from the context which one we mean. Now we can transform every term over $\left\lbrace 0,1,+,*\right\rbrace$ into a (w.r.t. equality of polynomials) unique $\approx_B$-equivalent polynomial, its \textbf{polynomial form}. Since 1 is the neutral element of * we write 1 for the polynomial containing only the empty monomial correspondingly we identify 0 with the empty polynomial. Now the polynomial form can be computed recursively as follows:\\
+	Note that we did not introduce a new symbol for equality of polynomials and just use the same as for syntactic equality since it will be clear from the context which one we mean. Now we can transform every term over $\left\lbrace 0,1,+,*\right\rbrace$ 
+	%TODO right order?
+	 into a (w.r.t. equality of polynomials) unique $\approx_B$-equivalent polynomial, its \textbf{polynomial form}. Since 1 is the neutral element of * we write 1 for the polynomial containing only the empty monomial correspondingly we identify 0 with the empty polynomial. Now the polynomial form can be computed recursively as follows:\\
 	\begin{description}
-		\item[$x,0,1:$] This is the base case, variables and the constants 0 and 1 are already polynomials.\\
-		\item[$t_1+t_2:$] Let $p_1$ and $p_2$ be the polynomial forms of $t_1$ and $t_2$ the polynomial form of $t_1+t_2$ is obtained by removing all pairs of equivalent monomials from $p_1+p_2$. Since we have $\left\lbrace0+x\approx x,x+x\approx0\right\rbrace\in B$  this rule preserves $\approx_E$-equivalence.\\
+		\item[$x,0,1:$] This is the base case, variables and the constants 0 and 1 are already polynomials.
+		\item[$t_1+t_2:$] Let $p_1$ and $p_2$ be the polynomial forms of $t_1$ and $t_2$ the polynomial form of $t_1+t_2$ is obtained by removing all pairs of equivalent monomials from $p_1+p_2$. Since we have $\left\lbrace0+x\approx x,x+x\approx0\right\rbrace\in B$  this rule preserves $\approx_E$-equivalence.
 		%explain 0?
 		\item[$t_1*t_2:$]  Let $p_1=m_1+\dots+m_k$ and $p_2=n_1+\dots+n_l$ be the polynomial forms of $t_1$ and $t_2$. The polynomial form of $t_1*t_2$ is obtained by removing all pairs of equivalent monomials from $p_1*p_2$ which when multiplied out is the sum
 		\begin{align*}
@@ -131,7 +133,7 @@
 	The polynomial form of $t$ is denoted by $t{\downarrow_P}$.
 	%t=_B t|P
 	%example
-	\begin{theorem}
+	\begin{theorem}\label{basicBR}
 		The following statements are equivalent:
 		\begin{enumerate}
 			\item $\BTwo\models s\approx t,$
@@ -140,16 +142,16 @@
 		\end{enumerate}
 	\end{theorem}
 	%TODO lemma 4.2 somewhere here
-	\begin{proof} tr
+	\begin{proof}\mbox{}
 		\begin{description}
 			\item[$1\Rightarrow 2$] asd
 			\item[$2\Rightarrow 3$] asdf
 			\item[$3\Rightarrow 1$] dth
 		\end{description}
 	\end{proof}
-	Consider as example $s:=(y+1)(x+y)+(y+1)x$ and $t:=0$.
-	\begin{description}
-			\item[1] $\BTwo$ is a model of $s\approx t$.
+	Lets consider a bigger example $s:=(y+1)(x+y)+(y+1)x$, $t:=0$ and go through 1,2 and 3 from theorem \ref{basicBR}.
+	\begin{enumerate}
+			\item $\BTwo$ is a model of $s\approx t$.
 			\begin{align*}
 				s^\BTwo & =\left( \left( y+1\right)\left( x+y\right)+\left( y+1\right)x\right)^\BTwo       \\
 				& =\left( s_1^\BTwo\wedge \neg s_2^\BTwo\right)\vee\left( \neg s_1^\BTwo\wedge s_2^\BTwo\right) \\
@@ -165,13 +167,33 @@
 				& =0\vee 0\\
 				& =t^\BTwo 
 			\end{align*}
-			\item[2] The polynomial forms $s{\downarrow_P}$ and $t{\downarrow_P}$ are equal.
-			\item[3] $s\approx_B t$ is a consequence of $B$.
+			\item The polynomial forms $s{\downarrow_P}$ and $t{\downarrow_P}$ are equal.
+			\begin{align*}
+				s & \approx_B (y+1)(x+y)+(y+1)x \\
+				  & \approx_B yx+yy+x+y+yx+x    \\
+				  & \approx_B yx+yx+y+y+x+x     \\
+				  & \approx_B 0
+			\end{align*}
+			\begin{align*}
+				s{\downarrow_P}=0=t{\downarrow_P}
+			\end{align*}
+			\item $s\approx_B t$ is a consequence of $B$.
 			\begin{align*}
 				s & \approx_B (y+1)(x+y)+(y+1)x \\
 				  & \approx_B (y+1)(x+y+x)      \\
 				  & \approx_B y+y               \\
 				  & \approx_B 0                 \\
-				  & \approx_B t                 \\
+				  & \approx_B t                 
 			\end{align*}
-		\end{description}
+		\end{enumerate}
+		A nice consequence from theorem \ref{basicBR} is that $\approx_B$ is decidable, because we could just compare the computable polynomial forms, or by testing semantic equality in $\BTwo$.
+		\subsection{Unification}
+		Note that until now we have not said anything about unification we just introduced the equational theory $B$ and showed some properties of the word problem in $\approx_B$.
+		%intro
+		\begin{lemma}\mbox{}
+		\begin{enumerate}
+		\item Every solution of $s\approxq t$ in $\BTwo$ can be viewed as a $B$-unifier.
+		\item If $s\approxq_B t$ has a unifier then $s\approxq t$ has a solution in $\BTwo$.
+		\end{enumerate}
+		\end{lemma}
+		%TODO Note that we did not use iff because not every unifier can be viewed as a solution in $\BTwo$.
