@@ -206,13 +206,13 @@
 		0 & \text{if }\varphi(x)=\bot
 		\end{cases}
 		\end{align*}
-		for all $x\in V$. Lets denote the homeomorphic extension of $\phi$ by $\widehat{\phi}$. Let $\psi:\TermSet\mapsto\BTwo$ be an arbitrary homomorphism since $\widehat{\phi}$ is a mapping to ground terms $\psi\widehat{\phi}=\widehat{\varphi}$. So the following
+		for all $x\in V$. Lets denote the homeomorphic extension of $\phi$ by $\widehat{\phi}$. Let $\psi:\TermAlgebra\mapsto\BTwo$ be an arbitrary homomorphism since $\widehat{\phi}$ is a mapping to ground terms $\psi\widehat{\phi}=\widehat{\varphi}$. So the following
 		\begin{align*}
 		\psi\left( \widehat{\phi}(s)\right)=\widehat{\varphi}(s)=\widehat{\varphi}(t)=\psi\left( \widehat{\phi}(t)\right) 
 		\end{align*}
 		holds for all homomorphisms $\psi$ and hence $\BTwo\models\widehat{\phi}(s)\approx\widehat{\phi}(t)$. Theorem \ref{basicBR} yields $\widehat{\phi}(s)\approx_B\widehat{\phi}(t)$, i.e. the mapping $\phi$ (which we got directly from the solution $\varphi$), when viewed as a substitution, is a $B$-unifier.
 		%TODO replace phi
-		\item[(2)] Let $\sigma$ be a $B$-unifier of $s\approxq_B t$, i.e. $\sigma(s)\approx_B\sigma(t)$. Now theorem \ref{basicBR} yields $\BTwo\models\sigma(s)\approx\sigma(t)$ and hence $\psi\left(\sigma (s)\right)=\psi\left(\sigma (t)\right)$ for all homomorphisms $\psi:\TermSet\mapsto\BTwo$. Hence $\psi\sigma:V\mapsto\textbf{2}$ is a solution in $\BTwo$.
+		\item[(2)] Let $\sigma$ be a $B$-unifier of $s\approxq_B t$, i.e. $\sigma(s)\approx_B\sigma(t)$. Now theorem \ref{basicBR} yields $\BTwo\models\sigma(s)\approx\sigma(t)$ and hence $\psi\left(\sigma (s)\right)=\psi\left(\sigma (t)\right)$ for all homomorphisms $\psi:\TermAlgebra\mapsto\BTwo$. Hence $\psi\sigma:V\mapsto\textbf{2}$ is a solution in $\BTwo$.
 		%TODO ask why \BTwo instead of 2
 		\end{itemize}
 		\end{proof}
