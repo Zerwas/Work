@@ -10,17 +10,17 @@
 	\end{aligned}
 	\right\rbrace \]
 	Since $+$ and $*$ are associative we can omit most of the brackets. Furthermore we often write $xy$ instead of $x*y$.
-	Lets consider an interpretation of $B$ the two element boolean ring $\BTwo$ with the carrier set \textbf{2}$:=\left\lbrace 0,1\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright\ and $+$ is \textquotedblleft exclusive or\textquotedblright:
+	Lets consider an interpretation of $B$ the two element boolean ring $\BTwo$ with the carrier set $\textbf{2}:=\left\lbrace\bot,\top\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright\ and $+$ is \textquotedblleft exclusive or\textquotedblright:
 	\begin{align*}
 		(x+y)^\BTwo & :=\left( x^\BTwo\wedge\neg y^\BTwo\right)  \vee \left( \neg x^\BTwo\wedge y^\BTwo\right) & (x*y)^\BTwo & :=x^\BTwo\wedge y^\BTwo \\
-		0^\BTwo     & :=0                                                                                      & 1^\BTwo     & :=1                     
+		0^\BTwo     & :=\bot                                                                                      & 1^\BTwo     & :=\top                
 	\end{align*}
 	% treat 0,1 as ground
 	It is easy to see that $\BTwo$ is indeed a model of $B$. Furthermore we can transform a term back from an Boolean algebra into Boolean ring theory:
 	\begin{align*}
 		x \wedge y & \mapsto x*y     \\
 		x\vee y    & \mapsto x+y+x*y \\
-		\neg x     & \mapsto x*(x+1) 
+		\neg x     & \mapsto x+1
 	\end{align*}
 	We work with + and * instead of $\vee,\wedge$ and $\neg$ because in Boolean rings we have a very convenient normal form which makes the following proofs easier.\\
 	% maybe rephrase
@@ -164,7 +164,7 @@
 				s^\BTwo & =\left( \left( x^\BTwo\wedge\neg y^\BTwo\right)\wedge \neg \left( \neg y^\BTwo\wedge x^\BTwo\right)\right)\vee\left( \neg\left( x^\BTwo\wedge\neg y^\BTwo\right)\wedge \left( \neg y^\BTwo\wedge x^\BTwo\right)\right) \\
 				& =\left( x^\BTwo\wedge\left( \neg y^\BTwo\wedge \left( y^\BTwo\vee\neg x^\BTwo\right)\right)\right)\vee\left( \left( \left( \neg x^\BTwo\vee y^\BTwo\right)\wedge \neg y^\BTwo\right)\wedge x^\BTwo\right)              \\
 				& =\left( x^\BTwo\wedge\neg y^\BTwo\wedge \neg x^\BTwo\right)\vee\left( \neg x^\BTwo\wedge \neg y^\BTwo\wedge x^\BTwo\right)                                                                                             \\
-				& =0\vee 0\\
+				& =\bot\vee\bot\\
 				& =t^\BTwo 
 			\end{align*}
 			\item The polynomial forms $s{\downarrow_P}$ and $t{\downarrow_P}$ are equal.
@@ -186,9 +186,9 @@
 				  & \approx_B t                 
 			\end{align*}
 		\end{enumerate}
-		A nice consequence from theorem \ref{basicBR} is that $\approx_B$ is decidable, because we could just compare the computable polynomial forms, or by testing semantic equality in $\BTwo$.
+		A nice consequence from theorem \ref{basicBR} is that $\approx_B$ is decidable, because we could just compare the computable polynomial forms, or test semantic equality in $\BTwo$.
 		\subsection{Unification}
-		Note that until now we have not said anything about unification we just introduced the equational theory $B$ and showed some properties of the word problem in $\approx_B$.
+		Note that until now we have not said anything about unification we just introduced the equational theory $B$, the semantic interpretation $\BTwo$ and showed some properties of the word problem in $\approx_B$.
 		%TODO intro
 		\begin{lemma}\mbox{}
 		\begin{enumerate}
@@ -202,15 +202,15 @@
 		\item[(1)]Let $\varphi:V\mapsto\textbf{2}$ be a solution of $s\approxq t$ in $\BTwo$ and $\widehat{\varphi}$ the homeomorphic extension of $\varphi$, i.e. $\widehat{\varphi}(s)=\widehat{\varphi}(t)$. From $\varphi$ we now can define a mapping $\phi:V\mapsto \TermSet$ to ground terms in the following way:
 		\begin{align*}
 		\phi(x):=\begin{cases}
-		1 & \text{if }\varphi(x)=1\\
-		0 & \text{if }\varphi(x)=0
+		1 & \text{if }\varphi(x)=\top\\
+		0 & \text{if }\varphi(x)=\bot
 		\end{cases}
 		\end{align*}
-		Note that the results of $\phi$ are the constants 0 and 1 whereas the results of $\varphi$ are the values 0 and 1. Lets denote the homeomorphic extension of $\phi$ by $\widehat{\phi}$. Let $\psi:\TermSet\mapsto\BTwo$ be an arbitrary homomorphism since $\widehat{\phi}$ is a mapping to ground terms $\psi\widehat{\phi}=\widehat{\varphi}$. So the following
+		for all $x\in V$. Lets denote the homeomorphic extension of $\phi$ by $\widehat{\phi}$. Let $\psi:\TermSet\mapsto\BTwo$ be an arbitrary homomorphism since $\widehat{\phi}$ is a mapping to ground terms $\psi\widehat{\phi}=\widehat{\varphi}$. So the following
 		\begin{align*}
-		\psi\left( \widehat{\phi}(s)\right) =\widehat{\varphi}(s)=\widehat{\varphi}(t)=\psi\left( \widehat{\phi}(t)\right) 
+		\psi\left( \widehat{\phi}(s)\right)=\widehat{\varphi}(s)=\widehat{\varphi}(t)=\psi\left( \widehat{\phi}(t)\right) 
 		\end{align*}
-		holds for all homomorphisms $\psi$ and hence $\BTwo\models\widehat{\phi}(s)\approx\widehat{\phi}(t)$. Theorem \ref{basicBR} yields $\widehat{\phi}(s)\approx_B\widehat{\phi}(t)$, i.e. the mapping $\phi$ (which we got directly from the solution $\phi$) when viewed as a substitution, is a $B$-unifier.
+		holds for all homomorphisms $\psi$ and hence $\BTwo\models\widehat{\phi}(s)\approx\widehat{\phi}(t)$. Theorem \ref{basicBR} yields $\widehat{\phi}(s)\approx_B\widehat{\phi}(t)$, i.e. the mapping $\phi$ (which we got directly from the solution $\varphi$), when viewed as a substitution, is a $B$-unifier.
 		%TODO replace phi
 		\item[(2)] Let $\sigma$ be a $B$-unifier of $s\approxq_B t$, i.e. $\sigma(s)\approx_B\sigma(t)$. Now theorem \ref{basicBR} yields $\BTwo\models\sigma(s)\approx\sigma(t)$ and hence $\psi\left(\sigma (s)\right)=\psi\left(\sigma (t)\right)$ for all homomorphisms $\psi:\TermSet\mapsto\BTwo$. Hence $\psi\sigma:V\mapsto\textbf{2}$ is a solution in $\BTwo$.
 		%TODO ask why \BTwo instead of 2
