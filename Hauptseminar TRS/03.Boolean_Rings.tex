@@ -189,11 +189,30 @@
 		A nice consequence from theorem \ref{basicBR} is that $\approx_B$ is decidable, because we could just compare the computable polynomial forms, or by testing semantic equality in $\BTwo$.
 		\subsection{Unification}
 		Note that until now we have not said anything about unification we just introduced the equational theory $B$ and showed some properties of the word problem in $\approx_B$.
-		%intro
+		%TODO intro
 		\begin{lemma}\mbox{}
 		\begin{enumerate}
 		\item Every solution of $s\approxq t$ in $\BTwo$ can be viewed as a $B$-unifier.
-		\item If $s\approxq_B t$ has a unifier then $s\approxq t$ has a solution in $\BTwo$.
+		\item If $s\approxq_B t$ has a $B$-unifier then $s\approxq t$ has a solution in $\BTwo$.
 		\end{enumerate}
 		\end{lemma}
-		%TODO Note that we did not use iff because not every unifier can be viewed as a solution in $\BTwo$.
+		%TODO before or after proof? Note that we did not use iff because not every unifier can be viewed as a solution in $\BTwo$. example
+		\begin{proof}\mbox{}
+		\begin{itemize}
+		\item[(1)]Let $\varphi:V\mapsto\textbf{2}$ be a solution of $s\approxq t$ in $\BTwo$ and $\widehat{\varphi}$ the homeomorphic extension of $\varphi$, i.e. $\widehat{\varphi}(s)=\widehat{\varphi}(t)$. From $\varphi$ we now can define a mapping $\phi:V\mapsto \TermSet$ to ground terms in the following way:
+		\begin{align*}
+		\phi(x):=\begin{cases}
+		1 & \text{if }\varphi(x)=1\\
+		0 & \text{if }\varphi(x)=0
+		\end{cases}
+		\end{align*}
+		Note that the results of $\phi$ are the constants 0 and 1 whereas the results of $\varphi$ are the values 0 and 1. Lets denote the homeomorphic extension of $\phi$ by $\widehat{\phi}$. Let $\psi:\TermSet\mapsto\BTwo$ be an arbitrary homomorphism since $\widehat{\phi}$ is a mapping to ground terms $\psi\widehat{\phi}=\widehat{\varphi}$. So the following
+		\begin{align*}
+		\psi\left( \widehat{\phi}(s)\right) =\widehat{\varphi}(s)=\widehat{\varphi}(t)=\psi\left( \widehat{\phi}(t)\right) 
+		\end{align*}
+		holds for all homomorphisms $\psi$ and hence $\BTwo\models\widehat{\phi}(s)\approx\widehat{\phi}(t)$. Theorem \ref{basicBR} yields $\widehat{\phi}(s)\approx_B\widehat{\phi}(t)$, i.e. the mapping $\phi$ (which we got directly from the solution $\phi$) when viewed as a substitution, is a $B$-unifier.
+		%TODO replace phi
+		\item[(2)] Let $\sigma$ be a $B$-unifier of $s\approxq_B t$, i.e. $\sigma(s)\approx_B\sigma(t)$. Now theorem \ref{basicBR} yields $\BTwo\models\sigma(s)\approx\sigma(t)$ and hence $\psi\left(\sigma (s)\right)=\psi\left(\sigma (t)\right)$ for all homomorphisms $\psi:\TermSet\mapsto\BTwo$. Hence $\psi\sigma:V\mapsto\textbf{2}$ is a solution in $\BTwo$.
+		%TODO ask why \BTwo instead of 2
+		\end{itemize}
+		\end{proof}

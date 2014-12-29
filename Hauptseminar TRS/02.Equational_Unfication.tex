@@ -1,10 +1,11 @@
 \section{Equational Unification}
 In the following let $E$ be a set of identities of the form $\left\lbrace  e_1\approx f_1,\dots,e_n\approx f_n \right\rbrace$. Furthermore let $\mathcal{S}ig(E)$ denote the set of all function symbols occurring in $E$. Let $\Sigma$ be a finite set of function symbols and a superset of $\mathcal{S}ig(E)$.
 \begin{definition}
-	An \textbf{$E$-unification problem} over $\Sigma$ is a finite set $S$ of the form $S=\left\lbrace s_1\approxq_{E} t_1,\dots,s_n\approxq_{E} t_n\right\rbrace $ with $s_1,\dots,s_n,t_1,\dots,t_n \in T(\Sigma,V)$, $V$ being a countable set of Variables.\\
+	An \textbf{$E$-unification problem} over $\Sigma$ is a finite set $S$ of the form $S=\left\lbrace s_1\approxq_{E} t_1,\dots,s_n\approxq_{E} t_n\right\rbrace $ with $s_1,\dots,s_n,t_1,\dots,t_n \in\TermSet$, $V$ being a countable set of Variables.\\
 	A substitution $\sigma$ is an \textbf{$E$-unifier} of $S$ iff $ \sigma(s_i)\approx_E \sigma(t_i)$ for all $1\leq i \leq n$.
 	The set of all $E$-unifiers of $S$ is denoted by $\mathcal{U}_E(S)$. $S$ is \textbf{$E$-unifiable} iff $\mathcal{U}_E(S)\neq \emptyset$.
 \end{definition}
+If an $E$-unification problem $S$ contains only one equation $s\approxq_E t$ we often omit the brackets and write $S=s\approxq_E t$.
 \begin{definition}
 	Let $S$ be an $E$-unification problem over $\Sigma$.
 	\begin{itemize}
