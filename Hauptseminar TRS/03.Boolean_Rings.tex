@@ -213,6 +213,27 @@
 		holds for all homomorphisms $\psi$ and hence $\BTwo\models\widehat{\phi}(s)\approx\widehat{\phi}(t)$. Theorem \ref{basicBR} yields $\widehat{\phi}(s)\approx_B\widehat{\phi}(t)$, i.e. the mapping $\phi$ (which we got directly from the solution $\varphi$), when viewed as a substitution, is a $B$-unifier.
 		%TODO replace phi
 		\item[(2)] Let $\sigma$ be a $B$-unifier of $s\approxq_B t$, i.e. $\sigma(s)\approx_B\sigma(t)$. Now theorem \ref{basicBR} yields $\BTwo\models\sigma(s)\approx\sigma(t)$ and hence $\psi\left(\sigma (s)\right)=\psi\left(\sigma (t)\right)$ for all homomorphisms $\psi:\TermAlgebra\mapsto\BTwo$. Hence $\psi\sigma:V\mapsto\textbf{2}$ is a solution in $\BTwo$.
-		%TODO ask why \BTwo instead of 2
+		%TODO \psi\sigma ok? V->\TermSet=(?)\TermAlgebra->2
 		\end{itemize}
 		\end{proof}
+		%TODO more text?
+		%example
+		Lets consider the B-unification problem $x+y+z\approxq z+1$ as small example for clarification.
+		\begin{itemize}
+		\item[(1)]The mapping 
+		\begin{align*}
+		\varphi(w):=\begin{cases}
+		\bot& \text{if }w=x\\
+		\top& \text{if }w\neq x
+		\end{cases}
+		\end{align*}is a solution of our problem. The substitution $\sigma:=\left\lbrace x\mapsto0,y\mapsto1,z\mapsto1\right\rbrace$ is $\varphi$ viewed as a $B$-unifier.
+		\item[(2)]The substitution $\sigma':=\left\lbrace y\mapsto x+1,z\mapsto 1+z\right\rbrace $ obviously is a $B$-unifier. Let $\varphi$ be a mapping with $\varphi(x):=\top$ for all $x\in V$ and $\widehat{\varphi}$ its homeomorphic extension.
+		\begin{align*}
+		\widehat{\varphi}\sigma'(w)=\begin{cases}
+		(\top+1)^\BTwo=\bot& \text{if } w=y\\
+		(1+\top)^\BTwo=\bot& \text{if } w=z\\
+		\top&  \text{otherwise}
+		\end{cases}
+		\end{align*}
+		is a solution in $\BTwo$.
+		\end{itemize}
