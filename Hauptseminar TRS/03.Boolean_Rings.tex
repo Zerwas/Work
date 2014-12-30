@@ -15,7 +15,7 @@
 		(x+y)^\BTwo & :=\left( x^\BTwo\wedge\neg y^\BTwo\right)  \vee \left( \neg x^\BTwo\wedge y^\BTwo\right) & (x*y)^\BTwo & :=x^\BTwo\wedge y^\BTwo \\
 		0^\BTwo     & :=\bot                                                                                      & 1^\BTwo     & :=\top                
 	\end{align*}
-	% treat 0,1 as ground
+	%TODO exercise 10.26
 	It is easy to see that $\BTwo$ is indeed a model of $B$. Furthermore we can transform a term back from an Boolean algebra into Boolean ring theory:
 	\begin{align*}
 		x \wedge y & \mapsto x*y     \\
@@ -227,13 +227,73 @@
 		\top& \text{if }w\neq x
 		\end{cases}
 		\end{align*}is a solution of our problem. The substitution $\sigma:=\left\lbrace x\mapsto0,y\mapsto1,z\mapsto1\right\rbrace$ is $\varphi$ viewed as a $B$-unifier.
-		\item[(2)]The substitution $\sigma':=\left\lbrace y\mapsto x+1,z\mapsto 1+z\right\rbrace $ obviously is a $B$-unifier. Let $\varphi$ be a mapping with $\varphi(x):=\top$ for all $x\in V$ and $\widehat{\varphi}$ its homeomorphic extension.
+		\item[(2)]The substitution $\sigma':=\left\lbrace y\mapsto x+1,z\mapsto 1\right\rbrace $ obviously is a $B$-unifier. Let $\varphi$ be a mapping with $\varphi(x):=\top$ for all $x\in V$ and $\widehat{\varphi}$ its homeomorphic extension.
 		\begin{align*}
-		\widehat{\varphi}\sigma'(w)=\begin{cases}
+		\widehat{\varphi}\left(\sigma'(w)\right)=\begin{cases}
 		(\top+1)^\BTwo=\bot& \text{if } w=y\\
-		(1+\top)^\BTwo=\bot& \text{if } w=z\\
+		1^\BTwo=\top& \text{if } w=z\\
 		\top&  \text{otherwise}
 		\end{cases}
 		\end{align*}
 		is a solution in $\BTwo$.
 		\end{itemize}
+		%TODO intro unitary,t\approx0
+		\subsection{Successive variable elimination}
+		The idea of this unification algorithm is %TODO intro
+		
+		Every term $t$ can be written as $x*r+(x+1)*s$ such that $x\notin\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$. For example, we can split the polynomial form of $t$ into two sets of monomials, those who contain $x$  $\left(l_x\right)$ and those who do not contain $x$ $(s)$.Now $l$ is obtained by removing every occurrence of $x$ in $l_x$ and $r:=l+s$. To see why this works consider the small example $t:=yx+z$. Now $r:=y+z$ and $s:=z$.
+		\begin{align*}
+		x*(y+z)+(x+1)*z&\approx_B xy+xz+xz+z\\
+		&\approx_B xy+z\\
+		&\approx_B t
+		\end{align*}
+		This simple observation is the basis of successive variable elimination.
+		%TODO reproductive B(?)-unifiers
+		\begin{theorem}
+		Let $t\approx_B x*r+(x+1)*s$ such that $x\notin\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$ and define $t':=r*s$.
+		\begin{enumerate}
+		\item Every $B$-unifier of $t\approxq_B0$ is a $B$-unifier of $t'\approxq_B0$.
+		%reproductive unifier->mgu
+		\item If $\sigma$ is a reproductive unifier of $t'\approxq_B0$ and $x\notin\mathcal{D}om(\sigma)$, then 
+		\begin{align*}
+		\sigma':=\sigma\cup\left\lbrace x\mapsto x*(\sigma(r)+\sigma(s)+1)+\sigma(s)\right\rbrace
+		\end{align*}
+		is a reproductive unifier of $t\approxq_B0$.
+		\end{enumerate}
+		\end{theorem}
+		\begin{proof}\mbox{}
+		\begin{itemize}
+		\item[(1)] Let $\tau$ be a $B$-unifier of $t\approxq_B0$ and hence $\tau(t)\approx_B0$.
+		\begin{align*}
+		&&\tau(x)*\tau(r)+(\tau(x)+1)*\tau(s)&\approx_B0\\
+		&\iff&\tau(x)*\tau(r)*\tau(s)+(\tau(x)+1)*\tau(s)*\tau(r)&\approx_B0*\tau(s)*\tau(r)\\
+		&\iff&\tau(x)*\tau(r*s)+(\tau(x)+1)*\tau(s*r)&\approx_B0\\
+		&\iff&(\tau(x)+\tau(x)+1)*\tau(s*r)&\approx_B0\\
+		&\iff&\tau(s*r)&\approx_B0\\
+		\end{align*}
+		So $\tau$ is also a $B$-unifier of $t'\approxq_B0$.
+		\item[(2)] Let $\sigma$ is a reproductive unifier of $t'\approxq_B0$ and $x\notin\mathcal{D}om(\sigma)$. It is easy to show that $\sigma'$ is a $B$-unifier of $t\approxq_B0$:
+		\begin{align*}
+		\sigma'(t)&\approx_B\sigma'(x)*\sigma'(r)+(\sigma'(x)+1)*\sigma'(s)\\
+		&=\ \ (x*(\sigma(r)+\sigma(s)+1)+\sigma(s))*\sigma(r)+(\sigma'(x)+1)*\sigma(s)\\
+		&\approx_B(x*(\sigma(r)+\sigma(s)*\sigma(r)+\sigma(r))+\sigma(s)*\sigma(r))+(\sigma'(x)+1)*\sigma(s)\\
+		&\approx_B(x*(0+\sigma(s*r))+\sigma(s*r))+(\sigma'(x)+1)*\sigma(s)\\
+		&\approx_B(x*\sigma(t')+\sigma(t'))+(\sigma'(x)+1)*\sigma(s)\\
+		&\approx_B0+(x*(\sigma(r)+\sigma(s)+1)+\sigma(s)+1)*\sigma(s)\\
+		&\approx_B(x*(\sigma(r)*\sigma(s)+\sigma(s)+\sigma(s))+\sigma(s)+\sigma(s))\\
+		&\approx_B(x*(\sigma(r*s))+0)\\
+		&\approx_B0\\
+		\end{align*}
+		Now we show that $\sigma'$ is also reproductive. Let $\tau$ be a $B$-unifier of $t\approxq_B0$. Because $\sigma$ is a reproductive unifier of $t'\approxq_B0$ and (1) implies that $\tau$ is indeed a $B$-unifier of $t'\approxq_B0$ it follows that $\tau(\sigma(y))\approx_B\tau(y)$ for all $y$. Therefore $\tau(\sigma'(y))=\tau(\sigma(y))\approx_B\tau(y)$ for all $y\neq x$. For $y=x$:
+		\begin{align*}
+		\tau(\sigma'(x))&=\ \ \tau(x*(\sigma(r)+\sigma(s)+1)+\sigma(s))\\
+		&\approx_B \tau(x)*(\tau(\sigma(r))+\tau(\sigma(s))+1)+\tau(\sigma(s))\\
+		&\approx_B \tau(x)*(\tau(r)+\tau(s)+1)+\tau(s)\\
+		&\approx_B \tau(x)*\tau(r)+\tau(x)*\tau(s)+\tau(x)+\tau(s)\\
+		&\approx_B \tau(x)*\tau(r)+(\tau(x)+1)*\tau(s)+\tau(x)\\
+		&\approx_B \tau(t)+\tau(x)\\
+		&\approx_B \tau(x)\\
+		\end{align*}
+		\end{itemize}
+		\end{proof}
+		%TODO outtro
