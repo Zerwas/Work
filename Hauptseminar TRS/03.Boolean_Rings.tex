@@ -315,12 +315,12 @@
 		is a reproductive $B$-unifier of $t\approxq_B0$.
 		\end{theorem}
 		Before we can proof this theorem we need the following lemma to proof that $\sigma$ actually is a $B$-unifier. 
-		\begin{lemma}
+		\begin{lemma}\label{lowenLemma}
 		If $\sigma(x)=(s+1)*\sigma_1(x)+s*\sigma_2(x)$ for all $x\in\mathcal{V}ar(t)$, then $\sigma(t)=(s+1)*\sigma_1(t)+s*\sigma_2(t)$.
 		\end{lemma}
 		\begin{proof}
 		We show this by structural induction on $t$.
-		\begin{itemize}
+		\begin{description}
 		\item[$t=x:$]The base case is trivial:
 				\begin{align*}
 				\sigma(t)&=(s+1)*\sigma_1(x)+s*\sigma_2(x)\\
@@ -354,10 +354,23 @@
 				&\approx_B(s+1)*\sigma_1(t_1)*\sigma_1(t_2)+0+0+s*\sigma_2(t_1)*\sigma_2(t_2)\\
 				&=\ \ (s+1)*\sigma_1(t)+s*\sigma_2(t)\\
 				\end{align*}
-		\end{itemize}
+		\end{description}
 		\end{proof}
-		Now we can proof theorem \ref{lowenheim}.
-		\begin{proof}[Proof.(Theorem \ref{lowenheim})]
-		
+		Now we can proof theorem \ref{lowenheim}. %TODO change text
+		\begin{proof}[Proof(Theorem \ref{lowenheim})]
+		At first we need to show that $\sigma$ is indeed a $B$-unifier of $t\approxq_B0$. This is easy since $\sigma$ has exactly the form we need for lemma \ref{lowenLemma} ($s:=t,\sigma_1(x):=x$ for all $x$ and $\sigma_2:=\tau$). The fact that $\tau$ is a $B$-unifier of $t\approxq_B0$ now gives us:
+		\begin{align*}
+		\sigma(t)&=(t+1)*t+t*\tau(t)
+		\approx_B0+0
+		\approx_B0
+		\end{align*}
+		So $\sigma$ is a $B$-unifier, it is easy to show that it is also reproductive. Let $\tau'$ be an arbitrary $B$-unifier of $t\approxq_B0$. If $x\in\mathcal{V}ar(t)$ then
+		\begin{align*}
+		\tau'(\sigma(x))&=\ \ \tau'((t+1)*x+t*\tau(x))\\
+		&=\ \ (\tau'(t)+1)*\tau'(x)+\tau'(t)*\tau'(\tau(x))\\
+		&\approx_B(0+1)*\tau'(x)+0*\tau'(\tau(x))\\
+		&\approx_B\tau'(x)
+		\end{align*}
+		if $x\notin\mathcal{V}ar(t)$ then $\sigma(x)=x$ so $\tau'(\sigma(x))=\tau'(x)$ follows trivially.
 		\end{proof}
 		%TODO in Löwenheims formular in example show that the different mgus are reproductive (in \eqClass)
