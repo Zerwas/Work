@@ -192,7 +192,7 @@
 		%TODO intro
 		\begin{lemma}\mbox{}
 		\begin{enumerate}
-		\item Every solution of $s\approxq t$ in $\BTwo$ can be viewed as a $B$-unifier.
+		\item Every solution of $s\approxq_B t$ in $\BTwo$ can be viewed as a $B$-unifier.
 		\item If $s\approxq_B t$ has a $B$-unifier then $s\approxq t$ has a solution in $\BTwo$.
 		\end{enumerate}
 		\end{lemma}
@@ -250,9 +250,9 @@
 		This simple observation is the basis of successive variable elimination.
 		Before we come to the main theorem of successive variable elimination we introduce a strong type of most general $B$-unifiers the reproductive $B$-unifiers.
 		\begin{definition}
-		A $B$-unifier $\sigma$ of a $B$-unification problem $S$ is a \textbf{reproductive $B$-unifier} iff $\tau(\sigma(x))\approx_B\tau(x)$ for every unifier $\tau$ of $S$ and every $x$.
+		A $E$-unifier $\sigma$ of a $B$-unification problem $S$ is a \textbf{reproductive $E$-unifier} iff $\tau(\sigma(x))\approx_E\tau(x)$ for every unifier $\tau$ of $S$ and every $x$.
 		\end{definition}
-		Note that for a normal mgu $\sigma$ of a $B$-unification problem $S$ it only has to hold that for every $B$-unifier $\tau$ of $S$ there has to exist a substitution $\theta$ such that $\theta(\sigma(x))\approx_B\tau(x)$ for every $x\in X$. 
+		Note that for a normal mgu $\sigma$ of a $E$-unification problem $S$ it only has to hold that for every $E$-unifier $\tau$ of $S$ there has to exist a substitution $\theta$ such that $\theta(\sigma(x))\approx_E\tau(x)$ for every $x\in X$. 
 		%TODO more explanation?
 		\begin{theorem}
 		Let $t\approx_B x*r+(x+1)*s$ such that $x\notin\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$ and define $t':=r*s$.
@@ -303,12 +303,61 @@
 		\end{proof}
 		%TODO outtro+example
 		\subsection{Löwenheim's formula}
-		This algorithm is not as intuitive as successive variable elimination but much more interesting. The idea is to turn an arbitrary $B$-unifier $\tau$ of $t\approxq_B0$ into an mgu (even a reproductive $B$-unifier). The substitution $\sigma$ defined by
+		This algorithm is not as intuitive as successive variable elimination but much more interesting. The idea is to turn an arbitrary $B$-unifier $\tau$ of $t\approxq_B0$ into an mgu (even a reproductive $B$-unifier).
+		\begin{theorem}\label{lowenheim}
+		Let $\tau$ be a $B$-unifier of $t\approxq_B0$. The substitution $\sigma$ defined by
 		\begin{align*}
 		\sigma(x):=\begin{cases}
 		(t+1)*x+t*\tau(x) &\text{if }x\in\mathcal{V}ar(t) \\
 		x &\text{if }x\notin\mathcal{V}ar(t)
 		\end{cases}
 		\end{align*}
-		is an mgu of $t\approxq_B0$.
+		is a reproductive $B$-unifier of $t\approxq_B0$.
+		\end{theorem}
+		Before we can proof this theorem we need the following lemma to proof that $\sigma$ actually is a $B$-unifier. 
+		\begin{lemma}
+		If $\sigma(x)=(s+1)*\sigma_1(x)+s*\sigma_2(x)$ for all $x\in\mathcal{V}ar(t)$, then $\sigma(t)=(s+1)*\sigma_1(t)+s*\sigma_2(t)$.
+		\end{lemma}
+		\begin{proof}
+		We show this by structural induction on $t$.
+		\begin{itemize}
+		\item[$t=x:$]The base case is trivial:
+				\begin{align*}
+				\sigma(t)&=(s+1)*\sigma_1(x)+s*\sigma_2(x)\\
+				&=(s+1)*\sigma_1(t)+s*\sigma_2(t)
+				\end{align*}
+		\item[$t=0:$]
+				\begin{align*}
+				\sigma(t)&=0
+				\approx_B0+0
+				\approx_B(s+1)*0+s*0\\
+				&=(s+1)*\sigma_1(t)+s*\sigma_2(t)
+				\end{align*}
+		\item[$t=1:$]
+				\begin{align*}
+				\sigma(t)&=1
+				\approx_Bs+1+s
+				\approx_B(s+1)*1+s*1\\
+				&=(s+1)*\sigma_1(t)+s*\sigma_2(t)
+				\end{align*}
+		\item[$t=t_1+t_2:$]Using the induction hypothesis we obtain:
+				\begin{align*}
+				\sigma(t)&=\ \ \sigma(t_1)+\sigma(t_2)\\
+				&\approx_B(s+1)*\sigma_1(t_1)+s*\sigma_2(t_1)+(s+1)*\sigma_1(t_2)+s*\sigma_2(t_2)\\
+				&\approx_B(s+1)*(\sigma_1(t_1)+\sigma_1(t_2))+s*(\sigma_2(t_1)+\sigma_2(t_2))\\
+				&=\ \ (s+1)*\sigma_1(t)+s*\sigma_2(t)\\
+				\end{align*}
+		\item[$t=t_1*t_2:$]Using the induction hypothesis we obtain:
+				\begin{align*}
+				\sigma(t)&=\ \ \sigma(t_1)*\sigma(t_2)\\
+				&\approx_B((s+1)*\sigma_1(t_1)+s*\sigma_2(t_1))*((s+1)*\sigma_1(t_2)+s*\sigma_2(t_2))\\
+				&\approx_B(s+1)*\sigma_1(t_1)*\sigma_1(t_2)+0+0+s*\sigma_2(t_1)*\sigma_2(t_2)\\
+				&=\ \ (s+1)*\sigma_1(t)+s*\sigma_2(t)\\
+				\end{align*}
+		\end{itemize}
+		\end{proof}
+		Now we can proof theorem \ref{lowenheim}.
+		\begin{proof}[Proof.(Theorem \ref{lowenheim})]
+		
+		\end{proof}
 		%TODO in Löwenheims formular in example show that the different mgus are reproductive (in \eqClass)
