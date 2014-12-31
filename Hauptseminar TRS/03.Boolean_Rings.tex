@@ -248,17 +248,22 @@
 		&\approx_B t
 		\end{align*}
 		This simple observation is the basis of successive variable elimination.
-		%TODO reproductive B(?)-unifiers
+		Before we come to the main theorem of successive variable elimination we introduce a strong type of most general $B$-unifiers the reproductive $B$-unifiers.
+		\begin{definition}
+		A $B$-unifier $\sigma$ of a $B$-unification problem $S$ is a \textbf{reproductive $B$-unifier} iff $\tau(\sigma(x))\approx_B\tau(x)$ for every unifier $\tau$ of $S$ and every $x$.
+		\end{definition}
+		Note that for a normal mgu $\sigma$ of a $B$-unification problem $S$ it only has to hold that for every $B$-unifier $\tau$ of $S$ there has to exist a substitution $\theta$ such that $\theta(\sigma(x))\approx_B\tau(x)$ for every $x\in X$. 
+		%TODO more explanation?
 		\begin{theorem}
 		Let $t\approx_B x*r+(x+1)*s$ such that $x\notin\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$ and define $t':=r*s$.
 		\begin{enumerate}
 		\item Every $B$-unifier of $t\approxq_B0$ is a $B$-unifier of $t'\approxq_B0$.
 		%reproductive unifier->mgu
-		\item If $\sigma$ is a reproductive unifier of $t'\approxq_B0$ and $x\notin\mathcal{D}om(\sigma)$, then 
+		\item If $\sigma$ is a reproductive $B$-unifier of $t'\approxq_B0$ and $x\notin\mathcal{D}om(\sigma)$, then 
 		\begin{align*}
 		\sigma':=\sigma\cup\left\lbrace x\mapsto x*(\sigma(r)+\sigma(s)+1)+\sigma(s)\right\rbrace
 		\end{align*}
-		is a reproductive unifier of $t\approxq_B0$.
+		is a reproductive $B$-unifier of $t\approxq_B0$.
 		\end{enumerate}
 		\end{theorem}
 		\begin{proof}\mbox{}
@@ -272,7 +277,7 @@
 		&\iff&\tau(s*r)&\approx_B0\\
 		\end{align*}
 		So $\tau$ is also a $B$-unifier of $t'\approxq_B0$.
-		\item[(2)] Let $\sigma$ is a reproductive unifier of $t'\approxq_B0$ and $x\notin\mathcal{D}om(\sigma)$. It is easy to show that $\sigma'$ is a $B$-unifier of $t\approxq_B0$:
+		\item[(2)] Let $\sigma$ is a reproductive $B$-unifier of $t'\approxq_B0$ and $x\notin\mathcal{D}om(\sigma)$. It is easy to show that $\sigma'$ is a $B$-unifier of $t\approxq_B0$:
 		\begin{align*}
 		\sigma'(t)&\approx_B\sigma'(x)*\sigma'(r)+(\sigma'(x)+1)*\sigma'(s)\\
 		&=\ \ (x*(\sigma(r)+\sigma(s)+1)+\sigma(s))*\sigma(r)+(\sigma'(x)+1)*\sigma(s)\\
@@ -284,7 +289,7 @@
 		&\approx_B(x*(\sigma(r*s))+0)\\
 		&\approx_B0\\
 		\end{align*}
-		Now we show that $\sigma'$ is also reproductive. Let $\tau$ be a $B$-unifier of $t\approxq_B0$. Because $\sigma$ is a reproductive unifier of $t'\approxq_B0$ and (1) implies that $\tau$ is indeed a $B$-unifier of $t'\approxq_B0$ it follows that $\tau(\sigma(y))\approx_B\tau(y)$ for all $y$. Therefore $\tau(\sigma'(y))=\tau(\sigma(y))\approx_B\tau(y)$ for all $y\neq x$. For $y=x$:
+		Now we show that $\sigma'$ is also reproductive. Let $\tau$ be a $B$-unifier of $t\approxq_B0$. Because $\sigma$ is a reproductive $B$-unifier of $t'\approxq_B0$ and (1) implies that $\tau$ is indeed a $B$-unifier of $t'\approxq_B0$ it follows that $\tau(\sigma(y))\approx_B\tau(y)$ for all $y$. Therefore $\tau(\sigma'(y))=\tau(\sigma(y))\approx_B\tau(y)$ for all $y\neq x$. For $y=x$:
 		\begin{align*}
 		\tau(\sigma'(x))&=\ \ \tau(x*(\sigma(r)+\sigma(s)+1)+\sigma(s))\\
 		&\approx_B \tau(x)*(\tau(\sigma(r))+\tau(\sigma(s))+1)+\tau(\sigma(s))\\
@@ -296,4 +301,14 @@
 		\end{align*}
 		\end{itemize}
 		\end{proof}
-		%TODO outtro
+		%TODO outtro+example
+		\subsection{Löwenheim's formula}
+		This algorithm is not as intuitive as successive variable elimination but much more interesting. The idea is to turn an arbitrary $B$-unifier $\tau$ of $t\approxq_B0$ into an mgu (even a reproductive $B$-unifier). The substitution $\sigma$ defined by
+		\begin{align*}
+		\sigma(x):=\begin{cases}
+		(t+1)*x+t*\tau(x) &\text{if }x\in\mathcal{V}ar(t) \\
+		x &\text{if }x\notin\mathcal{V}ar(t)
+		\end{cases}
+		\end{align*}
+		is an mgu of $t\approxq_B0$.
+		%TODO in Löwenheims formular in example show that the different mgus are reproductive (in \eqClass)
