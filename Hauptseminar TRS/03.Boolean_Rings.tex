@@ -241,7 +241,7 @@
 		\subsection{Successive variable elimination}
 		The idea of this unification algorithm is %TODO intro
 		
-		Every term $t$ can be written as $x*r+(x+1)*s$ such that $x\notin\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$. For example, we can split the polynomial form of $t$ into two sets of monomials, those who contain $x$  $\left(l_x\right)$ and those who do not contain $x$ $(s)$.Now $l$ is obtained by removing every occurrence of $x$ in $l_x$ and $r:=l+s$. To see why this works consider the small example $t:=yx+z$. Now $r:=y+z$ and $s:=z$.
+		Every term $t$ can be written as $x*r+(x+1)*s$ such that $x\notin\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$. For example, we can split the polynomial form of $t$ into two sets of monomials, those who contain $x$  $\left(l_x\right)$ and those who do not contain $x$ $(s)$. Now $l$ is obtained by removing every occurrence of $x$ in $l_x$ and $r:=l+s$. To see why this works consider the small example $t:=yx+z$. Now $r:=y+z$ and $s:=z$.
 		\begin{align*}
 		x*(y+z)+(x+1)*z&\approx_B xy+xz+xz+z\\
 		&\approx_B xy+z\\
