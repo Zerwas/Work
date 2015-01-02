@@ -254,7 +254,7 @@
 		\end{definition}
 		Note that for a normal mgu $\sigma$ of a $E$-unification problem $S$ it only has to hold that for every $E$-unifier $\tau$ of $S$ there has to exist a substitution $\theta$ such that $\theta(\sigma(x))\approx_E\tau(x)$ for every $x\in X$. 
 		%TODO more explanation?
-		\begin{theorem}
+		\begin{theorem}\label{sucVEli}
 		Let $t\approx_B x*r+(x+1)*s$ such that $x\notin\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$ and define $t':=r*s$.
 		\begin{enumerate}
 		\item Every $B$-unifier of $t\approxq_B0$ is a $B$-unifier of $t'\approxq_B0$.
@@ -301,7 +301,31 @@
 		\end{align*}
 		\end{itemize}
 		\end{proof}
-		%TODO outtro+example
+		Now lets consider as example the $B$-unification problem $xy+yz+xz+1\approxq_B0$. First we eliminate $x$.
+		\begin{align*}
+		& x*(y+z+yz+1)+(x+1)*(yz+1)\approxq_B0& r=y+z+yz+1,s=yz+1\\
+		& r*s\approx_Byz+yz+yz+yz+y+z+yz+1\approx_By+z+yz+1
+		\end{align*}
+		Now we eliminate y.
+		\begin{align*}
+		& y*(1+z+z+1)+(y+1)*(z+1)\approxq_B0& r'=1+z+z+1,s'=z+1\\
+		& r'*s'\approx_B(1+z+z+1)*(z+1)\approx_B0*(z+1)\approx_B0
+		\end{align*}
+		Obviously $0\approxq0$ is $B$-unifiable with the reproductive $B$-unifier $\sigma''$ which is the identity on all variables. From theorem \ref{sucVEli} it follows that $\sigma'$ defined by
+		\begin{align*}
+		\sigma'&:=\sigma''\cup\left\lbrace y\mapsto y*(\sigma''(r')+\sigma''(s')+1)+\sigma''(s')\right\rbrace\\
+		\sigma'&:=\sigma''\cup\left\lbrace y\mapsto y*(0+z+1+1)+z+1\right\rbrace\\
+		\sigma'&:=\sigma''\cup\left\lbrace y\mapsto yz+z+1\right\rbrace
+		\end{align*}
+		is a reproductive $B$-unifier of $y*(1+z+z+1)+(y+1)*(z+1)\approxq_B0$. Correspondingly $\sigma$ defined by
+		\begin{align*}
+		\sigma&:=\sigma'\cup\left\lbrace x\mapsto x*(\sigma'(r+s)+1)+\sigma'(s)\right\rbrace\\
+		\sigma&:=\sigma'\cup\left\lbrace x\mapsto x*(\sigma'(y+z)+1)+(yz+z+1)*z+1\right\rbrace\\
+		\sigma&:=\sigma'\cup\left\lbrace x\mapsto x*(yz+z+1+z+1)+yz+1\right\rbrace\\
+		\sigma&:=\sigma'\cup\left\lbrace x\mapsto xyz+yz+1\right\rbrace\\
+		\end{align*}
+		is a reproductive $B$-unifier of $x*(y+z+yz+1)+(x+1)*(yz+1)\approxq_B0$ and also of our original problem $xy+yz+xz+1\approxq_B0$.
+		%TODO outtro
 		\subsection{Löwenheim's formula}
 		This algorithm is not as intuitive as successive variable elimination but much more interesting. The idea is to turn an arbitrary $B$-unifier $\tau$ of $t\approxq_B0$ into an mgu (even a reproductive $B$-unifier).
 		\begin{theorem}\label{lowenheim}
@@ -373,4 +397,57 @@
 		\end{align*}
 		if $x\notin\mathcal{V}ar(t)$ then $\sigma(x)=x$ so $\tau'(\sigma(x))=\tau'(x)$ follows trivially.
 		\end{proof}
+		Now lets consider the $B$-unification problem $xy+yz+xz+1\approxq_B0$ (the same as in successive variable elimination) as example. We will only consider ground $B$-unifiers.
+		\begin{align*}
+		& x=1,y=1,z=1:& \sigma_1(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*1\\
+		&&&\approx_Bxy+xyz+xz+(xy+yz+xz+1)\\
+		&&&\approx_Bxyz+yz+1\\
+		&&\sigma_1(y)&=\ \ (xy+yz+xz+1+1)*y+(xy+yz+xz+1)*1\\
+		&&&\approx_Bxyz+xz+1\\
+		&&\sigma_1(z)&=\ \ (xy+yz+xz+1+1)*z+(xy+yz+xz+1)*1\\
+		&&&\approx_Bxyz+xy+1\\
+		& x=0,y=1,z=1:& \sigma_2(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*0\\
+		&&&\approx_Bxy+xyz+xz\\
+		&&\sigma_2(y)&\approx_Bxyz+xz+1\\
+		&&\sigma_2(z)&\approx_Bxyz+xy+1
+		\end{align*}
+		\begin{align*}
+		& x=1,y=0,z=1\text{ and }x=1,y=1,z=0\text{ are symettric to }x=0,y=1,z=1
+		\end{align*} 
+		%Since it is not so easy to see that the calculated $B$-unifiers are reproductive we will consider some examples. First $\sigma_1(\sigma_2(w))\approx_B\sigma_1(w)$ for all $w$, if $w\notin\left\lbrace x,y,z\right\rbrace $ then $\sigma_1(\sigma_2(w))=\sigma_1(w)$ follows trivially. If $w\in\left\lbrace x,y,z\right\rbrace $ then
+		%\begin{align*}
+		%\sigma_1(\sigma_2(x))&\approx_B\sigma_1(xy+xyz+xz)\\
+		%&\approx_B(xyz+yz+1)(xyz+xz+1)+\sigma_1(xyz+xz)\\
+		%&\approx_B(xyz+xyz+xyz)+(xyz+xyz+xz)+(xyz+yz+1)+\sigma_1(xyz+xz)\\
+		%&\approx_Bxz+yz+1+\sigma_1(xyz+xz)\\
+		%&\approx_Bxz+yz+1+\sigma_1(xyz)+xy+yz+1\\
+		%&\approx_Bxz+xy+(xz+yz+1)(xyz+xy+1)\\
+		%&\approx_Bxz+xy+(xyz+xyz+xyz)+(xyz+xyz+xy)+(xz+yz+1)\\
+		%&\approx_Bxyz+yz+1\\
+		%&\approx_B\sigma_1(x)
+		%\end{align*}
+		Since it is not so easy to see that the calculated $B$-unifiers are reproductive we will consider an example.
+		Remember the reproductive $B$-unifier $\sigma:=\left\lbrace x\mapsto xyz+yz+1,y\mapsto yz+z+1\right\rbrace$  we computed with successive variable elimination. Lets show that $\sigma(\sigma_1(w))\approx_B\sigma(w)$ for all $w$. If $w\notin\left\lbrace x,y,z\right\rbrace $ then $\sigma(\sigma_1(w))=\sigma(w)$ follows trivially. If $w\in\left\lbrace x,y,z\right\rbrace $ then
+		\begin{align*}
+		\sigma(\sigma_1(x))&\approx_B\sigma(xyz+yz+1)\\
+		&\approx_B(xyz+yz+1)(yz+z+1)z+\sigma(yz+1)\\
+		&\approx_B(xyz+yz+yz)+(xyz+yz+z)+(xyz+yz+z)+\sigma(yz+1)\\
+		&\approx_Bxyz+(yz+z+1)z+1\\
+		&\approx_Bxyz+yz+1\\
+		&\approx_B\sigma(x)\\
+		\sigma(\sigma_1(y))&\approx_B\sigma(xyz+xz+1)\\
+		&\approx_Bxyz+\sigma(xz+1)\\
+		&\approx_Bxyz+(xyz+yz+1)z+1\\
+		&\approx_Byz+z+1\\
+		&\approx_B\sigma(y)
+		\end{align*}
+		\begin{align*}
+		\sigma(\sigma_1(z))&\approx_B\sigma(xyz+xy+1)\\
+		&\approx_Bxyz+\sigma(xy+1)\\
+		&\approx_Bxyz+(xyz+yz+1)(yz+z+1)+1\\
+		&\approx_Bxyz+(xyz+yz+yz)+(xyz+yz+z)+(xyz+yz+1)+1\\
+		&\approx_Bz\\
+		&\approx_B\sigma(z)
+		\end{align*}
+		Of course this does not proof that $\sigma_1$ is reproductive it was just to stress the fact that for a reproductive $B$-unifier $\sigma$ the equation $\tau(\sigma(x))\approx_B\tau(x)$ has to hold for all $B$-unifiers $\tau$ so it especially has to hold for other reproductive $B$-unifiers.
 		%TODO in Löwenheims formular in example show that the different mgus are reproductive (in \eqClass)
