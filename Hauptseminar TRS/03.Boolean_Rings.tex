@@ -122,7 +122,7 @@
 	 into a (w.r.t. equality of polynomials) unique $\approx_B$-equivalent polynomial, its \textbf{polynomial form}. Since 1 is the neutral element of * we write 1 for the polynomial containing only the empty monomial correspondingly we identify 0 with the empty polynomial. Now the polynomial form can be computed recursively as follows:\\
 	\begin{description}
 		\item[$x,0,1:$] This is the base case, variables and the constants 0 and 1 are already polynomials.
-		\item[$t_1+t_2:$] Let $p_1$ and $p_2$ be the polynomial forms of $t_1$ and $t_2$ the polynomial form of $t_1+t_2$ is obtained by removing all pairs of equivalent monomials from $p_1+p_2$. Since we have $\left\lbrace0+x\approx x,x+x\approx0\right\rbrace\in B$  this rule preserves $\approx_E$-equivalence.
+		\item[$t_1+t_2:$] Let $p_1$ and $p_2$ be the polynomial forms of $t_1$ and $t_2$ the polynomial form of $t_1+t_2$ is obtained by removing all pairs of equivalent monomials from $p_1+p_2$. Since we have $\left\lbrace0+x\approx x,x+x\approx0\right\rbrace\in B$  this rule preserves $\approx_B$-equivalence.
 		%explain 0?
 		\item[$t_1*t_2:$]  Let $p_1=m_1+\dots+m_k$ and $p_2=n_1+\dots+n_l$ be the polynomial forms of $t_1$ and $t_2$. The polynomial form of $t_1*t_2$ is obtained by removing all pairs of equivalent monomials from $p_1*p_2$ which when multiplied out is the sum
 		\begin{align*}
@@ -130,7 +130,7 @@
 		\end{align*} 
 		where the product of two monomials $m=x_1\dots x_r$ and $n=y_1\dots y_s$ is the monomial obtained by removing repeated occurrences of the same variable from $x_1\dots x_r y_1\dots y_s$. Since we have $\left\lbrace x*x\approx x\right\rbrace\in B$  this rule preserves $\approx_E$-equivalence. Note that if $t_1=1$ then we multiply every monomial in $p_2$ with the empty monomial which does not change anything so the result is as expected just $p_2$.
 	\end{description}
-	The polynomial form of $t$ is denoted by $t{\downarrow_P}$. It is easy to see that all rules preserve $\approx_E$-equivalence and hence $t\approx_Bt{\downarrow_P}$.
+	The polynomial form of $t$ is denoted by $t{\downarrow_P}$. It is easy to see that all rules preserve $\approx_B$-equivalence and hence $t\approx_Bt{\downarrow_P}$.
 	%example?
 	\begin{theorem}\label{basicBR}
 		The following statements are equivalent:
@@ -140,15 +140,7 @@
 			\item $s\approx_B t.$
 		\end{enumerate}
 	\end{theorem}
-	%TODO lemma 4.2 somewhere here
-	\begin{proof}\mbox{}
-		\begin{description}
-			\item[$1\Rightarrow 2$] asd
-			\item[$2\Rightarrow 3$] asdf
-			\item[$3\Rightarrow 1$] dth
-		\end{description}
-	\end{proof}
-	Lets consider a bigger example $s:=(y+1)(x+y)+(y+1)x$, $t:=0$ and go through 1,2 and 3 from theorem \ref{basicBR}.
+	We will not proof this theorem but instead look at a bigger example. Let $s:=(y+1)*(x+y)+(y+1)*x$ and $t:=0$ and go through 1, 2 and 3 from theorem \ref{basicBR}.
 	\begin{enumerate}
 			\item $\BTwo$ is a model of $s\approx t$.
 			\begin{align*}
@@ -178,17 +170,16 @@
 			\end{align*}
 			\item $s\approx_B t$ is a consequence of $B$.
 			\begin{align*}
-				s & \approx_B (y+1)(x+y)+(y+1)x \\
+				s & =\ \ (y+1)(x+y)+(y+1)x \\
 				  & \approx_B (y+1)(x+y+x)      \\
 				  & \approx_B y+y               \\
 				  & \approx_B 0                 \\
-				  & \approx_B t                 
+				  & =\ \ t                 
 			\end{align*}
 		\end{enumerate}
 		A nice consequence from theorem \ref{basicBR} is that $\approx_B$ is decidable, because we could just compare the computable polynomial forms, or test semantic equality in $\BTwo$.
 		\subsection{Unification}
-		Note that until now we have not said anything about unification we just introduced the equational theory $B$, the semantic interpretation $\BTwo$ and showed some properties of the word problem in $\approx_B$.
-		%TODO intro
+		Note that until now we have not said anything about unification we just introduced the equational theory $B$, the semantic interpretation $\BTwo$ and showed some properties of the word problem in $\approx_B$. Now we will look at some ways to find most general $B$-unifiers of $B$-unification problems. But fist we show that unification modulo $\approx_B$ is closely related to equation solving in $\BTwo$.
 		\begin{lemma}\mbox{}
 		\begin{enumerate}
 		\item Every solution of $s\approxq_B t$ in $\BTwo$ can be viewed as a $B$-unifier.
