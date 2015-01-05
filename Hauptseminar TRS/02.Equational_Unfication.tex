@@ -52,8 +52,8 @@ Since $\theta$ is an $A$-unifier of $S$ we know that:
 \begin{align*}
 	  &                          & \theta(x)+a                          & \approx_A a+\theta(x)                          \\
 	  & \iff                         & x_1+\dots+x_n+a                      & \approx_A a+x_1+\dots+x_n                      \\
-	  & \implies x_1=a,x_n=a     & a+x_2+\dots+x_{n-1}+a+a              & \approx_A a+a+x_2+\dots+x_{n-1}+a              \\
-	  & \implies x_2=a,x_{n-1}=a & a+a+\dots+a+a+a                      & \approx_A a+a+a+\dots+a+a                      \\
+	  & \implies x_1=x_n=a     & a+x_2+\dots+a+a              & \approx_A a+a+\dots+x_{n-1}+a              \\
+	  & \implies x_2=x_{n-1}=a & a+a+\dots+a+a+a                      & \approx_A a+a+a+\dots+a+a                      \\
 	  & \hspace{10pt}\vdots      &                                      & \vdots                                         \\
 	  & \implies                 & \underbrace{a+\dots+a}_{n+1\times a} & \approx_A \underbrace{a+\dots+a}_{n+1\times a} 
 \end{align*}
