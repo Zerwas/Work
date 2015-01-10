@@ -225,7 +225,7 @@
 		\end{align*}
 		is a solution in $\BTwo$.
 		\end{itemize}
-		Note that $\approx_B$ is $unitary$ hence it suffices to find an mgu and not $B$-minimal $B$-complete sets. Furthermore we can transform every $B$-unification problem into a $B$-unification problem of the form $t\approxq_B0$ in the following way. Let $S=\left\lbrace t_1\approxq_Bs_1,\dots,t_n\approxq_Bs_n\right\rbrace$ be an arbitrary $B$-unification problem. For all $1\leq i\leq n$ we transform $t_i\approxq_Bs_i$ into $t_i+s_i\approx_B0$. Now we put the equation together by multiplying them in the following way 
+		Note that $\approx_B$ is $unitary$ for elementary unification and unification with constants hence we only consider elementary unification here it suffices to find an mgu and not $B$-minimal $B$-complete sets. Furthermore we can transform every $B$-unification problem into a $B$-unification problem of the form $t\approxq_B0$ in the following way. Let $S=\left\lbrace t_1\approxq_Bs_1,\dots,t_n\approxq_Bs_n\right\rbrace$ be an arbitrary $B$-unification problem. For all $1\leq i\leq n$ we transform $t_i\approxq_Bs_i$ into $t_i+s_i\approx_B0$. Now we put the equation together by multiplying them in the following way 
 		\begin{align*}
 		&&(t_1+s_1+1)*\dots*(t_n+s_n+1)&\approxq_B1\\
 		&\iff&(t_1+s_1+1)*\dots*(t_n+s_n+1)+1&\approxq_B0
@@ -443,3 +443,19 @@
 		&\approx_B\sigma(z)
 		\end{align*}
 		Of course this does not proof that $\sigma_1$ is reproductive it was just to stress the fact that for a reproductive $B$-unifier $\sigma$ the equation $\tau(\sigma(x))\approx_B\tau(x)$ has to hold for all $B$-unifiers $\tau$ so it especially has to hold for other reproductive $B$-unifiers.
+		
+		\begin{thebibliography}{9}
+		
+		\bibitem{TRS}
+		  Franz Baader and Tobias Nipkow,
+		  \emph{Term Rewriting and All That}.
+		  Cambridge University Press,
+		  1st edition,
+		  1999.
+		
+		\bibitem{cmplxBU}
+			Franz Baader,
+			\emph{On the complexity of Boolean unification}.
+		 %TODO 
+		
+		\end{thebibliography}
