@@ -42,7 +42,7 @@
 	\def\CircleX{(\f*0.5,\f*0.866) circle (\f*0.8)}
 	\def\CircleY{(\f*0,0) circle (\f*0.8)}
 	\def\CircleZ{(\f*1,0) circle (\f*0.8)}
-	\begin{tabular*}{\textwidth}{cc}
+	\begin{tabular*}{\linewidth}{cc}
 		\begin{tikzpicture}[fill=gray]
 			\begin{scope}
 				\clip \CircleY
@@ -113,15 +113,15 @@
 	We compare monomials and polynomials modulo commutativity and associativity. So two monomials are distinct iff the sets of variables occurring in them are distinct and two polynomials are distinct iff the sets of their monomials are distinct.
 	Here are some examples for clarification:
 	\begin{align*}
-		yxz & =zyx     & xy+yz & =zy+xy  \\
+		yxz & =zyx     & xy+yz & =zy+xy\\
 		yx  & \neq yxz & xy+yz & \neq xy 
 	\end{align*}
 	Note that we did not introduce a new symbol for equality of polynomials and just use the same as for syntactic equality since it will be clear from the context which one we mean. Now we can transform every term over $\left\lbrace 0,1,+,*\right\rbrace$ 
 	%TODO right order?
-	 into a (w.r.t. equality of polynomials) unique $\approx_B$-equivalent polynomial, its \textbf{polynomial form}. Since 1 is the neutral element of * we write 1 for the polynomial containing only the empty monomial correspondingly we identify 0 with the empty polynomial. Now the polynomial form can be computed recursively as follows:\\
+	 into a (w.r.t. equality of polynomials) unique $\approx_B$-equivalent polynomial, its \textbf{polynomial form}. Since 1 is the neutral element of * we write 1 for the polynomial containing only the empty monomial correspondingly we identify 0 with the empty polynomial. Now the polynomial form can be computed recursively as follows:
 	\begin{description}
 		\item[$x,0,1:$] This is the base case, variables and the constants 0 and 1 are already polynomials.
-		\item[$t_1+t_2:$] Let $p_1$ and $p_2$ be the polynomial forms of $t_1$ and $t_2$ the polynomial form of $t_1+t_2$ is obtained by removing all pairs of equivalent monomials from $p_1+p_2$. Since we have $\left\lbrace0+x\approx x,x+x\approx0\right\rbrace\in B$  this rule preserves $\approx_B$-equivalence.
+		\item[$t_1+t_2:$] Let $p_1$ and $p_2$ be the polynomial forms of $t_1$ and $t_2$ the polynomial form of $t_1+t_2$ is obtained by removing all pairs of equivalent monomials from $p_1+p_2$. Since we have $\left\lbrace0+x\approx x,x+x\approx0\right\rbrace\subseteq B$  this rule preserves $\approx_B$-equivalence.
 		%explain 0?
 		\item[$t_1*t_2:$]  Let $p_1=m_1+\dots+m_k$ and $p_2=n_1+\dots+n_l$ be the polynomial forms of $t_1$ and $t_2$. The polynomial form of $t_1*t_2$ is obtained by removing all pairs of equivalent monomials from $p_1*p_2$ which when multiplied out is the sum
 		\begin{align*}
@@ -230,7 +230,7 @@
 		&&(t_1+s_1+1)*\dots*(t_n+s_n+1)&\approxq_B1\\
 		&\iff&(t_1+s_1+1)*\dots*(t_n+s_n+1)+1&\approxq_B0
 		\end{align*}
-		It is easy to see that our transformation do not change the set of $B$-unifiers. Now we will look at two ways to find mgu's of $B$-unification problems of the form $t\approxq_B0$.
+		It is easy to see that our transformation does not change the set of $B$-unifiers. Now we will look at two ways to find mgu's of $B$-unification problems of the form $t\approxq_B0$.
 		\subsection{Successive variable elimination}
 		The idea of this unification algorithm is pretty simple we just eliminate variables until we have a ground $B$-unification problem if it has a solution then we can read off an mgu for the original problem otherwise the original problem is not $B$-unifiable. The following observation gives us a way to eliminate variables.
 		
@@ -270,7 +270,7 @@
 		&\iff&\tau(s*r)&\approx_B0\\
 		\end{align*}
 		So $\tau$ is also a $B$-unifier of $t'\approxq_B0$.
-		\item[(2)] Let $\sigma$ is a reproductive $B$-unifier of $t'\approxq_B0$ and $x\notin\mathcal{D}om(\sigma)$. It is easy to show that $\sigma'$ is a $B$-unifier of $t\approxq_B0$:
+		\item[(2)] Let $\sigma$ be a reproductive $B$-unifier of $t'\approxq_B0$ and $x\notin\mathcal{D}om(\sigma)$. It is easy to show that $\sigma'$ is a $B$-unifier of $t\approxq_B0$:
 		\begin{align*}
 		\sigma'(t)&\approx_B\sigma'(x)*\sigma'(r)+(\sigma'(x)+1)*\sigma'(s)\\
 		&=\ \ (x*(\sigma(r)+\sigma(s)+1)+\sigma(s))*\sigma(r)+(\sigma'(x)+1)*\sigma(s)\\
@@ -296,12 +296,12 @@
 		\end{proof}
 		Now lets consider as example the $B$-unification problem $xy+yz+xz+1\approxq_B0$. First we eliminate $x$.
 		\begin{align*}
-		& x*(y+z+yz+1)+(x+1)*(yz+1)\approxq_B0& r=y+z+yz+1,s=yz+1\\
+		& x*(y+z+yz+1)+(x+1)*(yz+1)\approxq_B0\ (r=y+z+yz+1,s=yz+1)\\
 		& r*s\approx_Byz+yz+yz+yz+y+z+yz+1\approx_By+z+yz+1
 		\end{align*}
 		Now we eliminate y.
 		\begin{align*}
-		& y*(1+z+z+1)+(y+1)*(z+1)\approxq_B0& r'=1+z+z+1,s'=z+1\\
+		& y*(1+z+z+1)+(y+1)*(z+1)\approxq_B0\ (r'=1+z+z+1,s'=z+1)\\
 		& r'*s'\approx_B(1+z+z+1)*(z+1)\approx_B0*(z+1)\approx_B0
 		\end{align*}
 		Obviously $0\approxq0$ is $B$-unifiable with the reproductive $B$-unifier $\sigma''$ which is the identity on all variables. From theorem \ref{sucVEli} it follows that $\sigma'$ defined by
@@ -392,14 +392,14 @@
 		\end{proof}
 		Now lets consider the $B$-unification problem $xy+yz+xz+1\approxq_B0$ (the same as in successive variable elimination) as example. We will only consider ground $B$-unifiers.
 		\begin{align*}
-		& x=1,y=1,z=1:& \sigma_1(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*1\\
+		& xyz=1:& \sigma_1(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*1\\
 		&&&\approx_Bxy+xyz+xz+(xy+yz+xz+1)\\
 		&&&\approx_Bxyz+yz+1\\
 		&&\sigma_1(y)&=\ \ (xy+yz+xz+1+1)*y+(xy+yz+xz+1)*1\\
 		&&&\approx_Bxyz+xz+1\\
 		&&\sigma_1(z)&=\ \ (xy+yz+xz+1+1)*z+(xy+yz+xz+1)*1\\
 		&&&\approx_Bxyz+xy+1\\
-		& x=0,y=1,z=1:& \sigma_2(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*0\\
+		& x=0,yz=1:& \sigma_2(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*0\\
 		&&&\approx_Bxy+xyz+xz\\
 		&&\sigma_2(y)&\approx_Bxyz+xz+1\\
 		&&\sigma_2(z)&\approx_Bxyz+xy+1
@@ -420,7 +420,7 @@
 		%&\approx_B\sigma_1(x)
 		%\end{align*}
 		Since it is not so easy to see that the calculated $B$-unifiers are reproductive we will consider an example.
-		Remember the reproductive $B$-unifier $\sigma:=\left\lbrace x\mapsto xyz+yz+1,y\mapsto yz+z+1\right\rbrace$  we computed with successive variable elimination. Lets show that $\sigma(\sigma_1(w))\approx_B\sigma(w)$ for all $w$. If $w\notin\left\lbrace x,y,z\right\rbrace $ then $\sigma(\sigma_1(w))=\sigma(w)$ follows trivially. If $w\in\left\lbrace x,y,z\right\rbrace $ then
+		Remember the reproductive $B$-unifier $\sigma:=\left\lbrace x\mapsto xyz+yz+1,y\mapsto yz+z+1\right\rbrace$ which we computed with successive variable elimination. Lets show that $\sigma(\sigma_1(w))\approx_B\sigma(w)$ for all $w$. If $w\notin\left\lbrace x,y,z\right\rbrace $ then $\sigma(\sigma_1(w))=\sigma(w)$ follows trivially. If $w\in\left\lbrace x,y,z\right\rbrace $ then
 		\begin{align*}
 		\sigma(\sigma_1(x))&\approx_B\sigma(xyz+yz+1)\\
 		&\approx_B(xyz+yz+1)(yz+z+1)z+\sigma(yz+1)\\

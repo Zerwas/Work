@@ -1,10 +1,11 @@
 \section{Introduction}
-Equational unification is interesting for term rewriting systems \cite{TRS}. We will only consider boolean unification in more detail but there is also a lot of work on other equational theories like $AC$ \cite{TRS}. For more information on the complexity of boolean unification look at \cite{cmplxBU}.
+Equational unification is interesting for term rewriting systems \cite{TRS}. We will only consider boolean unification in more detail but there is also a lot of work on other equational theories like $AC$ \cite{TRS}. You can find more information on the complexity of boolean unification in \cite{cmplxBU}.
 \section{Equational Unification}
 %TODO intro
 In the following let $E$ be a set of identities of the form $\left\lbrace  e_1\approx f_1,\dots,e_n\approx f_n \right\rbrace$. Furthermore let $\mathcal{S}ig(E)$ denote the set of all function symbols occurring in $E$. Let $\Sigma$ be a finite set of function symbols and a superset of $\mathcal{S}ig(E)$.
 \begin{definition}
-	An \textbf{$E$-unification problem} over $\Sigma$ is a finite set $S$ of the form $S=\left\lbrace s_1\approxq_{E} t_1,\dots,s_n\approxq_{E} t_n\right\rbrace $ with $s_1,\dots,s_n,t_1,\dots,t_n \in\TermSet$, $V$ being a countable set of Variables.\\
+	An \textbf{$E$-unification problem} over $\Sigma$ is a finite set $S$ of the form $S=\left\lbrace s_1\approxq_{E} t_1,\dots,s_n\approxq_{E} t_n\right\rbrace $ with $s_1,\dots,s_n,t_1,\dots,t_n \in\TermSet$, $V$ being a countable set of Variables.
+	
 	A substitution $\sigma$ is an \textbf{$E$-unifier} of $S$ iff $ \sigma(s_i)\approx_E \sigma(t_i)$ for all $1\leq i \leq n$.
 	The set of all $E$-unifiers of $S$ is denoted by $\mathcal{U}_E(S)$. $S$ is \textbf{$E$-unifiable} iff $\mathcal{U}_E(S)\neq \emptyset$.
 \end{definition}
@@ -36,9 +37,9 @@ $\moreGeneral$ is a is a quasi order since it obviously is reflexive and transit
 	\end{itemize}
 	The substitution $\sigma$ is a \textbf{most general $E$-unifier} (mgu) of $S$ iff $\left\lbrace \sigma\right\rbrace$ is an $E$-minimal $E$-complete set of $S$.
 \end{definition}
-Now to see why the restriction to $X$ makes sense note that by the restriction to Variables in $X$ more substitutions are comparable with respect to $\moreGeneral$ since we do not demand equality modulo $\approx_E$ on all Variables. Lets denote the Variables occurring in an $E$-unification problem $S$ by $\mathcal{V}ar(S)$. It is easy to see that if $X=\mathcal{V}ar(S)$, $\sigma$ is an $E$-unifier of $S$ and $\sigma\moreGeneral\sigma'$ then $\sigma'$ is also an $E$-unifier of $S$. This only shows that restriction to $X$ does not do any damage but the reason it is useful is that there are $E$-unification problems $S$ for which any $E$-minimal $E$-complete set of $E$-unifiers has to contain Variables not occurring in $S$. 
+Now to understand why the restriction to $X$ makes sense note that by the restriction to Variables in $X$ more substitutions are comparable with respect to $\moreGeneral$ since we do not demand equality modulo $\approx_E$ on all Variables. Lets denote the Variables occurring in an $E$-unification problem $S$ by $\mathcal{V}ar(S)$. It is easy to see that if $X=\mathcal{V}ar(S)$, $\sigma$ is an $E$-unifier of $S$ and $\sigma\moreGeneral\sigma'$ then $\sigma'$ is also an $E$-unifier of $S$. This only shows that restriction to $X$ does not do any damage but the reason it is useful is that there are $E$-unification problems $S$ for which any $E$-minimal $E$-complete set of $E$-unifiers has to contain Variables not occurring in $S$. 
 
-Lets consider a small example, let $\sigma:=\left\lbrace x\mapsto f(y)\right\rbrace$ be in $\mathcal{M}$ a $E$-minimal $E$-complete set of $E$-unifiers of $S$ with $\mathcal{V}ar(S)=\left\lbrace x\right\rbrace$ and $ a\not\approx_E x$. Clearly $\sigma':=\left\lbrace x\mapsto f(a)\right\rbrace$ is also an $E$-unifier of $S$ but $\sigma$ and $\sigma'$ are incomparable with respect to $\lesssim^{\left\lbrace x,y\right\rbrace }_E$. The substitution $\delta:=\left\lbrace y\mapsto a\right\rbrace $ does not work here since $\delta(\sigma(y))=a \not\approx_E y=\sigma'(y)$ which means there has to be another unifier $\sigma''$ in $\mathcal{M}$ with $\sigma''\lesssim^{\left\lbrace x,y\right\rbrace }_E\sigma$. But if we restrict $X$ to $\left\lbrace x\right\rbrace $ we only need that $\delta(\sigma(x))=f(a)=\sigma'(x)$ so $\sigma\lesssim^{\left\lbrace x\right\rbrace }_E\sigma'$ holds. We see that $E$-minimal $E$-complete sets can become unnecessary large if we consider all Variables.
+Lets consider a small example, let $\sigma:=\left\lbrace x\mapsto f(y)\right\rbrace$ be in $\mathcal{M}$ an $E$-minimal $E$-complete set of $E$-unifiers of $S$ with $\mathcal{V}ar(S)=\left\lbrace x\right\rbrace$ and $ a\not\approx_E x$. Clearly $\sigma':=\left\lbrace x\mapsto f(a)\right\rbrace$ is also an $E$-unifier of $S$ but $\sigma$ and $\sigma'$ are incomparable with respect to $\lesssim^{\left\lbrace x,y\right\rbrace }_E$. The substitution $\delta:=\left\lbrace y\mapsto a\right\rbrace $ does not work here since $\delta(\sigma(y))=a \not\approx_E y=\sigma'(y)$ which means there has to be another unifier $\sigma''$ in $\mathcal{M}$ with $\sigma''\lesssim^{\left\lbrace x,y\right\rbrace }_E\sigma$. But if we restrict $X$ to $\left\lbrace x\right\rbrace $ we only need that $\delta(\sigma(x))=f(a)=\sigma'(x)$, so $\sigma\lesssim^{\left\lbrace x\right\rbrace }_E\sigma'$ holds. We see that $E$-minimal $E$-complete sets can become unnecessary large if we consider all Variables.
 
 Now let us consider an example in which an $E$-minimal $E$-complete set contains infinitely many elements. Let $A:=\left\lbrace x+(y+z)\approx (x+y)+z\right\rbrace $ be a set of identities and $S:=\left\lbrace x+a\approxq_A a+x\right\rbrace$ an $A$-unification problem over $\Sigma:=\left\lbrace +,a\right\rbrace$. For $n>0$, we define substitutions $\sigma_n$ inductively as follows:
 \begin{align*}
@@ -60,7 +61,7 @@ Since $\theta$ is an $A$-unifier of $S$ we know that:
 	  & \hspace{10pt}\vdots      &                                      & \vdots                                         \\
 	  & \implies                 & \underbrace{a+\dots+a}_{n+1\times a} & \approx_A \underbrace{a+\dots+a}_{n+1\times a} 
 \end{align*}
-So $\theta(x)=\sigma_n(x)$ which implies $\sigma\lesssim^{\left\lbrace x\right\rbrace }_A\theta$.
+So $\theta(x)\approx_A\sigma_n(x)$ which implies $\sigma\lesssim^{\left\lbrace x\right\rbrace }_A\theta$.
 Since we picked $\theta$ arbitrarily this yields $A$-completeness of the set $\mathcal{M}:=\bigcup_{n>0}\left\lbrace  \sigma_n\right\rbrace $.
 All $\sigma_n$ are distinct and map x to ground terms. Hence they are pairwise incomparable with respect to $\lesssim^{\left\lbrace x\right\rbrace }_A$. This yields $A$-minimality of $\mathcal{M}$.
 We see that $E$-minimal $E$-complete sets do not need to have finite cardinality.
@@ -145,7 +146,7 @@ $\sigma\eqClass\sigma'$ iff $\sigma\moreGeneral\sigma'$ and $\sigma'\moreGeneral
 		\end{tikzpicture}
 	\end{center}
 \end{proof}
-The most interesting consequence from this Lemma is that $E$-minimal $E$-complete sets of the same $S$ always have the same cardinality. This allows us to classify equational theories $\approx_E$ by the existence and possible cardinalities of $E$-minimal $E$-complete sets of $E$-unification problems.\\
+The most interesting consequence of this Lemma is that $E$-minimal $E$-complete sets of the same $S$ always have the same cardinality. This allows us to classify equational theories $\approx_E$ by the existence and possible cardinalities of $E$-minimal $E$-complete sets of $E$-unification problems.
 \begin{definition}
 	The equational theory $\approx_E$ is of \textbf{unification type}
 	\begin{description}
