@@ -443,7 +443,8 @@
 		&\approx_B\sigma(z)
 		\end{align*}
 		Of course this does not proof that $\sigma_1$ is reproductive it was just to stress the fact that for a reproductive $B$-unifier $\sigma$ the equation $\tau(\sigma(x))\approx_B\tau(x)$ has to hold for all $B$-unifiers $\tau$ so it especially has to hold for other reproductive $B$-unifiers.
-		
+		\subsection{Conclusion}
+		Since for every $B$-unification problem we could just put the corresponding boolean formula into an SAT-solver to get an $B$-unifier for Löwenheims's formula it is easy to see that computing an mgu with Löwenheims's formula takes nondeterministic polynomial time. For successive variable elimination this is not so easy to show. But since by finding an mgu we also solve the SAT problem for boolean formulas it has to be NP-hard. Keep in mind that we have only considered elementary $B$-unification problems here, $B$-unification problems with constants and general $B$-unification problems have higher complexity \cite{cmplxBU}.
 		\begin{thebibliography}{9}
 		
 		\bibitem{TRS}

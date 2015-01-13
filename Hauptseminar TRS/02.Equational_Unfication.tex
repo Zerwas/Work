@@ -1,5 +1,7 @@
 \section{Introduction}
-Equational unification is interesting for term rewriting systems \cite{TRS}. We will only consider boolean unification in more detail but there is also a lot of work on other equational theories like $AC$ \cite{TRS}. You can find more information on the complexity of boolean unification in \cite{cmplxBU}.
+We already know syntactic unification where we try to find a substitution $\sigma$ to make two terms syntactically equal. But what if we know something about the function symbols in our terms for example we know that $f$ is idempotent (i.e. $f(x,x)\approx x$). The syntactic unification problem $S:=\left\lbrace f(a,x)\stackrel{?}{=}x\right\rbrace$ where $a$ is a constant and $x$ a Variable does not have a solution. This is where equational unification comes in handy because it considers equality modulo an equational theory $\approx_E$: given terms $s$ and $t$ is there a substitution $\sigma$ such that $\sigma(s)\approx_E \sigma(t)$. Let $I\models f(x,x)\approx x$ now the substitution $\sigma:=\left\lbrace x\mapsto a\right\rbrace $ is a solution of the $I$-unification problem $S:=\left\lbrace f(a,x)\approxq_I x\right\rbrace$ since $f(a,a)\approx_Ia$. 
+
+Here we will only consider boolean unification in more detail but there are also other interesting equational theories like $AC$ the theory that axiomatizes associativity and commutativity \cite{TRS}.
 \section{Equational Unification}
 %TODO intro
 In the following let $E$ be a set of identities of the form $\left\lbrace  e_1\approx f_1,\dots,e_n\approx f_n \right\rbrace$. Furthermore let $\mathcal{S}ig(E)$ denote the set of all function symbols occurring in $E$. Let $\Sigma$ be a finite set of function symbols and a superset of $\mathcal{S}ig(E)$.
