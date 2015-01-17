@@ -1,0 +1,78 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{fixltx2e}
+\usepackage{microtype}
+
+\usepackage[style=british]{csquotes}
+
+\usetheme[nogerman, nototalpages, noheader, nosectionnum,%
+    einrichtung={Institute of Theoretical Computer Science\ },%
+    professur={Chair of Automata Theory}]{TUDCD}
+
+\setbeamerfont{block title}{size=\small}
+
+\title{Unification modulo Boolean Rings}
+
+\author{Florian	Starke}
+
+\date{\today}
+
+\datecity{Dresden}
+
+
+\DefineNamedColor{named}{FgColour}{cmyk}{0,0.75,0.90,0}
+\setbeamercolor{alerted text}{fg=FgColour}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{upgreek}
+
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{xspace}
+\usepackage{rotating}
+\usepackage[square]{natbib}
+
+\usepackage{mdframed}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{automata}
+\usetikzlibrary{positioning}
+
+\hypersetup{%
+    pdftitle={Title},
+    pdfauthor={Author},
+    pdfsubject={Title},
+    pdfkeywords={Title},
+    pdftoolbar=true,
+    bookmarksopen=true,
+    bookmarksnumbered=false,
+    bookmarksopenlevel=1,
+    hyperfootnotes=false,
+    pdfdisplaydoctitle,
+    plainpages=false,
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+}
+
+\begin{document}
+
+\maketitle
+\addtocounter{framenumber}{-1}
+
+
+\section*{Gliederung}
+\begin{frame}
+\frametitle{Gliederung}
+\tableofcontents 
+\end{frame}
+\input{01.Equational_Unfication.tex}
+\input{02.BR_Unfication.tex}
+\section*{end}
+\end{document}
