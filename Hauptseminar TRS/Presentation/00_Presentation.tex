@@ -20,7 +20,7 @@
 
 \date{\today}
 
-\datecity{Dresden}
+%\datecity{Dresden}
 
 
 \DefineNamedColor{named}{FgColour}{cmyk}{0,0.75,0.90,0}
@@ -61,15 +61,23 @@
     citecolor=black,
 }
 
+\newcommand{\approxq}{\stackrel{?}{\approx}}
+\newcommand{\moreGeneral}{\lesssim^X_E}
+\newcommand{\eqClass}{\sim^X_E}
+\newcommand{\BTwo}{{\mathcal{B}_2}}
+\newcommand{\PSet}{{\mathcal{P}_S}}
+\newcommand{\TermSet}{T(\Sigma,V)}
+\newcommand{\TermAlgebra}{\mathcal{T}(\Sigma,V)}
+
 \begin{document}
 
 \maketitle
 \addtocounter{framenumber}{-1}
 
 
-\section*{Gliederung}
+\section*{Structure}
 \begin{frame}
-\frametitle{Gliederung}
+\frametitle{Structure}
 \tableofcontents 
 \end{frame}
 \input{01.Equational_Unfication.tex}

@@ -1,5 +1,20 @@
 \section{Equational Unification}
 \begin{frame}
 \frametitle{Equational Unification}
-\tableofcontents 
+\uncover<2->{$I:=\left\lbrace f(x,x)\approx x\right\rbrace$ }\\
+\begin{center}
+$S:=\left\lbrace f(a,x)\approxq x\right\rbrace\hspace{1cm}\uncover<3->{ \Rightarrow \hspace{1cm}S:=\left\lbrace f(a,x)\approxq_I x\right\rbrace}$
+\end{center}
+%$\sigma:=\left\lbrace x\mapsto a \right\rbrace $
+\end{frame}
+\begin{frame}
+\frametitle{Unification Classes}
+Let $S$ be an $I$-unification problem
+
+\begin{description}
+\setlength{\itemsep}{15pt}
+\item[\textbf{elementary}:] $S:=\left\lbrace f(y,x)\approxq_I x\right\rbrace$
+\item[with \textbf{constants}:] $S:=\left\lbrace f(a,x)\approxq_I x\right\rbrace$
+\item[\textbf{general}:] $S:=\left\lbrace f(g(a),x)\approxq_I x\right\rbrace$
+\end{description}
 \end{frame}
