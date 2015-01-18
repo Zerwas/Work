@@ -9,7 +9,7 @@ $S:=\left\lbrace f(a,x)\approxq x\right\rbrace\hspace{1cm}\uncover<3->{ \Rightar
 \end{frame}
 \begin{frame}
 \frametitle{Unification Classes}
-Let $S$ be an $I$-unification problem
+Let $S$ be an $I$-unification problem \dots
 
 \begin{description}
 \setlength{\itemsep}{15pt}
@@ -17,4 +17,38 @@ Let $S$ be an $I$-unification problem
 \item[with \textbf{constants}:] $S:=\left\lbrace f(a,x)\approxq_I x\right\rbrace$
 \item[\textbf{general}:] $S:=\left\lbrace f(g(a),x)\approxq_I x\right\rbrace$
 \end{description}
+\end{frame}
+
+\begin{frame}
+\frametitle{MGU?}
+\begin{align*}
+C&:=\left\lbrace f(x,y)\approx f(y,x)\right\rbrace\\
+S&:=\left\lbrace f(x,y)\approxq_Cf(a,b)\right\rbrace 
+\end{align*}
+\uncover<2->{
+\begin{align*}
+\sigma_1&:=\left\lbrace x\mapsto a,y\mapsto b\right\rbrace& \sigma_2&:=\left\lbrace x\mapsto b,y\mapsto a\right\rbrace
+\end{align*}
+}
+\end{frame}
+
+\begin{frame}
+\frametitle{More General}
+\begin{align*}
+\sigma&<\sigma'&&&\uncover<2->{\sigma&\moreGeneral\sigma'}\\
+&\hspace{2pt}\textbf{iff}&&\uncover<2->{\Rightarrow&&\hspace{5pt}\textbf{iff}}\\
+\exists\delta:\delta&(\sigma)=\sigma'&&&\uncover<2->{\exists\delta:\delta(\sigma(x))&\approx_E\sigma'(x)\text{ for all }x\in X}
+\end{align*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Minimal Complete Sets}
+Let $S$ be an $E$-unification problem. A \textbf{minimal complete} set of $S$ is a set of substitutions $\mathcal{M}$ that satisfy the following properties.
+
+\begin{itemize}
+\setlength{\itemsep}{9pt}
+	\item each $\sigma \in \mathcal{M}$ is an $E$-unifier of $S$
+	\item for all $E$-unifiers $\theta$ of $S$ there exists a $\sigma \in \mathcal{M}$ such that $\sigma\moreGeneral\theta$
+	\item for all $\sigma,\sigma'\in\mathcal{M},\ \sigma\moreGeneral\sigma'$ implies $\sigma=\sigma'$.
+\end{itemize}
 \end{frame}
