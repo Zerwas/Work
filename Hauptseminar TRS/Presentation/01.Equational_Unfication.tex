@@ -1,14 +1,12 @@
 \section{Equational Unification}
-\begin{frame}
-\frametitle{Equational Unification}
+\begin{frame}{Equational Unification}
 \uncover<2->{$I:=\left\lbrace f(x,x)\approx x\right\rbrace$ }\\
 \begin{center}
 $S:=\left\lbrace f(a,x)\approxq x\right\rbrace\hspace{1cm}\uncover<3->{ \Rightarrow \hspace{1cm}S:=\left\lbrace f(a,x)\approxq_I x\right\rbrace}$
 \end{center}
 %$\sigma:=\left\lbrace x\mapsto a \right\rbrace $
 \end{frame}
-\begin{frame}
-\frametitle{Unification Classes}
+\begin{frame}{Unification Classes}
 Let $S$ be an $I$-unification problem \dots
 
 \begin{description}
@@ -19,8 +17,7 @@ Let $S$ be an $I$-unification problem \dots
 \end{description}
 \end{frame}
 
-\begin{frame}
-\frametitle{MGU?}
+\begin{frame}{MGU?}
 \begin{align*}
 C&:=\left\lbrace f(x,y)\approx f(y,x)\right\rbrace\\
 S&:=\left\lbrace f(x,y)\approxq_Cf(a,b)\right\rbrace 
@@ -32,8 +29,7 @@ S&:=\left\lbrace f(x,y)\approxq_Cf(a,b)\right\rbrace
 }
 \end{frame}
 
-\begin{frame}
-\frametitle{More General}
+\begin{frame}{More General}
 \begin{align*}
 \sigma&<\sigma'&&&\uncover<2->{\sigma&\moreGeneral\sigma'}\\
 &\hspace{2pt}\textbf{iff}&&\uncover<2->{\Rightarrow&&\hspace{5pt}\textbf{iff}}\\
@@ -41,8 +37,8 @@ S&:=\left\lbrace f(x,y)\approxq_Cf(a,b)\right\rbrace
 \end{align*}
 \end{frame}
 
-\begin{frame}
-\frametitle{Minimal Complete Sets}
+\begin{frame}{Minimal Complete Sets}
+%\frametitle{Minimal Complete Sets}
 Let $S$ be an $E$-unification problem. A \textbf{minimal complete} set of $S$ is a set of substitutions $\mathcal{M}$ that satisfy the following properties.
 
 \begin{itemize}
@@ -51,4 +47,19 @@ Let $S$ be an $E$-unification problem. A \textbf{minimal complete} set of $S$ is
 	\item for all $E$-unifiers $\theta$ of $S$ there exists a $\sigma \in \mathcal{M}$ such that $\sigma\moreGeneral\theta$
 	\item for all $\sigma,\sigma'\in\mathcal{M},\ \sigma\moreGeneral\sigma'$ implies $\sigma=\sigma'$.
 \end{itemize}
+\end{frame}
+%minimal complete sets have same cardinality
+
+\begin{frame}{Unification Type of $\approx_E$}
+	\begin{description}
+	\setlength{\itemsep}{7pt}
+		\item[\textbf{unitary}] iff for all $E$-unification problems $S$ there exists a minimal complete set of cardinality $\leq 1$.
+		%if S has no solution M=\emptyset
+		\uncover<2->{
+		\item[\textbf{finitary}] iff for all $E$-unification problems $S$ there exists a minimal complete set with finite cardinality.}
+		\uncover<3->{
+		\item[\textbf{infinitary}] iff for all $E$-unification problems $S$ there exists a minimal complete set, and there exists an $E$-unification problem for which this set is infinite.}
+		\uncover<4->{
+		\item[\textbf{zero}] iff there exists an $E$-unification problem that does not have a minimal complete set.}
+	\end{description}
 \end{frame}
