@@ -1,5 +1,5 @@
 \section{Boolean Rings}
-Now we will look at the equational theory $\approx_B$ of Boolean rings in more detail.
+Now we will look at the equational theory $\approx_B$ in more detail. First we define the set of identities $B$.
 \[B:=\left\lbrace 
 	\begin{aligned}
 		x+y     & \approx y+x,         & x*y     & \approx y*x,     \\
@@ -177,6 +177,7 @@ Now we will look at the equational theory $\approx_B$ of Boolean rings in more d
 			\end{align*}
 		\end{enumerate}
 		A nice consequence of Theorem \ref{basicBR} is that $\approx_B$ is decidable, because we could just compare the computable polynomial forms, or test semantic equality in $\BTwo$.
+		Unfortunately computing the normal forms can lead to an exponential blow up (e.g. $(x_1+x_2)(x_3+x_4)\dots(x_{n-1}+x_n)$). And testing semantic equality in $\BTwo$ is basically solving the satisfiability problem in $\BTwo$ which is NP-complete.
 		\subsection{Unification}
 		Note that until now we have not said anything about unification. We just introduced the equational theory $B$, the semantic interpretation $\BTwo$ and showed some properties of the word problem in $\approx_B$. Now we will look at some ways to find most general $B$-unifiers of $B$-unification problems. But first we show that unification modulo $\approx_B$ is closely related to equation solving in $\BTwo$.
 		\begin{lemma}\mbox{}
@@ -224,7 +225,8 @@ Now we will look at the equational theory $\approx_B$ of Boolean rings in more d
 		\end{align*}
 		is a solution in $\BTwo$.
 		\end{itemize}
-		Note that $\approx_B$ is \emph{unitary} for elementary unification and unification with constants hence we only consider elementary unification here it suffices to find an mgu and not $B$-minimal $B$-complete sets. Furthermore we can transform every $B$-unification problem into a $B$-unification problem of the form $t\approxq_B0$ in the following way. Let $S=\left\lbrace t_1\approxq_Bs_1,\dots,t_n\approxq_Bs_n\right\rbrace$ be an arbitrary $B$-unification problem. For all $1\leq i\leq n$ we transform $t_i\approxq_Bs_i$ into $t_i+s_i\approxq_B0$. Now we put the equation together by multiplying them in the following way 
+		We will see that it is possible to find an mgu for every unifiable elementary $B$-unification problem and hence they are \emph{unitary}.
+		Furthermore we can transform every $B$-unification problem into a $B$-unification problem of the form $t\approxq_B0$ in the following way. Let $S=\left\lbrace t_1\approxq_Bs_1,\dots,t_n\approxq_Bs_n\right\rbrace$ be an arbitrary $B$-unification problem. For all $1\leq i\leq n$ we transform $t_i\approxq_Bs_i$ into $t_i+s_i\approxq_B0$. Now we put the equation together by multiplying them in the following way 
 		\begin{align*}
 		(t_1+s_1+1)*\dots*(t_n+s_n+1)+1\approxq_B0
 		\end{align*}
@@ -318,7 +320,7 @@ Now we will look at the equational theory $\approx_B$ of Boolean rings in more d
 		is a reproductive $B$-unifier of $x*(y+z+yz+1)+(x+1)*(yz+1)\approxq_B0$ and also of our original problem $xy+yz+xz+1\approxq_B0$.
 		%TODO outtro
 		\subsection{Löwenheim's formula}
-		This algorithm is not as intuitive as successive variable elimination but much more interesting. The idea is to turn an arbitrary $B$-unifier $\tau$ of $t\approxq_B0$ into an mgu (even a reproductive $B$-unifier).
+		This algorithm is not as intuitive as successive variable elimination but much more interesting since we can turn an arbitrary $B$-unifier $\tau$ of $t\approxq_B0$ into an mgu (even a reproductive $B$-unifier).
 		\begin{theorem}\label{lowenheim}
 		Let $\tau$ be a $B$-unifier of $t\approxq_B0$. The substitution $\sigma$ defined by
 		\begin{align*}
@@ -388,23 +390,22 @@ Now we will look at the equational theory $\approx_B$ of Boolean rings in more d
 		\end{align*}
 		if $x\notin\mathcal{V}ar(t)$ then $\sigma(x)=x$ so $\tau'(\sigma(x))=\tau'(x)$ follows trivially.
 		\end{proof}
-		Now let us consider the $B$-unification problem $xy+yz+xz+1\approxq_B0$ (the same as in successive variable elimination) as example. We will only consider ground $B$-unifiers.
+		Now let us consider the $B$-unification problem $xy+yz+xz+1\approxq_B0$ (the same as in successive variable elimination) as example. Assume that we transformed the solutions of a SAT-solver into the following four ground $B$-unifiers: $\tau:=\left\lbrace x\mapsto1,y\mapsto1,z\mapsto1\right\rbrace$, $\tau_2:=\left\lbrace x\mapsto0,y\mapsto1,z\mapsto1\right\rbrace$, $\tau_3:=\left\lbrace x\mapsto1,y\mapsto0,z\mapsto1\right\rbrace$, $\tau_4:=\left\lbrace x\mapsto1,y\mapsto1,z\mapsto0\right\rbrace$. Now we can compute the corresponding mgu's.
 		\begin{align*}
-		& xyz=1:& \sigma_1(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*1\\
+		& \tau_1:& \sigma_1(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*1\\
 		&&&\approx_Bxy+xyz+xz+(xy+yz+xz+1)\\
 		&&&\approx_Bxyz+yz+1\\
 		&&\sigma_1(y)&=\ \ (xy+yz+xz+1+1)*y+(xy+yz+xz+1)*1\\
 		&&&\approx_Bxyz+xz+1\\
 		&&\sigma_1(z)&=\ \ (xy+yz+xz+1+1)*z+(xy+yz+xz+1)*1\\
 		&&&\approx_Bxyz+xy+1\\
-		& x=0,yz=1:& \sigma_2(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*0\\
+		& \tau_2:& \sigma_2(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*0\\
 		&&&\approx_Bxy+xyz+xz\\
 		&&\sigma_2(y)&\approx_Bxyz+xz+1\\
 		&&\sigma_2(z)&\approx_Bxyz+xy+1
 		\end{align*}
-		\begin{align*}
-		& x=1,y=0,z=1\text{ and }x=1,y=1,z=0\text{ are symmetric to }x=0,y=1,z=1
-		\end{align*} 
+		The $B$-unifiers $\tau_3$ and $\tau_4$ are symmetric to $\tau_2$.
+		
 		%Since it is not so easy to see that the calculated $B$-unifiers are reproductive we will consider some examples. First $\sigma_1(\sigma_2(w))\approx_B\sigma_1(w)$ for all $w$, if $w\notin\left\lbrace x,y,z\right\rbrace $ then $\sigma_1(\sigma_2(w))=\sigma_1(w)$ follows trivially. If $w\in\left\lbrace x,y,z\right\rbrace $ then
 		%\begin{align*}
 		%\sigma_1(\sigma_2(x))&\approx_B\sigma_1(xy+xyz+xz)\\
