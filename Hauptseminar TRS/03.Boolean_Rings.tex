@@ -1,5 +1,5 @@
 \section{Boolean Rings}
-%TODO intro
+Now we will look at the equational theory $\approx_B$ of Boolean rings in more detail.
 \[B:=\left\lbrace 
 	\begin{aligned}
 		x+y     & \approx y+x,         & x*y     & \approx y*x,     \\
@@ -10,12 +10,12 @@
 	\end{aligned}
 	\right\rbrace \]
 	Since $+$ and $*$ are associative we can omit most of the brackets. Furthermore we often write $xy$ instead of $x*y$.
-	Lets consider an interpretation of $B$ the two element boolean ring $\BTwo$ with the carrier set $\textbf{2}:=\left\lbrace\bot,\top\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright\ and $+$ is \textquotedblleft exclusive or\textquotedblright:
+	Let us consider as interpretation of $B$ the two element Boolean ring $\BTwo$ with the carrier set $\textbf{2}:=\left\lbrace\bot,\top\right\rbrace$ where $*$ is \textquotedblleft and\textquotedblright\ and $+$ is \textquotedblleft exclusive or\textquotedblright:
 	\begin{align*}
 		(x+y)^\BTwo & :=\left( x^\BTwo\wedge\neg y^\BTwo\right)  \vee \left( \neg x^\BTwo\wedge y^\BTwo\right) & (x*y)^\BTwo & :=x^\BTwo\wedge y^\BTwo \\
 		0^\BTwo     & :=\bot                                                                                      & 1^\BTwo     & :=\top                
 	\end{align*}
-	It is easy to see that $\BTwo$ is indeed a model of $B$. Furthermore we can transform a term back from an Boolean algebra into Boolean ring theory:
+	It is easy to see that $\BTwo$ is indeed a model of $B$. Furthermore we can transform a term back from Boolean algebra into Boolean ring theory:
 	\begin{align*}
 		x \wedge y & \mapsto x*y     \\
 		x\vee y    & \mapsto x+y+x*y \\
@@ -23,12 +23,12 @@
 	\end{align*}
 	We work with + and * instead of $\vee,\wedge$ and $\neg$ because in Boolean rings we have a very convenient normal form which makes the following proofs easier.\\
 	% maybe rephrase
-	Lets consider another model of $B$ the powerset interpretation $\PSet$ with the carrier set $2^S$:
+	Let us look at another model of $B$. Let $S$ be an arbitrary set, the powerset interpretation $\PSet$ has the carrier set $2^S$ and interprets the function symbols as follows:
 	\begin{align*}
 		(x+y)^\PSet & :=x^\PSet\Delta y^\PSet & (x*y)^\PSet & :=x^\PSet\cap y^\PSet \\
 		0^\PSet     & :=\emptyset             & 1^\PSet     & :=S                   
 	\end{align*}
-	Where $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference of x and y. It is easy to see why $\PSet$ is a model of $B$. Lets just consider distributivity in detail.
+	Here $x\Delta y:=(x\setminus y)\cup(y\setminus x)$ is the symmetric difference of x and y. It is easy to see why $\PSet$ is a model of $B$. Let us just consider distributivity in detail:
 	\begin{align*}
 		\left( x*\left( y+z\right) \right) ^\PSet & =x^\PSet\cap\left( y^\PSet\Delta z^\PSet\right)                                                                                                                                                \\
 		                                          & =x^\PSet\cap\left( \left( y^\PSet\setminus z^\PSet\right) \cup\left( z^\PSet\setminus y^\PSet\right) \right)                                                                                   \\
@@ -104,9 +104,9 @@
 		\end{tikzpicture}
 	\end{tabular*}
 	This small example should just show that there are other models of $B$ with rather common interpretations of + and * apart from $\BTwo$. Note that if $|S|=1$ then $\PSet$ and $\BTwo$ are isomorphic.
-	%correct word?
 	In the following we will only consider elementary $B$-unification problems since additional function symbols would just complicate the following proofs.
 	\subsection{Polynomials}
+	The polynomials will give us a normal form for terms over $\left\lbrace +,*\right\rbrace $.
 	\begin{definition}
 		A product of distinct variables is a \textbf{monomial} (e.g.$\ xyz$). And a sum of distinct monomials is a \textbf{polynomial} (e.g.$\ x+xy+yz$).
 	\end{definition}
@@ -121,13 +121,13 @@
 	 into a (w.r.t. equality of polynomials) unique $\approx_B$-equivalent polynomial, its \textbf{polynomial form}. Since 1 is the neutral element of * we write 1 for the polynomial containing only the empty monomial correspondingly we identify 0 with the empty polynomial. Now the polynomial form can be computed recursively as follows:
 	\begin{description}
 		\item[$x,0,1:$] This is the base case, variables and the constants 0 and 1 are already polynomials.
-		\item[$t_1+t_2:$] Let $p_1$ and $p_2$ be the polynomial forms of $t_1$ and $t_2$ the polynomial form of $t_1+t_2$ is obtained by removing all pairs of equivalent monomials from $p_1+p_2$. Since we have $\left\lbrace0+x\approx x,x+x\approx0\right\rbrace\subseteq B$  this rule preserves $\approx_B$-equivalence.
+		\item[$t_1+t_2:$] Let $p_1$ and $p_2$ be the polynomial forms of $t_1$ and $t_2$. The polynomial form of $t_1+t_2$ is obtained by removing all pairs of equivalent monomials from $p_1+p_2$. Since we have $\left\lbrace0+x\approx x,x+x\approx0\right\rbrace\subseteq B$  this rule preserves $\approx_B$-equivalence.
 		%explain 0?
-		\item[$t_1*t_2:$]  Let $p_1=m_1+\dots+m_k$ and $p_2=n_1+\dots+n_l$ be the polynomial forms of $t_1$ and $t_2$. The polynomial form of $t_1*t_2$ is obtained by removing all pairs of equivalent monomials from $p_1*p_2$ which when multiplied out is the sum
+		\item[$t_1*t_2:$]  Let $p_1=m_1+\dots+m_k$ and $p_2=n_1+\dots+n_l$ be the polynomial forms of $t_1$ and $t_2$. The polynomial form of $t_1*t_2$ is obtained by removing all pairs of equivalent monomials from $p_1*p_2$. Which when multiplied out is the sum
 		\begin{align*}
 			m_1*n_1+\dots+m_1*n_l+\dots+m_k*n_1+\dots+m_k*n_l 
 		\end{align*} 
-		where the product of two monomials $m=x_1\dots x_r$ and $n=y_1\dots y_s$ is the monomial obtained by removing repeated occurrences of the same variable from $x_1\dots x_r y_1\dots y_s$. Since we have $\left\lbrace x*x\approx x\right\rbrace\in B$  this rule preserves $\approx_E$-equivalence. Note that if $t_1=1$ then we multiply every monomial in $p_2$ with the empty monomial which does not change anything so the result is as expected just $p_2$.
+		where the product of two monomials $m=x_1\dots x_r$ and $n=y_1\dots y_s$ is the monomial obtained by removing repeated occurrences of the same variable from $x_1\dots x_r y_1\dots y_s$. Since we have $\left\lbrace x*x\approx x\right\rbrace\in B$  this rule preserves $\approx_E$-equivalence. Note that if $t_1=1$ then we multiply every monomial in $p_2$ with the empty monomial which does not change anything, so the result is as expected just $p_2$.
 	\end{description}
 	The polynomial form of $t$ is denoted by $t{\downarrow_P}$. It is easy to see that all rules preserve $\approx_B$-equivalence and hence $t\approx_Bt{\downarrow_P}$.
 	%example?
@@ -139,11 +139,11 @@
 			\item $s\approx_B t.$
 		\end{enumerate}
 	\end{theorem}
-	We will not proof this theorem but instead look at a bigger example. Let $s:=(y+1)*(x+y)+(y+1)*x$ and $t:=0$ and go through 1, 2 and 3 from theorem \ref{basicBR}.
+	We will not prove this theorem but instead look at a bigger example. Let $s:=(y+1)*(x+y)+(y+1)*x$ and $t:=0$ and go through 1, 2 and 3 from Theorem \ref{basicBR}.
 	\begin{enumerate}
 			\item $\BTwo$ is a model of $s\approx t$.
 			\begin{align*}
-				s^\BTwo & =\left( \left( y+1\right)\left( x+y\right)+\left( y+1\right)x\right)^\BTwo       \\
+				s^\BTwo & =\left( \left( y+1\right)*\left( x+y\right)+\left( y+1\right)*x\right)^\BTwo       \\
 				& =\left( s_1^\BTwo\wedge \neg s_2^\BTwo\right)\vee\left( \neg s_1^\BTwo\wedge s_2^\BTwo\right) \\
 				&\hspace{8pt}\begin{aligned}
 				s_1 & =\left( y+1\right)^\BTwo\wedge\left( x+y\right)^\BTwo & s_2 & =   \left( y+1\right)^\BTwo\wedge x^\BTwo \\
@@ -159,7 +159,7 @@
 			\end{align*}
 			\item The polynomial forms $s{\downarrow_P}$ and $t{\downarrow_P}$ are equal.
 			\begin{align*}
-				s & \approx_B (y+1)(x+y)+(y+1)x \\
+				s & \approx_B (y+1)*(x+y)+(y+1)*x \\
 				  & \approx_B yx+yy+x+y+yx+x    \\
 				  & \approx_B yx+yx+y+y+x+x     \\
 				  & \approx_B 0
@@ -169,16 +169,16 @@
 			\end{align*}
 			\item $s\approx_B t$ is a consequence of $B$.
 			\begin{align*}
-				s & =\ \ (y+1)(x+y)+(y+1)x \\
-				  & \approx_B (y+1)(x+y+x)      \\
+				s & =\ \ (y+1)*(x+y)+(y+1)*x \\
+				  & \approx_B (y+1)*(x+y+x)      \\
 				  & \approx_B y+y               \\
 				  & \approx_B 0                 \\
 				  & =\ \ t                 
 			\end{align*}
 		\end{enumerate}
-		A nice consequence from theorem \ref{basicBR} is that $\approx_B$ is decidable, because we could just compare the computable polynomial forms, or test semantic equality in $\BTwo$.
+		A nice consequence of Theorem \ref{basicBR} is that $\approx_B$ is decidable, because we could just compare the computable polynomial forms, or test semantic equality in $\BTwo$.
 		\subsection{Unification}
-		Note that until now we have not said anything about unification we just introduced the equational theory $B$, the semantic interpretation $\BTwo$ and showed some properties of the word problem in $\approx_B$. Now we will look at some ways to find most general $B$-unifiers of $B$-unification problems. But fist we show that unification modulo $\approx_B$ is closely related to equation solving in $\BTwo$.
+		Note that until now we have not said anything about unification. We just introduced the equational theory $B$, the semantic interpretation $\BTwo$ and showed some properties of the word problem in $\approx_B$. Now we will look at some ways to find most general $B$-unifiers of $B$-unification problems. But first we show that unification modulo $\approx_B$ is closely related to equation solving in $\BTwo$.
 		\begin{lemma}\mbox{}
 		\begin{enumerate}
 		\item Every solution of $s\approxq_B t$ in $\BTwo$ can be viewed as a $B$-unifier.
@@ -187,26 +187,25 @@
 		\end{lemma}
 		\begin{proof}\mbox{}
 		\begin{itemize}
-		\item[(1)]Let $\varphi:V\mapsto\textbf{2}$ be a solution of $s\approxq t$ in $\BTwo$ and $\widehat{\varphi}$ the homeomorphic extension of $\varphi$, i.e. $\widehat{\varphi}(s)=\widehat{\varphi}(t)$. From $\varphi$ we now can define a mapping $\phi:V\mapsto \TermSet$ to ground terms in the following way:
+		\item[(1)]Let $\varphi:V\to\textbf{2}$ be a solution of $s\approxq t$ in $\BTwo$ and $\widehat{\varphi}$ the homomorphic extension of $\varphi$, i.e. $\widehat{\varphi}(s)=\widehat{\varphi}(t)$. From $\varphi$ we now can define a mapping $\phi:V\to \TermSet$ to ground terms in the following way:
 		\begin{align*}
 		\phi(x):=\begin{cases}
 		1 & \text{if }\varphi(x)=\top\\
 		0 & \text{if }\varphi(x)=\bot
 		\end{cases}
 		\end{align*}
-		for all $x\in V$. Lets denote the homeomorphic extension of $\phi$ by $\widehat{\phi}$. Let $\psi:\TermAlgebra\mapsto\BTwo$ be an arbitrary homomorphism since $\widehat{\phi}$ is a mapping to ground terms $\psi\widehat{\phi}=\widehat{\varphi}$. So the following
+		for all $x\in V$. Let us denote the homomorphic extension of $\phi$ by $\widehat{\phi}$. Let $\psi:\TermAlgebra\to\BTwo$ be an arbitrary homomorphism. Since $\widehat{\phi}$ is a mapping to ground terms $\psi\widehat{\phi}=\widehat{\varphi}$. So the following
 		\begin{align*}
 		\psi\left( \widehat{\phi}(s)\right)=\widehat{\varphi}(s)=\widehat{\varphi}(t)=\psi\left( \widehat{\phi}(t)\right) 
 		\end{align*}
 		holds for all homomorphisms $\psi$ and hence $\BTwo\models\widehat{\phi}(s)\approx\widehat{\phi}(t)$. Theorem \ref{basicBR} yields $\widehat{\phi}(s)\approx_B\widehat{\phi}(t)$, i.e. the mapping $\phi$ (which we got directly from the solution $\varphi$), when viewed as a substitution, is a $B$-unifier.
 		%TODO replace phi
-		\item[(2)] Let $\sigma$ be a $B$-unifier of $s\approxq_B t$, i.e. $\sigma(s)\approx_B\sigma(t)$. Now theorem \ref{basicBR} yields $\BTwo\models\sigma(s)\approx\sigma(t)$ and hence $\psi\left(\sigma (s)\right)=\psi\left(\sigma (t)\right)$ for all homomorphisms $\psi:\TermAlgebra\mapsto\BTwo$. Hence $\psi\sigma:V\mapsto\textbf{2}$ is a solution in $\BTwo$.
+		\item[(2)] Let $\sigma$ be a $B$-unifier of $s\approxq_B t$, i.e. $\sigma(s)\approx_B\sigma(t)$. Now Theorem \ref{basicBR} yields $\BTwo\models\sigma(s)\approx\sigma(t)$ and hence $\psi\left(\sigma (s)\right)=\psi\left(\sigma (t)\right)$ for all homomorphisms $\psi:\TermAlgebra\to\BTwo$. Hence $\psi\sigma:V\to\textbf{2}$ is a solution in $\BTwo$.
 		%TODO \psi\sigma ok? V->\TermSet=(?)\TermAlgebra->2
 		\end{itemize}
 		\end{proof}
-		%TODO more text?
 		%example
-		Lets consider the B-unification problem $x+y+z\approxq z+1$ as small example for clarification.
+		Let us consider the B-unification problem $x+y+z\approxq z+1$ as small example for clarification.
 		\begin{itemize}
 		\item[(1)]The mapping 
 		\begin{align*}
@@ -215,7 +214,7 @@
 		\top& \text{if }w\neq x
 		\end{cases}
 		\end{align*}is a solution of our problem. The substitution $\sigma:=\left\lbrace x\mapsto0,y\mapsto1,z\mapsto1\right\rbrace$ is $\varphi$ viewed as a $B$-unifier.
-		\item[(2)]The substitution $\sigma':=\left\lbrace y\mapsto x+1,z\mapsto 1\right\rbrace $ obviously is a $B$-unifier. Let $\varphi$ be a mapping with $\varphi(x):=\top$ for all $x\in V$ and $\widehat{\varphi}$ its homeomorphic extension.
+		\item[(2)]The substitution $\sigma':=\left\lbrace y\mapsto x+1,z\mapsto 1\right\rbrace $ obviously is a $B$-unifier. Let $\varphi$ be a mapping with $\varphi(x):=\top$ for all $x\in V$ and $\widehat{\varphi}$ its homomorphic extension.
 		\begin{align*}
 		\widehat{\varphi}\left(\sigma'(w)\right)=\begin{cases}
 		(\top+1)^\BTwo=\bot& \text{if } w=y\\
@@ -225,30 +224,29 @@
 		\end{align*}
 		is a solution in $\BTwo$.
 		\end{itemize}
-		Note that $\approx_B$ is $unitary$ for elementary unification and unification with constants hence we only consider elementary unification here it suffices to find an mgu and not $B$-minimal $B$-complete sets. Furthermore we can transform every $B$-unification problem into a $B$-unification problem of the form $t\approxq_B0$ in the following way. Let $S=\left\lbrace t_1\approxq_Bs_1,\dots,t_n\approxq_Bs_n\right\rbrace$ be an arbitrary $B$-unification problem. For all $1\leq i\leq n$ we transform $t_i\approxq_Bs_i$ into $t_i+s_i\approx_B0$. Now we put the equation together by multiplying them in the following way 
+		Note that $\approx_B$ is \emph{unitary} for elementary unification and unification with constants hence we only consider elementary unification here it suffices to find an mgu and not $B$-minimal $B$-complete sets. Furthermore we can transform every $B$-unification problem into a $B$-unification problem of the form $t\approxq_B0$ in the following way. Let $S=\left\lbrace t_1\approxq_Bs_1,\dots,t_n\approxq_Bs_n\right\rbrace$ be an arbitrary $B$-unification problem. For all $1\leq i\leq n$ we transform $t_i\approxq_Bs_i$ into $t_i+s_i\approxq_B0$. Now we put the equation together by multiplying them in the following way 
 		\begin{align*}
-		&&(t_1+s_1+1)*\dots*(t_n+s_n+1)&\approxq_B1\\
-		&\iff&(t_1+s_1+1)*\dots*(t_n+s_n+1)+1&\approxq_B0
+		(t_1+s_1+1)*\dots*(t_n+s_n+1)+1\approxq_B0
 		\end{align*}
 		It is easy to see that our transformation does not change the set of $B$-unifiers. Now we will look at two ways to find mgu's of $B$-unification problems of the form $t\approxq_B0$.
 		\subsection{Successive variable elimination}
-		The idea of this unification algorithm is pretty simple we just eliminate variables until we have a ground $B$-unification problem if it has a solution then we can read off an mgu for the original problem otherwise the original problem is not $B$-unifiable. The following observation gives us a way to eliminate variables.
+		The underlying idea of this unification algorithm is pretty simple. We just eliminate variables until we have a ground $B$-unification problem. If it has a solution then we can read off an mgu for the original problem, otherwise the original problem is not $B$-unifiable. The following observation gives us a way to eliminate variables.
 		
-		Every term $t$ is $B$-equivalent to a term of the form $x*r+(x+1)*s$ such that $x\notin\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$. For example, we can split the polynomial form of $t$ into two sets of monomials, those who contain $x$  $\left(l_x\right)$ and those who do not contain $x$ $(s)$. Now $l$ is obtained by removing every occurrence of $x$ in $l_x$ and $r:=l+s$. To see why this works consider the small example $t:=yx+z$. Now $r:=y+z$ and $s:=z$.
+		Every term $t$ is $B$-equivalent to a term of the form $x*r+(x+1)*s$ such that $\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$ and $\left\lbrace x\right\rbrace =\mathcal{V}ar(t)\setminus\mathcal{V}ar(r,s)$. For example, we can split the polynomial form of $t$ into two sets of monomials, those who do contain $x$  $\left(l_x\right)$ and those who do not contain $x$ $(s)$. Now $l$ is obtained by removing every occurrence of $x$ in $l_x$ and $r:=l+s$. To see why this works consider the small example $t:=yx+z$. Now $r:=y+z$ and $s:=z$.
 		\begin{align*}
 		x*(y+z)+(x+1)*z&\approx_B xy+xz+xz+z\\
 		&\approx_B xy+z\\
 		&\approx_B t
 		\end{align*}
 		This simple observation is the basis of successive variable elimination.
-		Before we come to the main theorem of successive variable elimination we introduce a strong type of most general $B$-unifiers the reproductive $B$-unifiers.
+		Before we come to the main theorem of successive variable elimination we introduce a strong type of most general $B$-unifiers: the reproductive $B$-unifiers.
 		\begin{definition}
-		An $E$-unifier $\sigma$ of an $E$-unification problem $S$ is a \textbf{reproductive $E$-unifier} iff $\tau(\sigma(x))\approx_E\tau(x)$ for every unifier $\tau$ of $S$ and every $x$.
+		An $E$-unifier $\sigma$ of an $E$-unification problem $S$ is a \textbf{reproductive \mBold-unifier} iff $\tau(\sigma(x))\approx_E\tau(x)$ for every unifier $\tau$ of $S$ and every variable $x$.
 		\end{definition}
-		Note that for a normal mgu $\sigma$ of an $E$-unification problem $S$ it only has to hold that for every $E$-unifier $\tau$ of $S$ there has to exist a substitution $\theta$ such that $\theta(\sigma(x))\approx_E\tau(x)$ for every $x\in X$. 
+		Note that for a normal mgu $\sigma$ of an $E$-unification problem $S$ it only has to hold that for every $E$-unifier $\tau$ of $S$ there has to exist a substitution $\theta$ such that $\theta(\sigma(x))\approx_E\tau(x)$ for every variable $x\in X$. 
 		%TODO more explanation?
 		\begin{theorem}\label{sucVEli}
-		Let $t\approx_B x*r+(x+1)*s$ such that $x\notin\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$ and define $t':=r*s$.
+		Let $t\approx_B x*r+(x+1)*s$ such that $\mathcal{V}ar(r,s)\subset\mathcal{V}ar(t)$ and $\left\lbrace x\right\rbrace =\mathcal{V}ar(t)\setminus\mathcal{V}ar(r,s)$ define $t':=r*s$.
 		\begin{enumerate}
 		\item Every $B$-unifier of $t\approxq_B0$ is a $B$-unifier of $t'\approxq_B0$.
 		%reproductive unifier->mgu
@@ -259,15 +257,15 @@
 		is a reproductive $B$-unifier of $t\approxq_B0$.
 		\end{enumerate}
 		\end{theorem}
-		\begin{proof}\mbox{}
+		\begin{proof} We prove parts (1) and (2) from Theorem \ref{sucVEli}.
 		\begin{itemize}
 		\item[(1)] Let $\tau$ be a $B$-unifier of $t\approxq_B0$ and hence $\tau(t)\approx_B0$.
 		\begin{align*}
 		&&\tau(x)*\tau(r)+(\tau(x)+1)*\tau(s)&\approx_B0\\
-		&\iff&\tau(x)*\tau(r)*\tau(s)+(\tau(x)+1)*\tau(s)*\tau(r)&\approx_B0*\tau(s)*\tau(r)\\
-		&\iff&\tau(x)*\tau(r*s)+(\tau(x)+1)*\tau(s*r)&\approx_B0\\
-		&\iff&(\tau(x)+\tau(x)+1)*\tau(s*r)&\approx_B0\\
-		&\iff&\tau(s*r)&\approx_B0\\
+		&\implies&\tau(x)*\tau(r)*\tau(s)+(\tau(x)+1)*\tau(s)*\tau(r)&\approx_B0*\tau(s)*\tau(r)\\
+		&\implies&\tau(x)*\tau(r*s)+(\tau(x)+1)*\tau(s*r)&\approx_B0\\
+		&\implies&(\tau(x)+\tau(x)+1)*\tau(s*r)&\approx_B0\\
+		&\implies&\tau(s*r)&\approx_B0
 		\end{align*}
 		So $\tau$ is also a $B$-unifier of $t'\approxq_B0$.
 		\item[(2)] Let $\sigma$ be a reproductive $B$-unifier of $t'\approxq_B0$ and $x\notin\mathcal{D}om(\sigma)$. It is easy to show that $\sigma'$ is a $B$-unifier of $t\approxq_B0$:
@@ -280,7 +278,7 @@
 		&\approx_B0+(x*(\sigma(r)+\sigma(s)+1)+\sigma(s)+1)*\sigma(s)\\
 		&\approx_B(x*(\sigma(r)*\sigma(s)+\sigma(s)+\sigma(s))+\sigma(s)+\sigma(s))\\
 		&\approx_B(x*(\sigma(r*s))+0)\\
-		&\approx_B0\\
+		&\approx_B0
 		\end{align*}
 		Now we show that $\sigma'$ is also reproductive. Let $\tau$ be a $B$-unifier of $t\approxq_B0$. Because $\sigma$ is a reproductive $B$-unifier of $t'\approxq_B0$ and (1) implies that $\tau$ is indeed a $B$-unifier of $t'\approxq_B0$ it follows that $\tau(\sigma(y))\approx_B\tau(y)$ for all $y$. Therefore $\tau(\sigma'(y))=\tau(\sigma(y))\approx_B\tau(y)$ for all $y\neq x$. For $y=x$:
 		\begin{align*}
@@ -290,11 +288,11 @@
 		&\approx_B \tau(x)*\tau(r)+\tau(x)*\tau(s)+\tau(x)+\tau(s)\\
 		&\approx_B \tau(x)*\tau(r)+(\tau(x)+1)*\tau(s)+\tau(x)\\
 		&\approx_B \tau(t)+\tau(x)\\
-		&\approx_B \tau(x)\\
+		&\approx_B \tau(x)
 		\end{align*}
 		\end{itemize}
 		\end{proof}
-		Now lets consider as example the $B$-unification problem $xy+yz+xz+1\approxq_B0$. First we eliminate $x$.
+		Let us consider as an example the $B$-unification problem $xy+yz+xz+1\approxq_B0$. First we eliminate $x$.
 		\begin{align*}
 		& x*(y+z+yz+1)+(x+1)*(yz+1)\approxq_B0\ (r=y+z+yz+1,s=yz+1)\\
 		& r*s\approx_Byz+yz+yz+yz+y+z+yz+1\approx_By+z+yz+1
@@ -304,7 +302,7 @@
 		& y*(1+z+z+1)+(y+1)*(z+1)\approxq_B0\ (r'=1+z+z+1,s'=z+1)\\
 		& r'*s'\approx_B(1+z+z+1)*(z+1)\approx_B0*(z+1)\approx_B0
 		\end{align*}
-		Obviously $0\approxq0$ is $B$-unifiable with the reproductive $B$-unifier $\sigma''$ which is the identity on all variables. From theorem \ref{sucVEli} it follows that $\sigma'$ defined by
+		Obviously $0\approxq0$ is $B$-unifiable with the reproductive $B$-unifier $\sigma''$ which is the identity on all variables. From Theorem \ref{sucVEli} it follows that $\sigma'$ defined by
 		\begin{align*}
 		\sigma'&:=\sigma''\cup\left\lbrace y\mapsto y*(\sigma''(r')+\sigma''(s')+1)+\sigma''(s')\right\rbrace\\
 		\sigma'&:=\sigma''\cup\left\lbrace y\mapsto y*(0+z+1+1)+z+1\right\rbrace\\
@@ -315,7 +313,7 @@
 		\sigma&:=\sigma'\cup\left\lbrace x\mapsto x*(\sigma'(r+s)+1)+\sigma'(s)\right\rbrace\\
 		\sigma&:=\sigma'\cup\left\lbrace x\mapsto x*(\sigma'(y+z)+1)+(yz+z+1)*z+1\right\rbrace\\
 		\sigma&:=\sigma'\cup\left\lbrace x\mapsto x*(yz+z+1+z+1)+yz+1\right\rbrace\\
-		\sigma&:=\sigma'\cup\left\lbrace x\mapsto xyz+yz+1\right\rbrace\\
+		\sigma&:=\sigma'\cup\left\lbrace x\mapsto xyz+yz+1\right\rbrace
 		\end{align*}
 		is a reproductive $B$-unifier of $x*(y+z+yz+1)+(x+1)*(yz+1)\approxq_B0$ and also of our original problem $xy+yz+xz+1\approxq_B0$.
 		%TODO outtro
@@ -331,7 +329,7 @@
 		\end{align*}
 		is a reproductive $B$-unifier of $t\approxq_B0$.
 		\end{theorem}
-		Before we can proof this theorem we need the following lemma to proof that $\sigma$ actually is a $B$-unifier. 
+		Before we can prove this theorem we need the following lemma to prove that $\sigma$ actually is a $B$-unifier. 
 		\begin{lemma}\label{lowenLemma}
 		If $\sigma(x)=(s+1)*\sigma_1(x)+s*\sigma_2(x)$ for all $x\in\mathcal{V}ar(t)$, then $\sigma(t)=(s+1)*\sigma_1(t)+s*\sigma_2(t)$.
 		\end{lemma}
@@ -373,9 +371,9 @@
 				\end{align*}
 		\end{description}
 		\end{proof}
-		Now we can proof theorem \ref{lowenheim} easily.
+		Now we can prove Theorem \ref{lowenheim} easily.
 		\begin{proof}[Proof(Theorem \ref{lowenheim})]
-		At first we need to show that $\sigma$ is indeed a $B$-unifier of $t\approxq_B0$. This is easy since $\sigma$ has exactly the form we need for lemma \ref{lowenLemma} ($s:=t,\sigma_1(x):=x$ for all $x$ and $\sigma_2:=\tau$). The fact that $\tau$ is a $B$-unifier of $t\approxq_B0$ now gives us:
+		At first we need to show that $\sigma$ is indeed a $B$-unifier of $t\approxq_B0$. This is easy since $\sigma$ has exactly the form we need for Lemma \ref{lowenLemma} ($s:=t,\sigma_1(x):=x$ for all $x$ and $\sigma_2:=\tau$). The fact that $\tau$ is a $B$-unifier of $t\approxq_B0$ now gives us:
 		\begin{align*}
 		\sigma(t)&=(t+1)*t+t*\tau(t)
 		\approx_B0+0
@@ -390,7 +388,7 @@
 		\end{align*}
 		if $x\notin\mathcal{V}ar(t)$ then $\sigma(x)=x$ so $\tau'(\sigma(x))=\tau'(x)$ follows trivially.
 		\end{proof}
-		Now lets consider the $B$-unification problem $xy+yz+xz+1\approxq_B0$ (the same as in successive variable elimination) as example. We will only consider ground $B$-unifiers.
+		Now let us consider the $B$-unification problem $xy+yz+xz+1\approxq_B0$ (the same as in successive variable elimination) as example. We will only consider ground $B$-unifiers.
 		\begin{align*}
 		& xyz=1:& \sigma_1(x)&=\ \ (xy+yz+xz+1+1)*x+(xy+yz+xz+1)*1\\
 		&&&\approx_Bxy+xyz+xz+(xy+yz+xz+1)\\
@@ -405,7 +403,7 @@
 		&&\sigma_2(z)&\approx_Bxyz+xy+1
 		\end{align*}
 		\begin{align*}
-		& x=1,y=0,z=1\text{ and }x=1,y=1,z=0\text{ are symettric to }x=0,y=1,z=1
+		& x=1,y=0,z=1\text{ and }x=1,y=1,z=0\text{ are symmetric to }x=0,y=1,z=1
 		\end{align*} 
 		%Since it is not so easy to see that the calculated $B$-unifiers are reproductive we will consider some examples. First $\sigma_1(\sigma_2(w))\approx_B\sigma_1(w)$ for all $w$, if $w\notin\left\lbrace x,y,z\right\rbrace $ then $\sigma_1(\sigma_2(w))=\sigma_1(w)$ follows trivially. If $w\in\left\lbrace x,y,z\right\rbrace $ then
 		%\begin{align*}
@@ -420,7 +418,7 @@
 		%&\approx_B\sigma_1(x)
 		%\end{align*}
 		Since it is not so easy to see that the calculated $B$-unifiers are reproductive we will consider an example.
-		Remember the reproductive $B$-unifier $\sigma:=\left\lbrace x\mapsto xyz+yz+1,y\mapsto yz+z+1\right\rbrace$ which we computed with successive variable elimination. Lets show that $\sigma(\sigma_1(w))\approx_B\sigma(w)$ for all $w$. If $w\notin\left\lbrace x,y,z\right\rbrace $ then $\sigma(\sigma_1(w))=\sigma(w)$ follows trivially. If $w\in\left\lbrace x,y,z\right\rbrace $ then
+		Remember the reproductive $B$-unifier $\sigma:=\left\lbrace x\mapsto xyz+yz+1,y\mapsto yz+z+1\right\rbrace$ which we computed with successive variable elimination. Let us show that $\sigma(\sigma_1(w))\approx_B\sigma(w)$ for all $w$. If $w\notin\left\lbrace x,y,z\right\rbrace $ then $\sigma(\sigma_1(w))=\sigma(w)$ follows trivially. If $w\in\left\lbrace x,y,z\right\rbrace $ then
 		\begin{align*}
 		\sigma(\sigma_1(x))&\approx_B\sigma(xyz+yz+1)\\
 		&\approx_B(xyz+yz+1)(yz+z+1)z+\sigma(yz+1)\\
@@ -442,9 +440,9 @@
 		&\approx_Bz\\
 		&\approx_B\sigma(z)
 		\end{align*}
-		Of course this does not proof that $\sigma_1$ is reproductive it was just to stress the fact that for a reproductive $B$-unifier $\sigma$ the equation $\tau(\sigma(x))\approx_B\tau(x)$ has to hold for all $B$-unifiers $\tau$ so it especially has to hold for other reproductive $B$-unifiers.
+		Of course this does not prove that $\sigma_1$ is reproductive it was just to stress the fact that for a reproductive $B$-unifier $\sigma$ the equation $\tau(\sigma(x))\approx_B\tau(x)$ has to hold for all $B$-unifiers $\tau$ so it especially has to hold for other reproductive $B$-unifiers.
 		\subsection{Conclusion}
-		Since for every $B$-unification problem we could just put the corresponding boolean formula into an SAT-solver to get an $B$-unifier for Löwenheims's formula it is easy to see that computing an mgu with Löwenheims's formula takes nondeterministic polynomial time. For successive variable elimination this is not so easy to show. But since by finding an mgu we also solve the SAT problem for boolean formulas it has to be NP-hard. Keep in mind that we have only considered elementary $B$-unification problems here, $B$-unification problems with constants and general $B$-unification problems have higher complexity \cite{cmplxBU}.
+		Since for every $B$-unification problem we could just put the corresponding Boolean formula into an SAT-solver to get an $B$-unifier for Löwenheims's formula it is easy to see that computing an mgu with Löwenheims's formula takes nondeterministic polynomial time. For successive variable elimination this is not so easy to show. But since by finding an mgu we also solve the SAT problem for Boolean formulas it has to be NP-hard. Keep in mind that we have only considered elementary $B$-unification problems here, $B$-unification problems with constants and general $B$-unification problems have higher complexity \cite{cmplxBU}.
 		\begin{thebibliography}{9}
 		
 		\bibitem{TRS}
