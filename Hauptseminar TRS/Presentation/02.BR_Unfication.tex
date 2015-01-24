@@ -1,4 +1,42 @@
-\section{BR-Unification}
-\begin{frame}
-\frametitle{BR-Unification}
+\section{Boolean Rings}
+\begin{frame}{Boolean Rings}
+\[B:=\left\lbrace 
+	\begin{aligned}
+		x+y     & \approx y+x,         & x*y     & \approx y*x,     \\
+		(x+y)+z & \approx x+(y+z),     & (x*y)*z & \approx x*(y*z), \\
+		x+x     & \approx 0,           & x*x     & \approx x,       \\
+		0+x     & \approx x,           & 0*x     & \approx 0,       \\
+		x*(y+z) & \approx (x*y)+(x*z), & 1*x     & \approx x        
+	\end{aligned}
+	\right\rbrace \]
 \end{frame}
+
+\begin{frame}{Boolean Rings}{Interpretation}
+$\BTwo:=(\Delta^\BTwo,\cdot^\BTwo)$\\
+\vspace{10pt}\hspace{10pt}
+$\Delta^\BTwo:=\left\lbrace\bot,\top\right\rbrace$
+\uncover<2->{
+\begin{align*}
+	(x+y)^\BTwo & :=\left( x^\BTwo\wedge\neg y^\BTwo\right)  \vee \left( \neg x^\BTwo\wedge y^\BTwo\right) \\ 
+	(x*y)^\BTwo & :=x^\BTwo\wedge y^\BTwo \\
+	0^\BTwo     & :=\bot \\ 
+	1^\BTwo     & :=\top                  
+\end{align*}
+}
+\end{frame}
+
+\begin{frame}{Boolean Rings}{Example}	
+\begin{align*}
+	(1+0)^\BTwo&=\left( 1^\BTwo\wedge\neg 0^\BTwo\right) \vee \left( \neg1^\BTwo\wedge 0^\BTwo\right) \\
+	&=\left( \top\wedge\neg\bot\right) \vee\left(\neg\top\wedge\bot \right) \\
+	&=\top\vee\bot\\
+	&=\top
+\end{align*}
+\end{frame}
+
+\begin{frame}{Boolean Rings}{Polynomial Form}	
+\begin{align*}
+asd
+\end{align*}
+\end{frame}
+\section{Unification modulo Boolean Rings}

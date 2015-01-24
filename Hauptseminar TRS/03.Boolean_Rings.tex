@@ -326,7 +326,6 @@ Now we will look at the equational theory $\approx_B$ in more detail. First we d
 		\sigma & :=\sigma'\cup\left\lbrace x\mapsto xyz+yz+1\right\rbrace                        
 	\end{align*}
 	is a reproductive $B$-unifier of $x*(y+z+yz+1)+(x+1)*(yz+1)\approxq_B0$ and also of our original problem $xy+yz+xz+1\approxq_B0$.
-	%TODO outtro
 	\subsection{Löwenheim's formula}
 	This algorithm is not as intuitive as successive variable elimination but much more interesting since we can turn an arbitrary $B$-unifier $\tau$ of $t\approxq_B0$ into an mgu (even a reproductive $B$-unifier).
 	\begin{theorem}\label{lowenheim}
@@ -451,7 +450,7 @@ Now we will look at the equational theory $\approx_B$ in more detail. First we d
 	\end{align*}
 	Of course this does not prove that $\sigma_1$ is reproductive it was just to stress the fact that for a reproductive $B$-unifier $\sigma$ the equation $\tau(\sigma(x))\approx_B\tau(x)$ has to hold for all $B$-unifiers $\tau$ so it especially has to hold for other reproductive $B$-unifiers.
 	\subsection{Conclusion}
-	Since for every $B$-unification problem we could just put the corresponding Boolean formula into an SAT-solver to get an $B$-unifier for Löwenheims's formula it is easy to see that computing an mgu with Löwenheims's formula takes nondeterministic polynomial time. For successive variable elimination this is not so easy to show. But since by finding an mgu we also solve the SAT problem for Boolean formulas it has to be NP-hard. Keep in mind that we have only considered elementary $B$-unification problems here, $B$-unification problems with constants and general $B$-unification problems have higher complexity \cite{cmplxBU}.
+	Since for every $B$-unification problem we could just put the corresponding Boolean formula into an SAT-solver to get an $B$-unifier for Löwenheims's formula it is easy to see that computing an mgu with Löwenheims's formula takes nondeterministic polynomial time. The time complexity of successive variable elimination is not so easy to determine. But since by finding an mgu we also solve the SAT problem for Boolean formulas it has to be at least NP-hard. Keep in mind that we have only considered elementary $B$-unification problems here, $B$-unification problems with constants and general $B$-unification problems have higher complexity \cite{cmplxBU}.
 	\begin{thebibliography}{9}
 				
 		\bibitem{TRS}
@@ -464,6 +463,13 @@ Now we will look at the equational theory $\approx_B$ in more detail. First we d
 		\bibitem{cmplxBU}
 		Franz Baader,
 		\emph{On the complexity of Boolean unification}.
+		Information Processing Letters 67,
+		pages 215-220,
+		1998.
+		
+		\bibitem{newV}
+		Franz Baader,
+		\emph{}.
 		Information Processing Letters 67,
 		pages 215-220,
 		1998.
