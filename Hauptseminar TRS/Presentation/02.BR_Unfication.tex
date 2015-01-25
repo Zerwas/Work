@@ -34,14 +34,21 @@ $\Delta^\BTwo:=\left\lbrace\bot,\top\right\rbrace$
 \end{align*}
 \end{frame}
 
-%leave this out and just do Löwenheims formula?
-\begin{frame}{Boolean Rings}{Polynomial Form}	
-\begin{align*}
-asd
-\end{align*}
-\end{frame}
 
 \section{Unification modulo Boolean Rings}
+%into slide elementary(!) BR-Unification 
+
+%how to turn solution in \BTwo to $B$-unifier
+
+%t=0
+\begin{frame}{Unification modulo Boolean Rings}{Transformation}
+\begin{align*}
+&	& S&=\left\lbrace s_1\approxq t_1,\dots, s_n\approxq_B t_n\right\rbrace\\
+\uncover<2->{&\Rightarrow & S&=\left\lbrace s_1+t_1\approxq 0,\dots, s_n+t_n\approxq_B 0\right\rbrace\\}
+\uncover<3->{&\Rightarrow & S&=\left\lbrace (s_1+t_1+1)*\dots*(s_n+t_n+1)\approxq_B 1\right\rbrace\\}
+\uncover<4->{&\Rightarrow & S&=\left\lbrace (s_1+t_1+1)*\dots*(s_n+t_n+1)+1\approxq_B 0\right\rbrace}
+\end{align*}
+\end{frame}
 
 \begin{frame}{Unification modulo Boolean Rings}{Reproductive $E$-unifier}
 \begin{center}
@@ -67,3 +74,30 @@ Let $\tau$ be a $B$-unifier of $t\approxq_B0$. The substitution $\sigma$ defined
 \end{align*}
 is a reproductive $B$-unifier of $t\approxq_B0$.
 \end{frame}
+
+\begin{frame}{Unification modulo Boolean Rings}{Löwenheim's Formula}
+Why is $\sigma$ reproductive?\vspace{10pt}
+
+Let $\tau'$ be an arbitrary $B$-unifier of $S$.
+\begin{align*}
+\tau'(\sigma(x)) & =\ \ \tau'((t+1)*x+t*\tau(x))                      \\
+        & =\ \ (\tau'(t)+1)*\tau'(x)+\tau'(t)*\tau'(\tau(x)) \\
+        & \approx_B(0+1)*\tau'(x)+0*\tau'(\tau(x))           \\
+        & \approx_B\tau'(x)                                  
+\end{align*}
+\end{frame}
+
+\begin{frame}{Unification modulo Boolean Rings}{Löwenheim's Formula Example}
+$B$-unification problem: $xy\approxq_B0$\vspace{10pt}
+$
+\def\arraystretch{1.3}
+\begin{array}{ll}
+ x=0,y=0:	&\uncover<2->{\sigma_1(x)=(xy+1)*x+xy*0\approx_B xy+x\\
+			&\sigma_1(y)=(xy+1)*y+xy*0\approx_B xy+y\\}
+ x=0,y=1:	&\uncover<3->{\sigma_2(x)=(xy+1)*x+xy*0\approx_B xy+x\\
+			&\sigma_2(y)=(xy+1)*y+xy*1\approx_B y\\}
+ x=1,y=0:	&\uncover<3->{ \text{similar to }x=0,y=1.}
+\end{array}$
+\end{frame}
+
+%summary
