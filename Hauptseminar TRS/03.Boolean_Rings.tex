@@ -251,7 +251,7 @@ Now we will look at the equational theory $\approx_B$ in more detail. First we d
 	This simple observation is the basis of successive variable elimination.
 	Before we come to the main theorem of successive variable elimination we introduce a strong type of most general $B$-unifiers: the reproductive $B$-unifiers.
 	\begin{definition}
-		An $E$-unifier $\sigma$ of an $E$-unification problem $S$ is a \textbf{reproductive \mBold-unifier} iff $\tau(\sigma(x))\approx_E\tau(x)$ for every unifier $\tau$ of $S$ and every variable $x$.
+		An $E$-unifier $\sigma$ of an $E$-unification problem $S$ is a \textbf{reproductive \mBold-unifier} iff $\tau(\sigma(x))\approx_E\tau(x)$ for every $E$-unifier $\tau$ of $S$ and every variable $x$.
 	\end{definition}
 	Note that for a normal mgu $\sigma$ of an $E$-unification problem $S$ it only has to hold that for every $E$-unifier $\tau$ of $S$ there has to exist a substitution $\theta$ such that $\theta(\sigma(x))\approx_E\tau(x)$ for every variable $x\in X$. 
 	%TODO more explanation?

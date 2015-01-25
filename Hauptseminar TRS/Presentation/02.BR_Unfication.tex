@@ -34,9 +34,36 @@ $\Delta^\BTwo:=\left\lbrace\bot,\top\right\rbrace$
 \end{align*}
 \end{frame}
 
+%leave this out and just do Löwenheims formula?
 \begin{frame}{Boolean Rings}{Polynomial Form}	
 \begin{align*}
 asd
 \end{align*}
 \end{frame}
+
 \section{Unification modulo Boolean Rings}
+
+\begin{frame}{Unification modulo Boolean Rings}{Reproductive $E$-unifier}
+\begin{center}
+$
+\def\arraystretch{1.5}
+\begin{array}{ccc}
+\sigma \text{ is an mgu of }S&&\uncover<2->{\sigma\textbf{ is a reproductive $E$-unifier of }S}\\
+\text{iff}&\uncover<2->{\Rightarrow&\textbf{iff}}\\
+\forall \tau\in\mathcal{U}_E(S):\exists\theta:\forall x\in X:&&\uncover<2->{\forall \tau\in\mathcal{U}_E(S):\forall x:}\\
+\theta(\sigma(x))\approx_E\tau(x)&&\uncover<2->{\tau(\sigma(x))\approx_E\tau(x)}
+\end{array}
+$
+\end{center}
+\end{frame}
+
+\begin{frame}{Unification modulo Boolean Rings}{Löwenheim's Formula}
+Let $\tau$ be a $B$-unifier of $t\approxq_B0$. The substitution $\sigma$ defined by
+\begin{align*}
+	\sigma(x):=\begin{cases}
+	(t+1)*x+t*\tau(x) & \text{if }x\in\mathcal{V}ar(t)    \\
+	x                 & \text{if }x\notin\mathcal{V}ar(t) 
+	\end{cases}
+\end{align*}
+is a reproductive $B$-unifier of $t\approxq_B0$.
+\end{frame}

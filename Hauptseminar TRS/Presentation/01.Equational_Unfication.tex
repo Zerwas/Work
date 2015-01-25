@@ -30,11 +30,16 @@ S&:=\left\lbrace f(x,y)\approxq_Cf(a,b)\right\rbrace
 \end{frame}
 
 \begin{frame}{Equational Unification}{More General}
-\begin{align*}
-\sigma&<\sigma'&&&\uncover<2->{\sigma&\moreGeneral\sigma'}\\
-&\hspace{2pt}\textbf{iff}&&\uncover<2->{\Rightarrow&&\hspace{5pt}\textbf{iff}}\\
-\exists\delta:\delta&(\sigma)=\sigma'&&&\uncover<2->{\exists\delta:\delta(\sigma(x))&\approx_E\sigma'(x)\text{ for all }x\in X}
-\end{align*}
+\begin{center}
+$
+\def\arraystretch{1.5}
+\begin{array}{ccc}
+\sigma<\sigma'&&\uncover<2->{\sigma\moreGeneral\sigma'}\\
+\textbf{iff}&\uncover<2->{\Rightarrow&\hspace{5pt}\textbf{iff}}\\
+\exists\delta:\delta(\sigma)=\sigma'&&\uncover<2->{\exists\delta:\forall x\in X:\\&&\delta(\sigma(x))\approx_E\sigma'(x)}
+\end{array}
+$
+\end{center}
 \end{frame}
 
 \begin{frame}{Equational Unification}{Minimal Complete Sets}
