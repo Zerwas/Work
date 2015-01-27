@@ -1,0 +1,163 @@
+\documentclass[]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{minted}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{claim}[theorem]{Claim}
+
+
+\begin{document}
+\section{WFI or not?}
+\begin{minted}{haskell}
+take 0 xs     = []
+take n []     = []
+take n (x:xs) = [x]++(take (n-1) xs)
+\end{minted}
+\begin{minted}{haskell}
+drop 0 xs     = xs
+drop n []     = []
+drop n (x:xs) = drop (n-1) xs
+\end{minted}
+\begin{claim}The following equation holds.
+\begin{minted}{haskell}
+(take n xs)++(drop n xs) = xs
+\end{minted}
+\end{claim}
+\begin{proof} by induction over n.
+\begin{itemize}
+\item[BC:]n=0:
+\begin{minted}{haskell}
+  (take n xs)++(drop n xs) 
+= (take 0 xs)++(drop 0 xs)
+= []++xs
+= xs
+\end{minted}
+\item[IH:]
+\begin{minted}{haskell}
+(take n' xs)++(drop n' xs) = xs
+\end{minted}
+holds for an arbitrary but fixed n' and all xs.
+\item[IS:]n=n'+1
+\subitem Case 1: xs=[]
+\begin{minted}{haskell}
+	  (take n xs)++(drop n xs)
+	= (take (n'+1) [])++(drop (n'+1) []) 
+	= []++[]
+	= []
+	= xs
+\end{minted}
+\subitem Case 2: xs=(x:xs')
+\begin{minted}{haskell}
+	  (take n xs)++(drop n xs)
+	= (take (n'+1) (x:xs'))++(drop (n'+1) (x:xs'))
+	= [x]++(take n' xs')++(drop n' xs')
+	= [x]++xs'
+	= xs
+\end{minted}
+\end{itemize}
+\end{proof}
+\newpage
+\begin{minted}{haskell}
+zip [] ys         = []
+zip xs []         = []
+zip (x:xs) (y:ys) = [(x,y)]++(zip xs ys)
+\end{minted}
+\begin{minted}{haskell}
+length []     = 0
+length (x:xs) = 1+(length xs)
+\end{minted}
+\begin{minted}{haskell}
+min x y
+   |x>y   = y
+   |true  = x
+\end{minted}
+\begin{claim}\label{minZip}The following equation holds.
+\begin{minted}{haskell}
+length (zip xs ys) = min (length xs) (length ys)
+\end{minted}
+\end{claim}
+
+\begin{proof} by structural induction over xs.
+\begin{itemize}
+\item[BC:]xs=[]
+\begin{minted}{haskell}
+  length (zip xs ys)
+= length (zip [] ys)
+= length []
+= 0
+= min 0 (length ys) --since (length ys) >= 0
+= min (length xs) (length ys)
+\end{minted}
+\item[IH:]
+\begin{minted}{haskell}
+length (zip xs' ys) = min (length xs') (length ys)
+\end{minted}
+holds for an arbitrary but fixed xs' and all ys.
+\item[IS:]xs=(x:xs')
+\subitem Case 1: ys=[]
+\begin{minted}{haskell}
+	  length (zip xs ys)
+	= length (zip (x:xs') []) 
+	= length []
+	= min (length (x:xs')) 0 --since (length (x:xs')) > 0
+	= min (length xs) (length ys)
+\end{minted}
+\subitem Case 2: ys=(y:ys')
+\begin{minted}{haskell}
+	  length (zip xs ys)
+	= length (zip (x:xs') (y:ys')) 
+	= length ([(x,y)]++(zip xs' ys'))
+	= 1+length (zip xs' ys')
+	= 1+(min (length xs') (length ys'))
+	= min (1+(length xs')) (1+(length ys'))
+	= min (length (x:xs')) (length (y:ys'))
+	= min (length xs) (length ys)
+\end{minted}
+\end{itemize}
+\end{proof}
+But now just for the fun of it let us proof Claim \ref{minZip} by well founded induction.
+\begin{align*}
+%([],ys)&\prec((x:xs),\hphantom{(y:\ }ys\hphantom{)})\\
+%(xs,[])&\prec(\hphantom{(x:\ }xs\hphantom{)},(y:ys))\\
+(xs,ys)&\prec((x:xs),(y:ys))
+\end{align*}
+We denote the transitive closure of $\prec$ by $<$. Obviously $<$ is a well-founded order.
+\begin{proof} by well-founded induction with the predicate 
+\begin{minted}{haskell}
+P((xs,ys))=(length (zip xs ys) = min (length xs) (length ys))
+\end{minted}.
+%\iff intestead of = ?
+\begin{itemize}
+\item[] xs=[]: (Note that ([],ys) has no successors w.r.t. $<$.)
+\begin{minted}{haskell}
+  length (zip xs ys)
+= length (zip [] ys)
+= length []
+= 0
+= min 0 (length ys) --since (length ys) >= 0
+= min (length xs) (length ys)
+\end{minted}
+\item[] ys=[]: This case can be treated analogously to xs=[].
+\item[] xs=(x:xs'),ys=(y:ys)
+\begin{minted}{haskell}
+  length (zip xs ys)
+= length (zip (x:xs') (y:ys')) 
+= length ([(x,y)]++(zip xs' ys'))
+= 1+(length (zip xs' ys'))
+= 1+(min (length xs') (length ys')) {-since (xs',ys')<(xs,ys) 
+                                         P((xs',ys')) holds-}
+= min (1+(length xs')) (1+(length ys'))
+= min (length (x:xs')) (length (y:ys'))
+= min (length xs) (length ys)
+\end{minted}
+\end{itemize}
+\end{proof}
+\newpage
+\input{WFI_Haskell_2}
+\end{document}

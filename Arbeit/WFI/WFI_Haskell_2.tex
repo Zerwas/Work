@@ -1,0 +1,28 @@
+\begin{minted}{haskell}
+a 0 m = m+1
+a n 0 = a (n-1) 1
+a n m = a (n-1) (a n (m-1))
+\end{minted}
+\begin{minted}{haskell}
+alist []     ys     = [1]++ys
+alist (x:xs) []     = alist xs [x]
+alist (x:xs) (y:ys) = alist xs (alist (x:xs) ys)
+\end{minted}
+\begin{claim}The following equation holds.
+\begin{minted}{haskell}
+length (alist xs ys) = a (length xs) (length ys)
+\end{minted}
+\end{claim}
+\begin{align*}
+(xs,ys)&\prec(\hphantom{(x:\ }xs\hphantom{)},(y:ys))\\
+(xs,zs)&\prec((x:xs),\hphantom{(x:\ }ys\hphantom{)})
+\end{align*}
+\begin{minted}{haskell}
+r []     = []
+r (x:xs) = r (xs++[(x+1)]++[(x+1)])
+\end{minted}
+\begin{claim}The following equation holds.
+\begin{minted}{haskell}
+r xs = []
+\end{minted}
+\end{claim}
