@@ -1,3 +1,4 @@
+\subsection{Lexicographic Order}
 \begin{minted}{haskell}
 a 0 m = m+1
 a n 0 = a (n-1) 1
@@ -14,9 +15,10 @@ length (alist xs ys) = a (length xs) (length ys)
 \end{minted}
 \end{claim}
 \begin{align*}
-(xs,ys)&\prec(\hphantom{(x:\ }xs\hphantom{)},(y:ys))\\
-(xs,zs)&\prec((x:xs),\hphantom{(x:\ }ys\hphantom{)})
+(xs,ys)&\prec_l(\hphantom{(x:\ }xs\hphantom{)},(y:ys))\\
+(xs,zs)&\prec_l((x:xs),\hphantom{(x:\ }ys\hphantom{)})
 \end{align*}
+\subsection{Multiset Order}
 \begin{minted}{haskell}
 r []     = []
 r (x:xs) = r (xs++[(x+1)]++[(x+1)])
@@ -26,3 +28,4 @@ r (x:xs) = r (xs++[(x+1)]++[(x+1)])
 r xs = []
 \end{minted}
 \end{claim}
+%multiset order
