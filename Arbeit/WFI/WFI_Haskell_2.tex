@@ -18,6 +18,39 @@ length (alist xs ys) = a (length xs) (length ys)
 (xs,ys)&\prec_l(\hphantom{(x:\ }xs\hphantom{)},(y:ys))\\
 (xs,zs)&\prec_l((x:xs),\hphantom{(x:\ }ys\hphantom{)})
 \end{align*}
+We denote the transitive closure of $\prec_l$ by $<_l$. Obviously $<_l$ is a well-founded order.
+\begin{proof} by well-founded induction with the predicate 
+\begin{minted}{haskell}
+P((xs,ys))=(length (alist xs ys) = a (length xs) (length ys))
+\end{minted}
+\begin{itemize}
+\item[] xs=ys=[]: (Note that ([],[]) has no successors w.r.t. $<_l$.)
+\begin{minted}{haskell}
+  length (alist xs ys)
+= length (alist [] [])
+= length ([1]++[])
+= 1
+= a 0 0
+= a (length []) (length [])
+\end{minted}
+\item[] xs=(x:xs'),ys=(y:ys)
+\begin{minted}{haskell}
+  length (alist xs ys)
+= length (alist (x:xs') (y:ys')) 
+= length (alist xs' (alist (x:xs') ys'))
+= a (length xs') (length (alist (x:xs') ys')) 
+                  {-since (xs',(alist (x:xs') ys'))<(xs,ys) 
+                       P((xs',(alist (x:xs') ys'))) holds-}
+= a (length xs') (a (length (x:xs')) (length ys'))
+                  {-since (xs,ys')<(xs,ys) 
+                        P((xs,ys') holds-}
+= a (length xs') (a ((length xs')+1) (length ys'))
+= a ((length xs')+1) ((length ys')+1)
+= a (length (x:xs')) (length (y:ys'))
+= a (length xs) (length ys)
+\end{minted}
+\end{itemize}
+\end{proof}
 \subsection{Multiset Order}
 \begin{minted}{haskell}
 r []     = []
@@ -29,3 +62,13 @@ r xs = []
 \end{minted}
 \end{claim}
 %multiset order
+\subsection{Arbitrary Order (Not ready just an idea)}
+\begin{minted}{haskell}
+f 0 = g 0
+f a = b (g (r a))
+\end{minted}
+\begin{claim}The following equation holds.
+\begin{minted}{haskell}
+f a = g a
+\end{minted}
+\end{claim}
