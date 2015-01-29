@@ -39,10 +39,10 @@ P((xs,ys))=(length (alist xs ys) = a (length xs) (length ys))
 = length (alist (x:xs') (y:ys')) 
 = length (alist xs' (alist (x:xs') ys'))
 = a (length xs') (length (alist (x:xs') ys')) 
-                  {-since (xs',(alist (x:xs') ys'))<(xs,ys) 
+                {-since (xs',(alist (x:xs') ys'))<_l(xs,ys) 
                        P((xs',(alist (x:xs') ys'))) holds-}
 = a (length xs') (a (length (x:xs')) (length ys'))
-                  {-since (xs,ys')<(xs,ys) 
+                {-since (xs,ys')<_l(xs,ys) 
                         P((xs,ys') holds-}
 = a (length xs') (a ((length xs')+1) (length ys'))
 = a ((length xs')+1) ((length ys')+1)
