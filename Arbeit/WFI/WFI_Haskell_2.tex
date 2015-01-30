@@ -71,6 +71,13 @@ r []     = []
 r (0:xs) = r xs
 r (x:xs) = r (xs++[(x-1)]++[(x-1)])
 \end{minted}
+\textbf{Alternative} definition of r, such that negative numbers work as well.
+\begin{minted}{haskell}
+r []       = []
+r (x:xs) 
+     |x>0  = r (xs++[(x-1)]++[(x-1)])
+     |true = r xs
+\end{minted}
 \begin{claim}The following equation holds.
 \begin{minted}{haskell}
 r xs = []
