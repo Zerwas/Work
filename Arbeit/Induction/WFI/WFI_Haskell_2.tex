@@ -1,0 +1,112 @@
+\subsection{Lexicographic Order}
+\begin{minted}{haskell}
+a 0 m = m+1
+a n 0 = a (n-1) 1
+a n m = a (n-1) (a n (m-1))
+\end{minted}
+\begin{minted}{haskell}
+alist []     ys     = [1]++ys
+alist (x:xs) []     = alist xs [x]
+alist (x:xs) (y:ys) = alist xs (alist (x:xs) ys)
+\end{minted}
+\begin{claim}The following equation holds.
+\begin{minted}{haskell}
+length (alist xs ys) = a (length xs) (length ys)
+\end{minted}
+\end{claim}
+\begin{align*}
+(xs,ys)&\prec_l(\hphantom{(x:\ }xs\hphantom{)},(y:ys))\\
+(xs,zs)&\prec_l((x:xs),\hphantom{(x:\ }ys\hphantom{)})
+\end{align*}
+We denote the transitive closure of $\prec_l$ by $<_l$. Obviously $<_l$ is a well-founded order.
+\begin{proof} by well-founded induction with the predicate 
+\begin{minted}{haskell}
+P((xs,ys))=(length (alist xs ys) = a (length xs) (length ys))
+\end{minted}
+\begin{itemize}
+\item[] xs=ys=[]: (Note that ([],[]) has no successors w.r.t. $<_l$.)
+\begin{minted}{haskell}
+  length (alist xs ys)
+= length (alist [] [])
+= length ([1]++[])
+= 1
+= a 0 0
+= a (length []) (length [])
+\end{minted}
+\item[] xs=(x:xs')
+\subitem Case 1: ys=[]
+\begin{minted}{haskell}
+	  length (alist xs ys)
+	= length (alist (x:xs') []) 
+	= length (alist xs' [x])
+	= a (length xs') (length [x]) 
+              {-since (xs',[x])<_l(xs,ys) 
+                      P((xs',[])) holds-}
+	= a (length xs') 1
+	= a ((length xs')+1) 0
+	= a (length (x:xs')) (length [])
+	= a (length xs) (length ys)
+\end{minted}
+\subitem Case 2: ys=(y:ys)
+\begin{minted}{haskell}
+	  length (alist xs ys)
+	= length (alist (x:xs') (y:ys')) 
+	= length (alist xs' (alist (x:xs') ys'))
+	= a (length xs') (length (alist (x:xs') ys')) 
+	                {-since (xs',(alist (x:xs') ys'))<_l(xs,ys) 
+	                       P((xs',(alist (x:xs') ys'))) holds-}
+	= a (length xs') (a (length (x:xs')) (length ys'))
+	                {-since (xs,ys')<_l(xs,ys) 
+	                        P((xs,ys') holds-}
+	= a (length xs') (a ((length xs')+1) (length ys'))
+	= a ((length xs')+1) ((length ys')+1)
+	= a (length (x:xs')) (length (y:ys'))
+	= a (length xs) (length ys)
+\end{minted}
+\end{itemize}
+\end{proof}
+\subsection{Multiset Order}
+\begin{minted}{haskell}
+r []       = []
+r (x:xs) 
+     |x<1  = r xs
+     |true = r (xs++[(x-1)]++[(x-1)])
+\end{minted}
+\begin{claim}The following equation holds.
+\begin{minted}{haskell}
+r xs = []
+\end{minted}
+\end{claim}
+\begin{proof} by well-founded induction with the predicate 
+\begin{minted}{haskell}
+P(xs)=(r xs = [])
+\end{minted}
+\begin{itemize}
+\item[] xs=[]:
+\begin{minted}{haskell}
+  r xs
+= r []
+= []
+\end{minted}
+\item[] xs=(x:xs')
+\subitem Case 1: x$<$1
+\begin{minted}{haskell}
+	  r xs
+	= r (x:xs')
+	= r xs'
+	= []
+     {-since xs'<_m xs)
+         P(xs') holds-}
+\end{minted}
+\subitem Case 2: xs$\geq$1
+\begin{minted}{haskell}
+	  r xs
+	= r (x:xs')
+	= r (xs'++[(x-1)]++[(x-1)])
+	= []
+	    {-since (xs'++[(x-1)]++[(x-1)])<_m xs 
+	         P(xs'++[(x-1)]++[(x-1)]) holds-}
+\end{minted}
+\end{itemize}
+\end{proof}
+%multiset order
