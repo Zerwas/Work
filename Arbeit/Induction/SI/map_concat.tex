@@ -70,7 +70,7 @@ structural induction on x\\
 alternative proof
 \begin{proof} we show the equivalent claim \\
 \verb|map f (concat xs) = concat (map (map f) xs)|\\
-by structural induction on xs\\
+structural induction on xs\\
 \verb|xs=[]|
 \begin{code}
 map f (concat xs) = map f (concat [])
@@ -106,7 +106,6 @@ map f (concat xs) = map f (concat ((y:ys):xs'))
                   = (map f (y:ys))++(concat (map (map f) xs'))
                   = concat [map f (y:ys)]++(map (map f) xs')
                   = concat (map (map f) ((y:ys):xs'))
-                  = concat (map (map f) (x:xs'))
                   = concat (map (map f) xs)
 \end{code}
 \end{proof}
