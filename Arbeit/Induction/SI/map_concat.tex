@@ -1,0 +1,112 @@
+\section{map concat}
+\begin{code}
+(.) :: (b -> c) -> (a -> b) -> a -> c
+f . g = \x -> f (g x)
+\end{code}
+\begin{code}
+concat::[[a]]->[a]
+concat []     = []
+concat (x:xs) = x++(concat xs)
+\end{code}
+\begin{code}
+map :: (a -> b) -> [a] -> [b] 
+map f []     = []
+map f (x:xs) = [f x]++(map f xs)
+\end{code}
+\begin{claim}\ 
+\begin{code}
+map f.concat = concat.map (map f)
+\end{code}
+\end{claim}
+\begin{proof}structural induction on xs\\
+\verb|xs=[]|
+\begin{code}
+(map f.concat) xs = (map f.concat) []
+                  = map f (concat [])
+                  = map f []
+                  = []
+                  = concat []
+                  = concat (map (map f) [])
+                  = (concat.map (map f)) []
+                  = (concat.map (map f)) xs
+\end{code}
+\verb|xs=(x:xs')|
+structural induction on x\\
+\verb|  x=[]|
+\begin{code}
+(map f.concat) xs = (map f.concat) (x:xs')
+                  = map f (concat ([]:xs'))
+                  = map f ([]++(concat xs'))
+                  = map f (concat xs')
+                  = (concat.map (map f)) xs'
+                  = concat (map (map f) xs')
+                  = []++(concat (map (map f) xs'))
+                  = concat [[]]++(map (map f) xs')
+                  = concat [map f []]++(map (map f) xs')
+                  = concat (map (map f) ([]:xs'))
+                  = concat (map (map f) xs)
+                  = (concat.map (map f)) xs
+\end{code}
+\verb|  x=(y:ys)|
+\begin{code}
+(map f.concat) xs = (map f.concat) (x:xs')
+                  = map f (concat ((y:ys):xs'))
+                  = map f ((y:ys)++(concat xs'))
+                  = [f y]++(map f (ys++(concat xs')))
+                  = [f y]++(map f (concat (ys:xs')))
+                  = [f y]++((concat.map (map f)) (ys:xs'))
+                  = [f y]++(concat (map (map f) (ys:xs')))
+                  = [f y]++(concat [map f ys]++(map (map f) xs'))
+                  = [f y]++(map f ys)++(concat (map (map f) xs'))
+                  = (map f (y:ys))++(concat (map (map f) xs'))
+                  = concat [map f (y:ys)]++(map (map f) xs')
+                  = concat (map (map f) ((y:ys):xs'))
+                  = concat (map (map f) (x:xs'))
+                  = concat (map (map f) xs)
+                  = (concat.map (map f)) xs
+\end{code}
+\end{proof}
+\newpage
+alternative proof
+\begin{proof} we show the equivalent claim \\
+\verb|map f (concat xs) = concat (map (map f) xs)|\\
+by structural induction on xs\\
+\verb|xs=[]|
+\begin{code}
+map f (concat xs) = map f (concat [])
+                  = map f []
+                  = []
+                  = concat []
+                  = concat (map (map f) [])
+                  = concat (map (map f) xs)
+\end{code}
+\verb|xs=(x:xs')|
+structural induction on x\\
+\verb|  x=[]|
+\begin{code}
+map f (concat xs) = map f (concat ([]:xs'))
+                  = map f ([]++(concat xs'))
+                  = map f (concat xs')
+                  = concat (map (map f) xs')
+                  = []++(concat (map (map f) xs'))
+                  = concat [[]]++(map (map f) xs')
+                  = concat [map f []]++(map (map f) xs')
+                  = concat (map (map f) ([]:xs'))
+                  = concat (map (map f) xs)
+\end{code}
+\verb|  x=(y:ys)|
+\begin{code}
+map f (concat xs) = map f (concat ((y:ys):xs'))
+                  = map f ((y:ys)++(concat xs'))
+                  = [f y]++(map f (ys++(concat xs')))
+                  = [f y]++(map f (concat (ys:xs')))
+                  = [f y]++(concat (map (map f) (ys:xs')))
+                  = [f y]++(concat [map f ys]++(map (map f) xs'))
+                  = [f y]++(map f ys)++(concat (map (map f) xs'))
+                  = (map f (y:ys))++(concat (map (map f) xs'))
+                  = concat [map f (y:ys)]++(map (map f) xs')
+                  = concat (map (map f) ((y:ys):xs'))
+                  = concat (map (map f) (x:xs'))
+                  = concat (map (map f) xs)
+\end{code}
+\end{proof}
