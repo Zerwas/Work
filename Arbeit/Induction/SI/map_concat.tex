@@ -1,10 +1,11 @@
 \section{map concat}
+\verb|===|\\
 \begin{code}
 (.) :: (b -> c) -> (a -> b) -> a -> c
 f . g = \x -> f (g x)
 \end{code}
 \begin{code}
-concat::[[a]]->[a]
+concat :: [[a]] -> [a]
 concat []     = []
 concat (x:xs) = x++(concat xs)
 \end{code}
@@ -38,7 +39,7 @@ structural induction on x\\
                   = map f (concat ([]:xs'))
                   = map f ([]++(concat xs'))
                   = map f (concat xs')
-                  = (concat.map (map f)) xs'
+                  (*\sEq{IH}*) (concat.map (map f)) xs'
                   = concat (map (map f) xs')
                   = []++(concat (map (map f) xs'))
                   = concat [[]]++(map (map f) xs')
@@ -54,7 +55,7 @@ structural induction on x\\
                   = map f ((y:ys)++(concat xs'))
                   = [f y]++(map f (ys++(concat xs')))
                   = [f y]++(map f (concat (ys:xs')))
-                  = [f y]++((concat.map (map f)) (ys:xs'))
+                  (*\sEq{IH}*) [f y]++((concat.map (map f)) (ys:xs'))
                   = [f y]++(concat (map (map f) (ys:xs')))
                   = [f y]++(concat [map f ys]++(map (map f) xs'))
                   = [f y]++(map f ys)++(concat (map (map f) xs'))
@@ -87,7 +88,7 @@ structural induction on x\\
 map f (concat xs) = map f (concat ([]:xs'))
                   = map f ([]++(concat xs'))
                   = map f (concat xs')
-                  = concat (map (map f) xs')
+                  (*\sEq{IH}*) concat (map (map f) xs')
                   = []++(concat (map (map f) xs'))
                   = concat [[]]++(map (map f) xs')
                   = concat [map f []]++(map (map f) xs')
@@ -100,7 +101,7 @@ map f (concat xs) = map f (concat ((y:ys):xs'))
                   = map f ((y:ys)++(concat xs'))
                   = [f y]++(map f (ys++(concat xs')))
                   = [f y]++(map f (concat (ys:xs')))
-                  = [f y]++(concat (map (map f) (ys:xs')))
+                  (*\sEq{IH}*) [f y]++(concat (map (map f) (ys:xs')))
                   = [f y]++(concat [map f ys]++(map (map f) xs'))
                   = [f y]++(map f ys)++(concat (map (map f) xs'))
                   = (map f (y:ys))++(concat (map (map f) xs'))

@@ -6,10 +6,27 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{verbatim}
+\usepackage{listings}
+\usepackage{calc}
+\usepackage{hhline}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{claim}[theorem]{Claim}
-\newenvironment{code}{\verbatim}{\endverbatim}
-
+%\newenvironment{code}{\verbatim}{\endverbatim}
+\newcommand{\sEq}[1]{\makebox[\widthof{\texttt{=}}]{$\stackrel{\text{\tiny #1}}{\texttt{=}}$}}
+%{\begin{minipage}[c][\widthof{\texttt{=}}]{\heightof{\texttt{=}}}
+%\hspace*{-0.015cm}\vspace{5pt}$\stackrel{\text{\tiny #1}}{\texttt{=}}$
+%\end{minipage}}
+\lstnewenvironment{code}
+    {\lstset{}%
+      \csname lst@SetFirstLabel\endcsname}
+    {\csname lst@SaveFirstLabel\endcsname}
+    \lstset{
+      basicstyle=\small\tt,
+      flexiblecolumns=false,
+      basewidth={0.5em,0.45em},
+      mathescape=true,
+      escapeinside={(*}{*)},%
+    }
 \begin{document}
 \input{map_concat}
 \end{document}
