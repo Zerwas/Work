@@ -1,0 +1,35 @@
+\section{foldl map}
+\begin{code}
+foldl :: (a -> b -> a) -> a -> [b] -> a
+foldl f a []     = a
+foldl f a (x:xs) = foldl f (f a x) xs
+\end{code}
+\begin{claim}\ 
+\begin{code}
+foldl f a.map g = foldl h a
+          h b x = f b (g x)
+\end{code}
+\end{claim}
+\begin{proof}we show the equivalent claim \\
+\verb|foldl f a (map g xs) = foldl h a xs|\\
+\verb|               h b x = f b (g x)|\\
+by structural induction on xs\\
+\verb|xs=[]|
+\begin{code}
+foldl f a (map g xs) = foldl f a (map g [])
+                     = foldl f a []
+                     = a
+                     = foldl h a []
+                     = foldl h a xs
+\end{code}
+\verb|xs=(x:xs')|
+\begin{code}
+foldl f a (map g xs) = foldl f a (map g (x:xs'))
+                     = foldl f a ([g x]++(map g xs'))
+                     = foldl f (f a (g x)) (map g xs')
+                     (*\sEq{IH}*) foldl h (f a (g x)) xs'
+                     = foldl h (h a x) xs'
+                     = foldl h a (x:xs')
+                     = foldl h a xs
+\end{code}
+\end{proof}

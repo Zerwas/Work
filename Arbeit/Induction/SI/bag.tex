@@ -1,0 +1,47 @@
+\section{bag}
+\begin{code}
+data Bag a = ListBag [(a,Integer)] deriving (Eq,Show)
+\end{code}
+%doch nur add::a->Bag a->Bag a?
+\begin{code}
+add :: Eq a => (a,Integer) -> (Bag a) -> (Bag a)
+add (ele,count) (ListBag bag)
+    |ele 'elem' map fst bag = 
+    |otherwise              = ListBag (bag++[ele,count])
+\end{code}
+\begin{code}
+unite :: (Bag a) -> (Bag a) -> (Bag a)
+unite (ListBag [])     bagy = bagy
+unite (ListBag (x:xs)) bagy = unite (ListBag xs) (add x bagy)
+\end{code}
+\begin{code}
+bag :: [a] -> (Bag a)
+bag []     = Listbag []
+bag (x:xs) = add (x,1) (bag xs)
+\end{code}
+\begin{claim}\ 
+\begin{code}
+bag (xs++ys) = unite (bag xs) (bag ys) 
+\end{code}
+\end{claim}
+\begin{proof}structural induction on xs\\
+\verb|xs=[]|
+\begin{code}
+bag (xs++ys) = bag ([]++ys)
+             = bag ys
+             = unite (ListBag []) (bag ys) 
+             = unite (bag []) (bag ys) 
+             = unite (bag xs) (bag ys) 
+\end{code}
+\verb|xs=(x:xs')|
+\begin{code}
+bag (xs++ys) = bag ((x:xs')++ys)
+             = add (x,1) (bag (xs'++ys))
+             (*\sEq{IH}*) add (x,1) (unite (bag xs') (bag ys) )
+             
+             
+             = unite (add (x,1) (bag xs')) (bag ys)
+             = unite (bag (x:xs')) (bag ys)
+             = unite (bag xs) (bag ys)
+\end{code}
+\end{proof}
