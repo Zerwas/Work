@@ -34,7 +34,7 @@ used but unproven statements:
 \begin{code}
 S1: map f (xs++ys) = (map f xs)++(map f ys)
 S2: map f (map g xs) = map (f.g) xs
-S2: (inc (e,z)).(inc (e,c)) = inc (e,z+c)
+S3: (inc (e,z)).(inc (e,c)) = inc (e,z+c)
 S4: (inc (f,z)).(inc (e,c)) = (inc (e,c)).(inc (f,z))
 \end{code}
 %-------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ xs = []
 xs = (f,z):xs'
    (*\sEq{IH}*) (f,z):(map (inc (e,c)) xs')
    (*\sEq{A1}*) (inc (e,c) (f,z)):(map (inc (e,c)) xs')
-   = map (inc (e,c)) ((f,z),xs')
+   = map (inc (e,c)) ((f,z):xs')
    = map (inc (e,c)) xs
 \end{code}
 \end{proof}
@@ -70,14 +70,14 @@ add (e,z) (add (e,c) (ListBag xs)) = add (e,c+z) (ListBag xs)
 Case 1 : \verb|A1: not e 'elem' map fst xs|
 \begin{code}
 add (e,z) (add (e,c) (ListBag xs)) 
-             (*\sEq{A1}*) add (e,z) (ListBag xs++[(e,c)])
+             (*\sEq{A1}*) add (e,z) (ListBag (xs++[(e,c)]))
              = ListBag (map (inc (e,z)) (xs++[(e,c)]))
-             (*\sEq{S1}*) ListBag (map (inc (e,z)) xs)++(map (inc (e,z)) [(e,c)])
-             (*\sEq{\ref{mapLemma},A1}*) xs++(map (inc (e,z)) [(e,c)])
-             = xs++((inc (e,z) (e,c)):(map (inc (e,z)) []))
-             = xs++((inc (e,z) (e,c)):[])
-             = xs++((e,z+c):[])
-             = xs++[(e,z+c)]
+             (*\sEq{S1}*) ListBag ((map (inc (e,z)) xs)++(map (inc (e,z)) [(e,c)]))
+             (*\sEq{\ref{mapLemma},A1}*) ListBag (xs++(map (inc (e,z)) [(e,c)]))
+             = ListBag (xs++((inc (e,z) (e,c)):(map (inc (e,z)) [])))
+             = ListBag (xs++((inc (e,z) (e,c)):[]))
+             = ListBag (xs++((e,z+c):[]))
+             = ListBag (xs++[(e,z+c)])
              (*\sEq{A1}*) add (e,c+z) (ListBag xs)
 \end{code}
 Case 2 : \verb|A1: e 'elem' map fst xs|
@@ -86,7 +86,7 @@ add (e,z) (add (e,c) (ListBag xs))
              (*\sEq{A1}*) add (e,z) (ListBag (map (inc (e,c)) xs))
              (*\sEq{A1}*) ListBag (map (inc (e,z)) (map (inc (e,c)) xs))
              (*\sEq{S2}*) ListBag (map (inc (e,z)).(inc (e,c)) xs)
-             (*\sEq{S3}*) map (inc (e,c+z)) xs
+             (*\sEq{S3}*) ListBag (map (inc (e,c+z)) xs)
              (*\sEq{A1}*) add (e,c+z) (ListBag xs)
 \end{code}
 \end{proof}
@@ -106,7 +106,7 @@ Case 1 : \verb|A3: not f 'elem' map fst xs|
 add (f,z) (add (e,c) (ListBag xs)) 
              (*\sEq{A1}*) add (f,z) (ListBag (map (inc (e,c)) xs))
              (*\sEq{A3}*) ListBag ((map (inc (e,c)) xs)++[(f,z)])
-             (*\sEq{A3}*) ListBag ((map (inc (e,c)) xs)++[inc (e,c) (f,z)])
+             (*\sEq{A2}*) ListBag ((map (inc (e,c)) xs)++[inc (e,c) (f,z)])
              = ListBag ((map (inc (e,c)) xs)++(map (inc (e,c)) [(f,z)]))
              (*\sEq{S1}*) ListBag (map (inc (e,c)) (xs++[(f,z)]))
              (*\sEq{A1,A2}*) add (e,c) (ListBag (xs++[(f,z)]))
@@ -128,7 +128,7 @@ add (f,z) (add (e,c) (ListBag xs))
 \begin{lemma}\label{incLemma}if  \verb|A1: not e 'elem' map fst xs|
 \begin{code}
 unite (ListBag ((e,c):(xs++[(e,z)]++ys))) bagy 
-                 = unite (ListBag (e,c+z):(xs++ys))) bagy
+                 = unite (ListBag ((e,c+z):(xs++ys))) bagy
 \end{code}
 \end{lemma}
 \begin{proof} of Lemma \ref{incLemma} by structural induction on xs\\
@@ -209,7 +209,7 @@ add (e,z) (unite (ListBag xs) bagy)
              (*\sEq{IH}*) unite (add (e,z) (ListBag xs')) (add x bagy)
              (*\sEq{A3}*) unite (ListBag (xs'++[(e,z)])) (add x bagy)
              = unite (ListBag (x:(xs'++[(e,z)]))) bagy
-             = unite (ListBag ((e,c):(xs'++[(e,z)]))) bagy
+             (*\sEq{A2}*) unite (ListBag ((e,c):(xs'++[(e,z)]))) bagy
              (*\sEq{\ref{incLemma}}*) unite (ListBag ((e,c+z):xs')) bagy
              = unite (ListBag ((inc (e,z) (e,c)):xs')) bagy
              (*\sEq{\ref{mapLemma}}*) unite (ListBag ((inc (e,z) x):(map (inc (e,z)) xs'))) bagy
@@ -268,76 +268,3 @@ bag (xs++ys) = bag ((x:xs')++ys)
              = unite (bag xs) (bag ys)
 \end{code}
 \end{proof}
-\begin{comment}
-
-\begin{lemma}\ 
-\begin{code}
-add (e,1) (unite (bag xs) (bag ys)) 
-                 = unite (add (e,1) (bag xs)) (bag ys)
-\end{code}
-\end{lemma}
-\begin{proof} of Lemma \ref{addLemma} by structural induction on xs\\
-\verb|xs=[]| %mb no induction just cases
-\begin{code}
-add (e,1) (unite (bag xs) (bag ys)) 
-             = add (e,1) (unite (bag []) (bag ys))
-             = add (e,1) (unite (ListBag []) (bag ys))
-             = add (e,1) (bag ys)
-             = unite (ListBag []) (add (e,1) (bag ys))
-             = unite (ListBag [(e,1)]) (bag ys)
-             = unite (add (e,1) (ListBag [])) (bag ys)
-             = unite (add (e,1) (bag [])) (bag ys)
-             = unite (add (e,1) (bag xs)) (bag ys)
-\end{code}
-\verb|xs=(x:xs')|
-\begin{code}
-add (e,1) (unite (bag xs) (bag ys))
-             %1 idea case e not in xs u ys
-             = ListBag (bagxy++[(e,1)]) where ListBag bagxy=unite (bag xs) (bag ys)
-             
-             = unite ((ListBag bagx++[(e,1)])) (bag ys) where ListBag bagx=(bag xs)
-             = unite (add (e,1) (bag xs)) (bag ys)
-             %2 idea case e not in xs u ys
-             = unite (ListBag []) (add (e,1) (unite (bag xs) (bag ys)))
-             = unite (ListBag [(e,1)]) (unite (bag xs) (bag ys))
-             %assozitiv
-             = unite (unite (ListBag [(e,1)]) (bag xs)) (bag ys)
-             = unite (unite (ListBag []) (add (e,1) (bag xs))) (bag ys)
-             = unite (add (e,1) (bag xs)) (bag ys)
-             
-             = add (e,1) (unite (ListBag []) (bag ys))
-             = add (e,1) (bag ys)
-             = unite (ListBag []) (add (e,1) (bag ys))
-             = unite (ListBag [(e,1)]) (bag ys)
-             = unite (add (e,1) (ListBag [])) (bag ys)
-             = unite (add (e,1) (bag [])) (bag ys)
-             = unite (add (e,1) (bag xs)) (bag ys)
-\end{code}
-\end{proof}
-
-Case 1.2: \verb|x 'elem' map fst (unite (bag xs') (bag ys))|\\
-\hphantom{Case 1.2: }and \verb|x 'elem' xs'|
-\begin{code}            
-             = add (x,1) (unite (bag xs') (bag ys))
-             %lemma1
-             = add (x,1) (unite (bag xs'') (add (x,c-1) (bag ys)))
-             = 
-             %lemma2
-             = unite (bag xs'') (add (x,1) (add (x,c-1) (bag ys)))
-             %lemma3
-             = unite (bag xs'') (add (x,c) (bag ys))
-             
-             = unite (bag (x:xs')) (bag ys)
-             = unite (bag xs) (bag ys)
-\end{code}
-Case 2: \verb|not x 'elem' map fst (unite (bag xs') (bag ys))|
-\begin{code}             
-             = add (x,1) (unite (bag xs') (bag ys))
-             = ListBag (bagxy++[(x,1)]) where ListBag bagxy=unite (bag xs') (bag ys)
-             %lemma4 order!
-             = unite (ListBag (bagx++[(x,1)])) (bag ys) where ListBag bagx=(bag xs')
-             = unite (add (x,1) (bag xs')) (bag ys)
-             = unite (bag (x:xs')) (bag ys)
-             = unite (bag xs) (bag ys)
-\end{code}
-\end{comment}
