@@ -7,7 +7,7 @@ inits (x:xs) = []:(map (x:) (inits xs))
 \begin{code}
 scanl :: (a -> b -> a) -> a -> [b] -> [a]
 scanl f a []     = [a]
-scanl f a (x:xs) = a:(scanl f  (f a x) xs)
+scanl f a (x:xs) = a:(scanl f (f a x) xs)
 \end{code}
 \begin{code}
 foldl :: (a -> b -> a) -> a -> [b] -> a

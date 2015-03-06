@@ -1,5 +1,6 @@
 \section{sum prod tails}
 \begin{code}
-tails :: 
-tails 
+tails :: [a] -> [[a]]
+tails []         = [[]]
+tails xxs@(_:xs) = xxs:(tails xs)
 \end{code}
