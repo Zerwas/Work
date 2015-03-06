@@ -1,0 +1,77 @@
+\section{foldl scanl}
+\begin{code}
+inits :: [a] -> [[a]]
+inits []     = [[]]
+inits (x:xs) = []:(map (x:) (inits xs))
+\end{code}
+\begin{code}
+scanl :: (a -> b -> a) -> a -> [b] -> [a]
+scanl f a []     = [a]
+scanl f a (x:xs) = a:(scanl f  (f a x) xs)
+\end{code}
+\begin{code}
+foldl :: (a -> b -> a) -> a -> [b] -> a
+foldl f a []     = a
+foldl f a (x:xs) = foldl f (f a x) xs
+\end{code}
+\begin{claim}\label{foldscanClaim}\ 
+\begin{code}
+map (foldl f a).inits = scanl f a
+\end{code}
+\end{claim}
+\begin{lemma}\label{mapfoldlLemma}\ 
+\begin{code}
+map (foldl f a) (map (x:) ys) = map (foldl f (f a x)) ys
+\end{code}
+\end{lemma}
+\begin{proof} of Lemma \ref{mapfoldlLemma} by structural induction on ys\\
+\verb|ys=[]|
+\begin{code}
+map (foldl f a) (map (x:) ys)
+           = map (foldl f a) (map (x:) [])
+           = map (foldl f a) []
+           = []
+           = map (foldl f (f a x)) []
+           = map (foldl f (f a x)) ys
+\end{code}
+\verb|ys=(y:ys')|
+\begin{code}
+map (foldl f a) (map (x:) ys)
+           = map (foldl f a) (map (x:) (y:ys'))
+           = map (foldl f a) ((x:y):(map (x:) ys'))
+           = (foldl f a (x:y)):(map (foldl f a) (map (x:) ys'))
+           (*\sEq{IH}*) (foldl f a (x:y)):(map (foldl f (f a x)) ys')
+           = (foldl f (f a x) y):(map (foldl f (f a x)) ys')
+           = map (foldl f (f a x)) (y:ys')
+           = map (foldl f (f a x)) ys
+\end{code}
+\end{proof}
+%-----------------------------------------------------------------------------------
+\newpage
+\begin{proof} of Claim \ref{foldscanClaim}\\
+we show the equivalent claim \\
+\verb|map (foldl f a) (inits xs) = scanl f a xs|\\
+by structural induction on xs\\
+\verb|xs=[]|
+\begin{code}
+map (foldl f a) (inits xs) 
+           = map (foldl f a) (inits [])
+           = map (foldl f a) [[]]
+           = [foldl f a []]
+           = [a]
+           = scanl f a []
+           = scanl f a xs
+\end{code}
+\verb|xs=(x:xs')|
+\begin{code}
+map (foldl f a) (inits xs) 
+           = map (foldl f a) (inits (x:xs'))
+           = map (foldl f a) ([]:(map (x:) (inits xs')))
+           = (foldl f a []):(map (foldl f a) (map (x:) (inits xs')))
+           = a:(map (foldl f a) (map (x:) (inits xs')))
+           (*\sEq{\ref{mapfoldlLemma}}*) a:(map (foldl f (f a x)) (inits xs'))
+           (*\sEq{IH}*) a:(scanl f (f a x) xs')
+           = scanl f a (x:xs')
+           = scanl f a xs
+\end{code}
+\end{proof}
