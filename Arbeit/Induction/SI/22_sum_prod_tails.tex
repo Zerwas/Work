@@ -4,3 +4,103 @@ tails :: [a] -> [[a]]
 tails []         = [[]]
 tails xxs@(_:xs) = xxs:(tails xs)
 \end{code}
+\begin{code}
+sum = foldl + 0
+\end{code}
+\begin{code}
+product = foldl * 1
+\end{code}
+\begin{claim}\label{tailsClaim}\ 
+\begin{code}
+sum.map product.tails = foldl f 1
+                f x y = x*y+1
+\end{code}
+\end{claim}\begin{lemma}\label{sumLemma}\ 
+\begin{code}
+sum (x:ys) = x+(sum ys)
+\end{code}
+\end{lemma}
+\begin{proof} of Lemma \ref{sumLemma} by structural induction on ys\\
+\verb|ys=[]|
+\begin{code}
+\end{code}
+\verb|ys=(y:ys')|
+\begin{code}
+\end{code}
+\end{proof}
+%-----------------------------------------------------------------------------------
+\begin{lemma}\label{prodLemma}\ 
+\begin{code}
+product (x:ys) = x(product ys)
+\end{code}
+\end{lemma}
+\begin{proof} of Lemma \ref{prodLemma} by structural induction on ys\\
+\verb|ys=[]|
+\begin{code}
+\end{code}
+\verb|ys=(y:ys')|
+\begin{code}
+\end{code}
+\end{proof}
+%-----------------------------------------------------------------------------------
+\begin{lemma}\label{prodfoldlLemma}\ 
+\begin{code}
+foldl f (x+1) ys = x(product ys) + (foldl f 1 ys)
+\end{code}
+\end{lemma}
+\begin{proof} of Lemma \ref{prodfoldlLemma} by structural induction on ys\\
+\verb|ys=[]|
+\begin{code}
+foldl f (x+1) ys
+           = foldl f (x+1) []
+           = x+1
+           = x(product []) + (foldl f 1 [])
+           = x(product ys) + (foldl f 1 ys)
+\end{code}
+\verb|ys=(y:ys')|
+\begin{code}
+foldl f (x+1) ys
+           = foldl f (x+1) (y:ys')
+           = foldl f (f (x+1) y) ys'
+           = foldl f (xy+y+1) ys'
+           (*\sEq{IH}*) (xy+y)(product ys') + (foldl f 1 ys')
+           = xy(product ys') + y(product ys') + (foldl f 1 ys')
+           (*\sEq{IH}*) xy(product ys') + (foldl f (y+1) ys')
+           = xy(product ys') + (foldl f (f 1 y) ys')
+           = xy(product ys') + (foldl f 1 (y:ys'))
+           (*\sEq{\ref{prodLemma}}*) x(product (y:ys')) + (foldl f 1 (y:ys'))
+           = x(product ys) + (foldl f 1 ys)
+\end{code}
+\end{proof}
+%-----------------------------------------------------------------------------------
+\begin{proof} of Claim \ref{tailsClaim}\\
+we show the equivalent claim\\
+\verb|sum (map product (tails xs)) = foldl f 1 xs|\\
+\verb|                       f x y = x*y+1|\\
+by structural induction on xs\\
+\verb|xs=[]|
+\begin{code}
+sum (map product (tails xs)) 
+              = sum (map product (tails []))
+              = sum (map product [[]])
+              = sum [product []]
+              = sum [1]
+              = 1
+              = foldl f 1 []
+              = foldl f 1 xs
+\end{code}
+\verb|xs=(x:xs')|
+\begin{code}
+sum (map product (tails xs)) 
+              = sum (map product (tails (x:xs')))
+              = sum (map product ((x:xs'):(tails xs')))
+              = sum ((product (x:xs')):(map product (tails xs')))
+              (*\sEq{\ref{sumLemma}}*) (product (x:xs')) + (sum (map product (tails xs')))
+              (*\sEq{IH}*) (product (x:xs')) + (foldl f 1 xs')
+              (*\sEq{\ref{prodLemma}}*) x(product xs') + (foldl f 1 xs')
+              (*\sEq{\ref{prodfoldlLemma}}*) foldl f (x+1) xs'
+              = foldl f (f 1 x) xs'
+              = foldl f 1 (x:xs')
+              = foldl f 1 xs
+\end{code}
+\end{proof}

@@ -34,9 +34,81 @@ used but unproven statements:
 \begin{code}
 S1: map f (xs++ys) = (map f xs)++(map f ys)
 S2: map f (map g xs) = map (f.g) xs
-S3: (inc (e,z)).(inc (e,c)) = inc (e,z+c)
-S4: (inc (f,z)).(inc (e,c)) = (inc (e,c)).(inc (f,z))
 \end{code}
+%-------------------------------------------------------------------------------
+\begin{lemma}\label{sameIncLemma}\ 
+\begin{code}
+(inc (e,z)).(inc (e,c)) = inc (e,z+c)
+\end{code}
+\end{lemma}
+\begin{proof} of Lemma \ref{sameIncLemma}
+Case 1 : \verb|A1: f!=e|
+\begin{code}
+(inc (e,z)).(inc (e,c)) (f,y) = inc (e,z) ((inc (e,c)) (f,y))
+                              (*\sEq{A1}*) inc (e,z) (f,y)
+                              (*\sEq{A1}*) (f,y)
+                              (*\sEq{A1}*) inc (e,z+c) (f,y)
+\end{code}
+Case 2 : \verb|A1: f==e|
+\begin{code}
+(inc (e,z)).(inc (e,c)) (f,z) (*\sEq{A1}*) inc (e,z) ((inc (e,c)) (e,y))
+                              = inc (e,z) (e,y+c)
+                              = (e,y+c+z)
+                              = inc (e,z+c) (f,z)
+\end{code}
+\end{proof}
+%-------------------------------------------------------------------------------
+\begin{lemma}\label{swapIncLemma}\ 
+\begin{code}
+(inc (f,z)).(inc (e,c)) = (inc (e,c)).(inc (f,z))
+\end{code}
+\end{lemma}
+\begin{proof} of Lemma \ref{swapIncLemma}
+Case 1 : \verb|A1: g!=e|
+\begin{code}
+(inc (f,z)).(inc (e,c)) (g,y) = inc (f,z) ((inc (e,c)) (g,y))
+                              (*\sEq{A1}*) inc (f,z) (g,y)
+\end{code}
+Case 1.1 : \verb|A2: g!=f|
+\begin{code}
+                              (*\sEq{A1}*) inc (f,z) (g,y)
+                              (*\sEq{A2}*) (g,y)
+                              (*\sEq{A1}*) inc (e,c) (g,y)
+                              (*\sEq{A2}*) inc (e,c) ((inc (f,z)) (g,y))
+                              = (inc (e,c)).(inc (f,z)) (g,y)
+\end{code}
+Case 1.2 : \verb|A2: g==f|
+\begin{code}
+                              (*\sEq{A1}*) inc (f,z) (g,y)
+                              (*\sEq{A2}*) inc (f,z) (f,y)
+                              = (f,y+z)
+                              (*\sEq{A1,A2}*) inc (e,c) (f,y+z)
+                              = inc (e,c) ((inc (f,z)) (f,y))
+                              (*\sEq{A1}*) (inc (e,c)).(inc (f,z)) (g,y)
+\end{code}
+Case 2 : \verb|A1: f==e|
+\begin{code}
+(inc (f,z)).(inc (e,c)) (g,y) (*\sEq{A1}*) inc (f,z) ((inc (e,c)) (e,y))
+                              = inc (f,z) (e,c+y)
+\end{code}
+Case 2.1 : \verb|A2: e!=f|
+\begin{code}
+                              = inc (f,z) (e,c+y)
+                              (*\sEq{A2}*) (e,c+y)
+                              = inc (e,c) (e,y)
+                              (*\sEq{A2}*) inc (e,c) ((inc (f,z)) (e,y))
+                              (*\sEq{A1}*) (inc (e,c)).(inc (f,z)) (g,y)
+\end{code}
+Case 2.2 : \verb|A2: e==f|
+\begin{code}
+                              = inc (f,z) (e,c+y)
+                              (*\sEq{A2}*) inc (f,z) (f,c+y)
+                              = (f,z+c+y)
+                              = inc (f,c) (f,y+z)
+                              = inc (f,c) ((inc (f,z)) (f,y))
+                              (*\sEq{A1,A2}*) (inc (e,c)).(inc (f,z)) (g,y)
+\end{code}
+\end{proof}
 %-------------------------------------------------------------------------------
 \begin{lemma}\label{mapLemma}if \verb|A1: not e 'elem' map fst xs| inc does not do anything
 \begin{code}
@@ -86,7 +158,7 @@ add (e,z) (add (e,c) (ListBag xs))
              (*\sEq{A1}*) add (e,z) (ListBag (map (inc (e,c)) xs))
              (*\sEq{A1}*) ListBag (map (inc (e,z)) (map (inc (e,c)) xs))
              (*\sEq{S2}*) ListBag (map (inc (e,z)).(inc (e,c)) xs)
-             (*\sEq{S3}*) ListBag (map (inc (e,c+z)) xs)
+             (*\sEq{\ref{sameIncLemma}}*) ListBag (map (inc (e,c+z)) xs)
              (*\sEq{A1}*) add (e,c+z) (ListBag xs)
 \end{code}
 \end{proof}
@@ -118,7 +190,7 @@ add (f,z) (add (e,c) (ListBag xs))
              (*\sEq{A1}*) add (f,z) (ListBag (map (inc (e,c)) xs))
              (*\sEq{A3}*) ListBag (map (inc (f,z)) (map (inc (e,c)) xs))
              (*\sEq{S2}*) ListBag (map (inc (f,z)).(inc (e,c)) xs)
-             (*\sEq{S4}*) ListBag (map (inc (e,c)).(inc (f,z)) xs)
+             (*\sEq{\ref{swapIncLemma}}*) ListBag (map (inc (e,c)).(inc (f,z)) xs)
              (*\sEq{S2}*) ListBag (map (inc (e,c)) (map (inc (f,z)) xs))
              (*\sEq{A1}*) add (e,c) (ListBag (map (inc (f,z)) xs))
              (*\sEq{A3}*) add (e,c) (add (f,z) (ListBag xs))
