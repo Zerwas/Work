@@ -13,19 +13,35 @@ product = foldl * 1
 \begin{claim}\label{tailsClaim}\ 
 \begin{code}
 sum.map product.tails = foldl f 1
-                f x y = x*y+1
+                f x y = xy+1
 \end{code}
 \end{claim}\begin{lemma}\label{sumLemma}\ 
 \begin{code}
-sum (x:ys) = x+(sum ys)
+sum (x:ys) = x + (sum ys)
 \end{code}
 \end{lemma}
 \begin{proof} of Lemma \ref{sumLemma} by structural induction on ys\\
 \verb|ys=[]|
 \begin{code}
+sum (x:ys) = sum (x:[])
+           = foldl + 0 (x:[])
+           = foldl + (0+x) []
+           = 0+x
+           = x + (foldl + 0 [])
+           = x + (sum [])
+           = x + (sum ys)
 \end{code}
 \verb|ys=(y:ys')|
 \begin{code}
+sum (x:ys) = sum (x:(y:ys'))
+           = foldl + 0 (x:(y:ys'))
+           = foldl + (0+x) (y:ys')
+           = foldl + ((0+x)+y) ys'
+           = foldl + 0 ((x+y):ys')
+           = sum ((x+y):ys')
+           (*\sEq{IH}*) (x+y) + (sum ys')
+           (*\sEq{IH}*) x + (sum (y:ys'))
+           = x + (sum ys)
 \end{code}
 \end{proof}
 %-----------------------------------------------------------------------------------
@@ -37,9 +53,25 @@ product (x:ys) = x(product ys)
 \begin{proof} of Lemma \ref{prodLemma} by structural induction on ys\\
 \verb|ys=[]|
 \begin{code}
+product (x:ys) = product (x:[])
+               = foldl * 1 (x:[])
+               = foldl * x []
+               = x
+               = x(foldl * 1 [])
+               = x(product [])
+               = x(product ys)
 \end{code}
 \verb|ys=(y:ys')|
 \begin{code}
+product (x:ys) = product (x:(y:ys'))
+               = foldl * 1 (x:(y:ys'))
+               = foldl * x (y:ys')
+               = foldl * (xy) ys'
+               = foldl * 1 ((xy):ys')
+               = product ((xy):ys')
+               (*\sEq{IH}*) (xy)(product ys')
+               (*\sEq{IH}*) x(product (y:ys'))
+               = x(product ys)
 \end{code}
 \end{proof}
 %-----------------------------------------------------------------------------------
