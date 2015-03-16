@@ -11,14 +11,14 @@ L ist nicht kontextfrei.
 \begin{proof}
 Mit Hilfe des Ogden Lemma's.
 $$w'=\underline{a^n}b^{n+n!}c^{n+2n!}$$
-Alle a's sind markiert.
-Es existiert keine Zerlegung $w'=uvwxy$, sodass in $vwx$ maximal n Buchstaben und in $vx$ mindestens ein Buchstabe markiert sind und $\forall i\geq0\ uv^iwx^iy\in L$.
+Alle $a$'s sind markiert.
+Es existiert keine Zerlegung $w'=uvwxy$, sodass in $vwx$ maximal $n$ Buchstaben und in $vx$ mindestens ein Buchstabe markiert sind und $\forall i\geq0\ uv^iwx^iy\in L$.
 \begin{itemize}
 \item[Fall 1:] $v$ enth\"alt mindestens ein $a$ und mindestens einen weiteren anderen Buchstaben.\\ 
 F\"ur $i=2$ ist das Wort $uv^2wx^2y$ offensichtlich nicht in $L$, da es nicht von der Form $a^*b^*c^*$ ist.
 \item[Fall 2:] $x$ enth\"alt mindestens zwei unterschiedliche Buchstaben.\\ 
 F\"ur $i=2$ ist das Wort $uv^2wx^2y$ offensichtlich nicht in $L$, da es nicht von der Form $a^*b^*c^*$ ist.
-\item[Fall 3:] $v=a^r,x^s,r+s>0$ und $u,w,y$ beliebig.\\
+\item[Fall 3:] $v=a^r,x=a^s,r+s>0$ und $u,w,y$ beliebig.\\
 Da $t=r+s\leq n$ muss t Teiler von $n!$ sein.
 Daraus folgt das $i=1+\frac{n!}{t}$ eine ganze Zahl ist. 
 $$v^ix^i=(a^{r})^{1+\frac{n!}{t}}(a^{s})^{1+\frac{n!}{t}}=a^{(r+s)(1+\frac{n!}{t})}=a^{t+n!}$$
