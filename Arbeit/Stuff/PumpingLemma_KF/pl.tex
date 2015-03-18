@@ -33,34 +33,44 @@ F\"ur $i=1+\frac{n!}{r}$:
 $$uv^iwx^iy=a^{n+n!}b^{n+n!}c^{n+2n!+s\frac{n!}{r}}\notin L$$
 \end{itemize}
 \end{proof}
+\newpage
 Warum funktioniert das einfache Pumping Lemma f\"ur kontextfreie Sprachen hier nicht?\\
 $n=6$\\
 $w'=a^jb^kc^l,j+k+l\geq6,$ O.B.d.A. $j<k<l$
 \begin{itemize}
-\item[Fall 1:]$k+1\leq l$\\
+\item[Fall 1:]$k+1< l$\\
 F\"ur die Zerlegung $u=a^jb^kc^{l-1},v=c,wxy=\epsilon$ gilt $uv^iwx^iy\in L$ f\"ur alle $i\geq0$, da:
 $$uv^iwx^iy=a^jb^kc^{l+i-1}$$
 \begin{align*}
 j<k &\implies j \neq k\\
-k<l-1\leq l+i-1 &\implies k\neq l \wedge j\neq k
+k<l-1\leq l+i-1 &\implies k\neq l+i-1 \wedge j\neq l+i-1
 \end{align*}
 \item[Fall 2:]$k+1=l,j+1<k$\\
 F\"ur die Zerlegung $u=a^jb^kc^{l-2},v=cc,wxy=\epsilon$ gilt $uv^iwx^iy\in L$ f\"ur alle $i\geq0$, da:
 $$uv^iwx^iy=a^jb^kc^{l+2i-2}$$
 F\"ur $i=0$ gilt:
 \begin{align*}
-l-2=k+1-2<k+1 &\implies k\neq l\\
-j<k-1=l-2 &\implies j\neq l \wedge j\neq k
+l-2=k+1-2<k &\implies k\neq l-2\\
+j<k-1=l-2 &\implies j\neq l-2 \wedge j\neq k
 \end{align*}
 F\"ur $i>0$ gilt:
 \begin{align*}
 j<k &\implies j \neq k\\
-k=l-1<l+0\leq l+2i-2 &\implies k\neq l \wedge j\neq k
+k=l-1<l+0\leq l+2i-2 &\implies k\neq l+2i-2 \wedge j\neq l+2i-2
 \end{align*}
 \item[Fall 3:]$k+1=l, j+1=k$\\
 F\"ur die Zerlegung $u=a^jb^kc^{l-3},v=ccc,wxy=\epsilon$ ($l\geq3$ da $n=6$) gilt $uv^iwx^iy\in L$ f\"ur alle $i\geq0$, da:
 $$uv^iwx^iy=a^jb^kc^{l+3i-3}$$
 F\"ur $i=0$ gilt:
-
+\begin{align*}
+l-3=k+1-3=j+2-3<j &\implies j\neq l-3\\
+j<k &\implies j\neq k \wedge k\neq l-3
+\end{align*}
+F\"ur $i>0$ gilt:
+\begin{align*}
+j<k &\implies j \neq k\\
+k=l-1<l+0\leq l+3i-3 &\implies k\neq l+3i-3 \wedge j\neq l+3i-3
+\end{align*}
 \end{itemize}
+Wie wir sehen gilt das Pumping Lemma f\"ur kontextfreie Sprachen f\"ur $L$ obwohl $L$ nicht kontextfrei ist.
 \end{document}
