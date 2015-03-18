@@ -1,6 +1,8 @@
 \documentclass[]{article}
 
 \usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{claim}[theorem]{Claim}
 \begin{document}
@@ -31,5 +33,34 @@ F\"ur $i=1+\frac{n!}{r}$:
 $$uv^iwx^iy=a^{n+n!}b^{n+n!}c^{n+2n!+s\frac{n!}{r}}\notin L$$
 \end{itemize}
 \end{proof}
+Warum funktioniert das einfache Pumping Lemma f\"ur kontextfreie Sprachen hier nicht?\\
+$n=6$\\
+$w'=a^jb^kc^l,j+k+l\geq6,$ O.B.d.A. $j<k<l$
+\begin{itemize}
+\item[Fall 1:]$k+1\leq l$\\
+F\"ur die Zerlegung $u=a^jb^kc^{l-1},v=c,wxy=\epsilon$ gilt $uv^iwx^iy\in L$ f\"ur alle $i\geq0$, da:
+$$uv^iwx^iy=a^jb^kc^{l+i-1}$$
+\begin{align*}
+j<k &\implies j \neq k\\
+k<l-1\leq l+i-1 &\implies k\neq l \wedge j\neq k
+\end{align*}
+\item[Fall 2:]$k+1=l,j+1<k$\\
+F\"ur die Zerlegung $u=a^jb^kc^{l-2},v=cc,wxy=\epsilon$ gilt $uv^iwx^iy\in L$ f\"ur alle $i\geq0$, da:
+$$uv^iwx^iy=a^jb^kc^{l+2i-2}$$
+F\"ur $i=0$ gilt:
+\begin{align*}
+l-2=k+1-2<k+1 &\implies k\neq l\\
+j<k-1=l-2 &\implies j\neq l \wedge j\neq k
+\end{align*}
+F\"ur $i>0$ gilt:
+\begin{align*}
+j<k &\implies j \neq k\\
+k=l-1<l+0\leq l+2i-2 &\implies k\neq l \wedge j\neq k
+\end{align*}
+\item[Fall 3:]$k+1=l, j+1=k$\\
+F\"ur die Zerlegung $u=a^jb^kc^{l-3},v=ccc,wxy=\epsilon$ ($l\geq3$ da $n=6$) gilt $uv^iwx^iy\in L$ f\"ur alle $i\geq0$, da:
+$$uv^iwx^iy=a^jb^kc^{l+3i-3}$$
+F\"ur $i=0$ gilt:
 
+\end{itemize}
 \end{document}
