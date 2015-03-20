@@ -5,20 +5,24 @@
 \usepackage{amsmath}
 \usepackage{calc}
 \usepackage{tikz}
+\usepackage{pgfplots}
 \begin{document}
 \begin{center}
-\begin{tikzpicture}
+\begin{tikzpicture}[thick]
 \def\f{0.015}
 \def\ra{\f*300}
+\def\raa{\f*360}
 \def\ri{\f*75}
 \def\rm{\f*160}
 \def\d{\f*20}
+\def\nC{4}
+\def\nA{40}
 \draw (0,0) circle (\ra) node {};
 \draw (0,0) circle (\ri) node {};
-\draw (0,\rm) circle (\d) node {};
-\draw (0,-\rm) circle (\d) node {};
-\draw (\rm,0) circle (\d) node {};
-\draw (-\rm,0) circle (\d) node {};
+\foreach \x in {1,...,\nC}{
+\draw ({\rm*cos(360*\x/\nC)},{\rm*sin(360*\x/\nC)}) circle (\d) node {};}
+\foreach \x in {1,...,\nA}{
+\draw[>=latex, ->] ({\raa*cos(360*\x/\nA)},{\raa*sin(360*\x/\nA)})--({\ra*cos(360*\x/\nA)},{\ra*sin(360*\x/\nA)});}
 \end{tikzpicture}
 \end{center}
 \begin{align*}
@@ -32,58 +36,62 @@ u_r&=C_1r+\frac{C_2}{r}\\
 \sigma_r&=\frac{E}{1-v}C_1-\frac{E}{(1+v)r^2}C_2\\
 \sigma_\varphi&=\frac{E}{1-v}C_1+\frac{E}{(1+v)r^2}C_2
 \end{align*}
-Gegeben sind $\sigma_r(r_1)=\sigma_1$ und $\sigma_r(r_2)=\sigma_2$. Damit kann man $C_1$ und $C_2$  herleiten:
+Gegeben sind $\sigma_r(r_1)=\sigma_1$ und $u_r(r_2)=0$. Damit kann man $C_1$ und $C_2$  herleiten:
 \begin{align*}
-C_1&=(1-v)\left( \frac{\sigma_2}{E}+\frac{C_2}{(1+v)r_2^2}\right) \\
-C_2&=\frac{(\sigma_1-\sigma_2)r_1^2r_2^2(1+v)}{E(r_1^2-r_2^2)}
+0&=C_1r_2+\frac{C_2}{r_2}\\
+C_1&=-\frac{C_2}{r^2_2}\tag{1}\\
+\sigma_1&=\frac{E}{1-v}C_1-\frac{E}{(1+v)r^2_1}C_2\\
+\sigma_1&=-\frac{E}{(1-v)r^2_2}C_2-\frac{E}{(1+v)r^2_1}C_2\\
+C_2&=-\frac{\sigma_1(1-v)(1+v)r^2_2r^2_1}{E(1+v)r^2_1+E(1-v)r^2_2}\tag{2}
 \end{align*}
-Mit $\sigma_1=-100N/mm^2$ und $\sigma_2=0N/mm^2$ folgt:
+Mit $\sigma_1=-100N/mm^2$ und $u_r(r_2)=0\ mm$ folgt:
 \begin{align*}
-C_1&\approx-3,73\cdot 10^{-4}\\
-C_2&=-3,9mm^2
+C_1&\approx -3,39\cdot 10^{-4}\\
+C_2&\approx 1,90\ mm^2
 \end{align*}
-\def\CA{-0.000373} %0.0000233
-\def\CB{-3.9} %3.9
-\def\E{4000}
-\def\sigR{(\CA/0.7-\CB/(1.3*((x*25)+75)*((x*25)+75)))}
-\def\sigP{(\CA/0.7+\CB/(1.3*((x*25)+75)*((x*25)+75)))}
-\def\sigT{-106.7/200000}
-Tangetial- und Radialspannung\\
-\begin{tikzpicture}[domain=0:9]
-    \draw[very thin,color=gray] (-0.1,-1.1) grid (9.1,3.9);
-    \draw[->] (-0.2,3) -- (9.1,3) node[right] {$r\left[ mm\right] $};
-    \draw[->] (0,-1.2) -- (0,4.2) node[above] {$Spannung \left[ N/mm^2\right]$};
-    \draw[color=red,thick] plot[id=x] function{\E*\sigR+3} 
-            node[right] {$\sigma_r$};
-    \draw[color=blue,thick] plot[id=x] function{\E*\sigP+3} 
-                        node[right] {$\sigma_\varphi$};
-    \draw (0,1) node[left] {$-100$};
-    \draw (0,3) node[left] {$0$};
-    \draw (0.2,3) node[below] {$75$};
-    \draw (9,3) node[below] {$300$};
+\def\CA{-0.000339} %0.0000233
+\def\CB{1.90} %3.9
+\def\E{200000}
+\def\sigR{\E*(\CA/0.7-\CB/(1.3*x*x))}
+\def\sigP{\E*(\CA/0.7+\CB/(1.3*x*x))}
+\def\sigT{0}
+\def\sigV{sqrt(\sigR*\sigR+\sigP*\sigP+\sigT*\sigT-\sigR*\sigP-\sigR*\sigT-\sigP*\sigT)}
+\begin{tikzpicture}
+\begin{axis}[title=Tangential- und Radialspannung,
+xlabel=$r$ in $mm$,
+ylabel=$Spannung$ in $N/mm^2$,
+grid=major,
+domain=75:300,
+legend pos=outer north east]
+\addplot {\sigR};
+\addplot {\sigP};
+\legend{$\sigma_r$,$\sigma_\varphi$}
+\end{axis}
 \end{tikzpicture}\vspace{1cm}\\
 Vergleichsspannung
-$$\sigma_v=\sqrt{\sigma_r^2+\sigma_\varphi^2+\sigma_t^2-\sigma_r\sigma_\varphi-\sigma_t\sigma_\varphi-\sigma_r\sigma_t}$$
-\begin{tikzpicture}[domain=0:9]
-    \draw[very thin,color=gray] (-0.1,-1.1) grid (9.1,3.9);
-    \draw[->] (-0.2,0) -- (9.1,0) node[right] {$r\left[ mm\right] $};
-    \draw[->] (0,-1.2) -- (0,4.2) node[above] {$Spannung \left[ N/mm^2\right]$};
-    \draw[color=red,thick] plot[id=x] function{4000*sqrt(\sigR*\sigR+\sigP*\sigP+\sigT*\sigT-\sigP*\sigR-\sigT*\sigR-\sigP*\sigT)} 
-                            node[right] {$\sigma_v$};
-    \draw (0,0) node[left] {$0$};
-    \draw (0,2) node[left] {$100$};
-    \draw (0.2,0) node[below] {$75$};
-    \draw (9,0) node[below] {$300$};
+%$$\sigma_v=\sqrt{\sigma_r^2+\sigma_\varphi^2+\sigma_t^2-\sigma_r\sigma_\varphi-\sigma_t\sigma_\varphi-\sigma_r\sigma_t}$$
+$$\sigma_v=\sqrt{\sigma_r^2+\sigma_\varphi^2-\sigma_r\sigma_\varphi}$$
+\begin{tikzpicture}
+\begin{axis}[title=Vergleichsspannung,
+xlabel=$r$ in $mm$,
+ylabel=$Spannung$ in $N/mm^2$,
+grid=major,
+domain=75:300,
+legend pos=outer north east]
+\addplot {\sigV};
+\legend{$\sigma_v$}
+\end{axis}
+\end{tikzpicture}\vspace{1cm}\\
+\begin{tikzpicture}
+\begin{axis}[title=Verschiebung,
+xlabel=$r$ in $mm$,
+ylabel=$Verschiebung$ in $mm$,
+grid=major,
+domain=75:300,
+legend pos=outer north east,
+scaled y ticks=base 10:2]
+\addplot {\CA*x+\CB/x};
+\legend{$u_r$}
+\end{axis}
 \end{tikzpicture}\\
-\begin{tikzpicture}[domain=0:9]
-    \draw[very thin,color=gray] (-0.1,-1.1) grid (9.1,3.9);
-    \draw[->] (-0.2,2) -- (9.1,2) node[right] {$r\left[ mm\right] $};
-    \draw[->] (0,-1.2) -- (0,4.2) node[above] {$Verschiebung \left[ mm\right]$};
-    \draw[color=red,thick] plot[id=x] function{20*(\CA*((x*25)+75)+\CB/((x*25)+75))+2} 
-        node[right] {$u_r$};
-    \draw (0,0) node[left] {$-0.1$};
-    \draw (0,2) node[left] {$0$};
-    \draw (0.2,2) node[below] {$75$};
-    \draw (9,2) node[below] {$300$};
-\end{tikzpicture}
 \end{document}
