@@ -73,8 +73,8 @@ ylabel=$Spannung$ in $N/mm^2$,
 grid=major,
 domain=75:300,
 legend pos=outer north east]
-\addplot {\sigR};
-\addplot {\sigP};
+\addplot[black,thick] {\sigR};
+\addplot[red,thick] {\sigP};
 \legend{$\sigma_r$,$\sigma_\varphi$}
 \end{axis}
 \end{tikzpicture}\vspace{1cm}\\
@@ -90,7 +90,7 @@ ylabel=$Spannung$ in $N/mm^2$,
 grid=major,
 domain=75:300,
 legend pos=outer north east]
-\addplot {\sigV};
+\addplot[black,thick] {\sigV};
 \legend{$\sigma_v$}
 \end{axis}
 \end{tikzpicture}\\
@@ -113,7 +113,7 @@ grid=major,
 domain=75:300,
 legend pos=outer north east,
 scaled y ticks=base 10:2]
-\addplot {\CA*x+\CB/x};
+\addplot[black,thick] {\CA*x+\CB/x};
 \legend{$u_r$}
 \end{axis}
 \end{tikzpicture}
@@ -126,6 +126,7 @@ Tangential- und Radialspannung nach ANSYS-L\"osung.\\
 \begin{center}
 \includegraphics[width=0.9\linewidth]{01_R_Phi}
 \end{center}
+Vergleichsspannung
 \begin{center}
 \includegraphics[width=0.9\linewidth]{02_Vgl}
 \end{center}
@@ -133,7 +134,7 @@ Maximale Vergleichspannung im ungest\"orten Scheibenbereich bei $r=75\ mm, \sigm
 \begin{center}
 \includegraphics[width=0.9\linewidth]{02_Vgl_pic}
 \end{center}
-Größte Vergleichsspannung am Lochrand mit $\sigma_v=221 N/mm^2$.
+Größte Vergleichsspannung befindet sich am Lochrand mit $\sigma_v=221 N/mm^2$.
 \begin{center}
 \includegraphics[width=0.9\linewidth]{03_versch_pic}
 \end{center}
@@ -142,10 +143,11 @@ Die Verschiebung ist bei $r=300\ mm$ und $\varphi=\pi/4$ mit $0,097\ mm$ betrags
 \includegraphics[width=0.9\linewidth]{04_versch}
 \end{center}
 \section{Gegen\"uberstellung}
-Gegen\"uberstellung beider L\"osungen im ungest\"orten Scheibenbereich.\\
+Gegen\"uberstellung beider L\"osungen im ungest\"orten Scheibenbereich.\vspace{0.5cm}\\
 \begin{tabular}{c|cc}
 & Analytische L\"osung& ANSYS-L\"osung\\ \hline
 max $|u_r|$ & $0,095\ mm$& $0,096\ mm$\\
 max $\sigma_v$ & $132,22\ N/mm^2$ & $143,64\ N/mm^2$
-\end{tabular}
+\end{tabular}\vspace{0.5cm}\\
+Wie man an den Funktionsverl\"aufen sieht unterscheiden sich die analytische und die ANSYS-L\"osung im ungest\"orten Scheibenbereich kaum. Da die L\"ocher sehr klein sind haben sie hier kaum einen Einfluss.
 \end{document}
