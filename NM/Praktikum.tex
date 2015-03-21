@@ -6,6 +6,14 @@
 \usepackage{calc}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{expl3,xparse}
+\ExplSyntaxOn
+\DeclareDocumentCommand { \print }{m}
+  { \fp_to_decimal:n { round((#1),2) } }
+  \cs_new_eq:NN \fpeval \fp_eval:n
+  \cs_new_eq:NN \fpcmpTF \fp_compare:nTF
+\ExplSyntaxOff
+
 \begin{document}
 \begin{center}
 \begin{tikzpicture}[thick]
@@ -87,13 +95,14 @@ legend pos=outer north east]
 \end{axis}
 \end{tikzpicture}\\
 \end{center}
-Gr\"oßte Vergleichsspannung bei $r=75\ mm,\\ \sigma_r(75\ mm)\approx-148,82
-%\pgfmathparse{100*(2000*(\CA/0.7-\CB/(1.3*75*75)))}\pgfmathresult
+Gr\"oßte Vergleichsspannung bei $r=75\ mm,\\ \sigma_r(75\ mm)\approx
+\print{\fpeval{(200000*(\CA/0.7-\CB/(1.3*75*75)))}}
 \ N/mm^2\\
-\sigma_\varphi(75\ mm)\approx-44,89
-%\pgfmathparse{100*(2000*(\CA/0.7+\CB/(1.3*75*75)))}\pgfmathresult
+\sigma_\varphi(75\ mm)\approx
+\print{\fpeval{(200000*(\CA/0.7+\CB/(1.3*75*75)))}}
 \ N/mm^2\\
-\sigma_v(75\ mm)\approx132,22\ N/mm^2
+\sigma_v(75\ mm)\approx132,22
+\ N/mm^2
 $.\\
 \begin{center}
 \begin{tikzpicture}
@@ -109,23 +118,34 @@ scaled y ticks=base 10:2]
 \end{axis}
 \end{tikzpicture}
 \end{center}
-Betragsm\"aßig maximale Verschiebung bei $r=300\ mm, |u_r(300\ mm)|\approx-0,095
-%\pgfmathparse{abs(\CA*300+\CB/300)}\pgfmathresult
+Betragsm\"aßig maximale Verschiebung bei $r=300\ mm, |u_r(300\ mm)|\approx 0,095
+%\print{\fpeval{abs(\CA*300+\CB/300)}}
 \ mm$.
 \section{ANSYS-L\"osung}
 Tangential- und Radialspannung nach ANSYS-L\"osung.\\
 \begin{center}
-\includegraphics[width=0.9\linewidth]{/media/zerwas/0EF8-1256/NM-ANSYS/01_R_Phi}
+\includegraphics[width=0.9\linewidth]{01_R_Phi}
 \end{center}
 \begin{center}
-\includegraphics[width=0.9\linewidth]{/media/zerwas/0EF8-1256/NM-ANSYS/02_Vgl}
+\includegraphics[width=0.9\linewidth]{02_Vgl}
 \end{center}
-Maximale Vergleichspannung bei $r=75\ mm, \sigma_v(75\ mm)\approx 143,64\ N/mm^2$.\\
+Maximale Vergleichspannung im ungest\"orten Scheibenbereich bei $r=75\ mm, \sigma_v(75\ mm)\approx 143,64\ N/mm^2$.\\
 \begin{center}
-\includegraphics[width=0.9\linewidth]{/media/zerwas/0EF8-1256/NM-ANSYS/03_versch_pic}
+\includegraphics[width=0.9\linewidth]{02_Vgl_pic}
+\end{center}
+Größte Vergleichsspannung am Lochrand mit $\sigma_v=221 N/mm^2$.
+\begin{center}
+\includegraphics[width=0.9\linewidth]{03_versch_pic}
 \end{center}
 Die Verschiebung ist bei $r=300\ mm$ und $\varphi=\pi/4$ mit $0,097\ mm$ betragsm\"aßig maximal.
 \begin{center}
-\includegraphics[width=0.9\linewidth]{/media/zerwas/0EF8-1256/NM-ANSYS/04_versch}
+\includegraphics[width=0.9\linewidth]{04_versch}
 \end{center}
+\section{Gegen\"uberstellung}
+Gegen\"uberstellung beider L\"osungen im ungest\"orten Scheibenbereich.\\
+\begin{tabular}{c|cc}
+& Analytische L\"osung& ANSYS-L\"osung\\ \hline
+max $|u_r|$ & $0,095\ mm$& $0,096\ mm$\\
+max $\sigma_v$ & $132,22\ N/mm^2$ & $143,64\ N/mm^2$
+\end{tabular}
 \end{document}
