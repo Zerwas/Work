@@ -28,7 +28,7 @@
 \draw (0,0) circle (\ra) node {};
 \draw (0,0) circle (\ri) node {};
 \foreach \x in {1,...,\nC}{
-\draw ({\rm*cos(360*\x/\nC)},{\rm*sin(360*\x/\nC)}) circle (\d) node {};}
+\draw ({\rm*cos(360*\x/\nC)},{\rm*sin(360*\x/\nC)}) circle ({\d/2}) node {};}
 \foreach \x in {1,...,\nA}{
 \draw[>=latex, ->] ({\raa*cos(360*\x/\nA)},{\raa*sin(360*\x/\nA)})--({\ra*cos(360*\x/\nA)},{\ra*sin(360*\x/\nA)});}
 \end{tikzpicture}
