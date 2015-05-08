@@ -9,12 +9,12 @@
 \begin{document}
 \begin{align*}
 A_{FS2}&=(\mathcal{A},\left\lbrace L'_g,L_d,L_t\right\rbrace )\\
-L'_g&=\left\lbrace w\in\Sigma^*|\forall u,v\in\Sigma^* \wedge uv=w:|u|_k\leq|u|_g\right\rbrace \end{align*}
+L'_g&=\left\lbrace w\in\Sigma^*\mid\forall u,v\in\Sigma^* \wedge uv=w:|u|_k\leq|u|_g\right\rbrace \end{align*}
 Zeigen Sie, dass $L(A_{FS2})$ kontextfrei, aber nicht regul\"ar ist.\\
 \subsection{$L(A_{FS2})$ ist nicht regul\"ar}
 \begin{proof}Mit Hilfe des versch\"arften Pumping Lemmas f\"ur regul\"are Sprachen.
-$$w'=(ksk)^nr(drt)^ndg^na$$
-Wir w\"ahlen $u=(ksk)^nr(drt)^nd$ und $y=a$. Nun lassen sich alle m\"oglichen Zerlegungen zusammenfassen mit $w=g^r,vx=g^{n-r},r>0$. Nun gilt f\"ur $i=2$ das $uvw^2xy=(ksk)^nr(drt)^ndg^{n+r}a$ und da $|uvw^2xy|_k=2n<2n+r=|uvw^2xy|_g$ ist $uvw^2xy$ offensichtlich nicht in $L(A_{FS2})$, somit kann $L(A_{FS2})$ keine regul\"are Sprache sein.
+$$w'=(ksk)^nr(drt)^{2n}dg^{2n}a$$
+Wir w\"ahlen $u=(ksk)^nr(drt)^{2n}d$ und $y=a$. Nun lassen sich alle m\"oglichen Zerlegungen zusammenfassen mit $w=g^r,vx=g^{2n-r},r>0$. Nun gilt f\"ur $i=2$ das $uvw^2xy=(ksk)^nr(drt)^{2n}dg^{2n+r}a$ und da $|uvw^2xy|_k=2n<2n+r=|uvw^2xy|_g$ ist $uvw^2xy$ offensichtlich nicht in $L(A_{FS2})$, somit kann $L(A_{FS2})$ keine regul\"are Sprache sein.
 \end{proof}
 \subsection{$L(A_{FS2})$ ist kontextfrei}
 \begin{proof}
@@ -24,7 +24,7 @@ $$A=(\left\lbrace q_0\right\rbrace ,\left\lbrace a,d,g,k,r,s,t\right\rbrace,\lef
 \Delta =\left\lbrace\right.
 &(q_0,y,X,X,q_0),\\
 &(q_0,k,X,ZX,q_0),\\
-&(q_0,g,Z,\varepsilon,q_0)\\&|X\in\left\lbrace S,Z \right\rbrace,y\in\left\lbrace a,d,r,s,t\right\rbrace  \left. \right\rbrace 
+&(q_0,g,Z,\varepsilon,q_0)\\&\mid X\in\left\lbrace S,Z \right\rbrace,y\in\left\lbrace a,d,r,s,t\right\rbrace  \left. \right\rbrace 
 \end{align*}
 Der Beweis das $L'_g=L(A)$ wurde hier ausgelassen.
 \end{proof}
