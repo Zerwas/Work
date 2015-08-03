@@ -1,0 +1,101 @@
+\documentclass[]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{amssymb}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+%for \uwave
+\usepackage[normalem]{ulem}
+\usepackage{enumitem}
+%\convertword{[.S ]}{.S}{.$S$} unfortunately no regular expressions
+\usepackage{hyperref}
+%for double [ bracket
+\usepackage{stmaryrd}
+
+\hypersetup{
+	colorlinks,
+	citecolor=black,
+	linkcolor=black
+}
+
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+
+\makeatletter
+\newtheoremstyle{def}%
+{\topsep}{\topsep}
+{}{}
+{\bfseries}{:}
+{0.5em}
+{\thmname{\@ifempty{#3}{#1}\@ifnotempty{#3}{#3}}}
+
+\newtheoremstyle{satz}%
+{\topsep}{\topsep}
+{}{}
+{\bfseries}{}
+{0.5em}
+{\thmname{Satz:\@ifempty{#3}{}\@ifnotempty{#3}{#3}}}
+\makeatother
+
+\declaretheorem[style=def,numbered=no]{definition}
+\declaretheorem[style=satz,name=Satz,qed=\qedsymbol]{satz}
+
+
+
+\begin{document}
+
+\section*{Metrische R\"aume}
+\begin{definition}[Metrischer Raum]
+Sei $X$ eine Menge. Eine Metrik auf $X$ ist eine Abbildung $d:X\times X\to\left[0,\infty\right]$ mit
+\begin{enumerate}
+\item $\forall x,y\in X:d(x,y)=d(y,x)$
+\item $\forall x,y,z\in X:d(x,z)\leq d(x,y)+d(y,z)$
+\item $\forall x\in X:d(x,x)=0$
+\item $\forall x,y\in X:d(x,y)=0\Rightarrow x=y$
+\end{enumerate}
+Das Paar $(X,d)$ ist ein metrischer Raum.
+\end{definition}
+
+\begin{definition}[Cauchy-Folge]
+Sei $(X,d)$ ein metrischer Raum. Eine Folge $(a_n)_{n\in\N}$ in $X$ hei\ss t Cauchy-Folge
+\[\Leftrightarrow\forall\varepsilon>0:\exists N\in\N:\forall n,m\geq N:d(a_n,a_m)<\varepsilon\]
+\end{definition}
+
+\begin{definition}[offen,abgeschlossen]
+Sei $(X,d)$ ein metrischer Raum.
+
+$U\subseteq X$ hei\ss t offen
+\[\Leftrightarrow\forall x\in U:\exists s>0:B(x,s)\subseteq U.\]
+
+$A\subseteq X$ hei\ss t abgeschlossen \[\Leftrightarrow X\setminus A\text{ offen.}\]
+\end{definition}
+
+\begin{satz}
+Sei $(X,d)$ ein metrischer Raum. $A\subseteq X$ abgeschlossen
+\[\Leftrightarrow\forall (a_n)_{n\in\N}\text{ in }A:a_n\to a\text{ in }X\Rightarrow x\in A\]
+\end{satz}
+
+\begin{definition}[vollst\"andig]
+Sei $(X,d)$ ein metrischer Raum. $X$ hei\ss t vollst\"andig
+\[\Leftrightarrow\text{jede Cauchy-Folge in $X$ konvergiert.}\]
+\end{definition}
+
+\section*{Stetigkeit}
+\begin{definition}[Stetigkeit]
+Seien $(X,d)$ und $(Y,e)$ metrische R\"aume, $f:X\to Y$, $a\in X$. Dann is $f$ stetig in $a$
+\begin{align*}
+&\Leftrightarrow\forall\varepsilon>0:\exists\delta>0:\forall x\in X:d(a,x)<\delta\Rightarrow e(f(a),f(x))<\varepsilon.\\
+&\Leftrightarrow\forall\varepsilon>0:\exists\delta>0:f(B_X(a,\delta))\subseteq B_Y(f(a),\varepsilon).
+\end{align*}
+\end{definition}
+
+\begin{satz}[Zwischenwertsatz]
+Seien $a,b\in\R$, $a<b$, $f:\left[a,b\right]\to\R$ stetig. Dann gilt:
+\[\forall A\in\R:f(a)<A<f(b)\text{ oder } f(b)<A<f(a) \Rightarrow \exists x\in\left[a,b\right]:f(x)=A\]
+\end{satz}
+\end{document}
