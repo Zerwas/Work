@@ -129,4 +129,32 @@ Sei $a<b$, $f:\left[a,b\right]\to\R$ stetig, $f(a)=f(b)=0$, $f$ in $(a,b)$ diffe
 Sei $a<b$, $f:\left[a,b\right]\to\R$ stetig, $f$ in $(a,b)$ differenzierbar. Dann gilt:
 \[\exists x\in(a,b):f'(x)=\frac{f(b)-f(a)}{b-a}.\]
 \end{satz}
+
+%TODO integrale reihen
+\section*{Topologie}
+\begin{definition}[Inneres, Abschlu\ss, Rand]
+Sei $(X,d)$ ein metrischer Raum. $Y\subseteq X$. Dann ist
+
+das Innere von $Y$ gleich
+\[\dot{Y}(=\text{int}(Y))=\{x\in Y\mid \exists\varepsilon>0:B(x,\varepsilon)\subseteq Y\}.\]
+
+der Abschluss von $Y$ gleich
+\[\overline{Y}(=\text{cl}(Y))=\{x\in X\mid \forall r>0:B(x,r)\cap Y\neq\emptyset\}.\]
+
+der Rand von $Y$ gleich
+\[\partial(Y)=\overline{Y}\setminus\dot{Y}.\]
+\end{definition}
+
+\begin{definition}[Kompaktheit]
+$X$ hei\ss t kompakt
+\[\Leftrightarrow\text{zu jeder offenen \"Uberdeckung $\mathcal{S}$ von $X$ gibt es $\mathcal{F}\subseteq\mathcal{S}$, $\mathcal{F}$ endlich, sodass $\bigcup\mathcal{F}=X$.}\]
+\end{definition}
+
+\begin{satz}[Kompaktheit und Folgenkompaktheit]
+Sei $(X,d)$ ein metrischer Raum. Dann sind \"aquivalent:
+\begin{enumerate}
+\item $X$ ist kompakt.
+\item $X$ ist folgenkompakt (i.e. jede Folge besitzt eine konvergente Teilfolge). 
+\end{enumerate}
+\end{satz}
 \end{document}
