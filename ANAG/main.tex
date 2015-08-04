@@ -39,7 +39,7 @@
 {}{}
 {\bfseries}{}
 {0.5em}
-{\thmname{Satz:\@ifempty{#3}{}\@ifnotempty{#3}{#3}}}
+{\thmname{Satz: \@ifempty{#3}{}\@ifnotempty{#3}{#3}}}
 \makeatother
 
 \declaretheorem[style=def,numbered=no]{definition}
@@ -66,7 +66,7 @@ Sei $(X,d)$ ein metrischer Raum. Eine Folge $(a_n)_{n\in\N}$ in $X$ hei\ss t Cau
 \[\Leftrightarrow\forall\varepsilon>0:\exists N\in\N:\forall n,m\geq N:d(a_n,a_m)<\varepsilon\]
 \end{definition}
 
-\begin{definition}[offen,abgeschlossen]
+\begin{definition}[offen, abgeschlossen]
 Sei $(X,d)$ ein metrischer Raum.
 
 $U\subseteq X$ hei\ss t offen
@@ -87,7 +87,7 @@ Sei $(X,d)$ ein metrischer Raum. $X$ hei\ss t vollst\"andig
 
 \section*{Stetigkeit}
 \begin{definition}[Stetigkeit]
-Seien $(X,d)$ und $(Y,e)$ metrische R\"aume, $f:X\to Y$, $a\in X$. Dann is $f$ stetig in $a$
+Seien $(X,d)$ und $(Y,e)$ metrische R\"aume, $f:X\to Y$, $a\in X$. Dann ist $f$ stetig in $a$
 \begin{align*}
 &\Leftrightarrow\forall\varepsilon>0:\exists\delta>0:\forall x\in X:d(a,x)<\delta\Rightarrow e(f(a),f(x))<\varepsilon.\\
 &\Leftrightarrow\forall\varepsilon>0:\exists\delta>0:f(B_X(a,\delta))\subseteq B_Y(f(a),\varepsilon).
@@ -96,6 +96,37 @@ Seien $(X,d)$ und $(Y,e)$ metrische R\"aume, $f:X\to Y$, $a\in X$. Dann is $f$ s
 
 \begin{satz}[Zwischenwertsatz]
 Seien $a,b\in\R$, $a<b$, $f:\left[a,b\right]\to\R$ stetig. Dann gilt:
-\[\forall A\in\R:f(a)<A<f(b)\text{ oder } f(b)<A<f(a) \Rightarrow \exists x\in\left[a,b\right]:f(x)=A\]
+\[\forall A\in\R:f(a)\leq A\leq f(b)\text{ oder } f(b)\leq A\leq f(a) \Rightarrow \exists x\in\left[a,b\right]:f(x)=A\]
+\end{satz}
+
+\begin{definition}[Folgenkompakt]
+Sei $(X,d)$ ein metrischer Raum. $X$ hei\ss t folgenkompakt
+\[\Leftrightarrow\text{Jede Folge in $X$ besitzt eine konvergente Teilfolge.}\]
+\end{definition}
+
+\begin{definition}[Lipschitz-Stetigkeit und gleichm\"a\ss ige Stetigkeit]
+Seien $(X,d)$ und $(Y,e)$ metrische R\"aume, $f:X\to Y$, $a\in X$. Dann hei\ss t $f$
+
+gleichm\"a\ss ig stetig
+\[\Leftrightarrow\forall\varepsilon>0:\exists\delta>0:\forall x,x'\in X:d(x,x')<\delta\Rightarrow e(f(x),f(x'))<\varepsilon.\]
+
+Lipschitz-stetig
+\[\Leftrightarrow\exists L>0:\forall x,x'\in X:e(f(x),f(x'))\leq L\cdot d(x,x').\]
+\end{definition}
+
+\section*{Differentation}
+\begin{definition}[Differenzierbar]
+Sei $D\subseteq\R$, $f:D\to\R$, $x\in D$. $f$ hei\ss t in $x$ differezierbar
+\[\Leftrightarrow\exists f'(x):=\lim\limits_{\xi\to x,\xi\in D\setminus\{x\}}\frac{f(\xi)-f(x)}{\xi-x}.\]
+\end{definition}
+
+\begin{satz}[von Rolle]
+Sei $a<b$, $f:\left[a,b\right]\to\R$ stetig, $f(a)=f(b)=0$, $f$ in $(a,b)$ differenzierbar. Dann gilt:
+\[\exists x\in(a,b):f'(x)=0.\]
+\end{satz}
+
+\begin{satz}[Mittelwertsatz]
+Sei $a<b$, $f:\left[a,b\right]\to\R$ stetig, $f$ in $(a,b)$ differenzierbar. Dann gilt:
+\[\exists x\in(a,b):f'(x)=\frac{f(b)-f(a)}{b-a}.\]
 \end{satz}
 \end{document}
