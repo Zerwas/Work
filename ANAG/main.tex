@@ -43,15 +43,16 @@
 \makeatother
 
 \declaretheorem[style=def,numbered=no]{definition}
-\declaretheorem[style=satz,name=Satz,qed=\qedsymbol]{satz}
+\declaretheorem[style=satz,name=Satz]{satz}
 
 
 
 \begin{document}
-
+	\binoppenalty=10000
+	\relpenalty=10000
 \section*{Metrische R\"aume}
 \begin{definition}[Metrischer Raum]
-Sei $X$ eine Menge. Eine Metrik auf $X$ ist eine Abbildung $d:X\times X\to\left[0,\infty\right]$ mit
+Sei $X$ eine Menge. Eine Metrik auf $X$ ist eine Abbildung\\$d:X\times X\to\left[0,\infty\right)$ mit
 \begin{enumerate}
 \item $\forall x,y\in X:d(x,y)=d(y,x)$
 \item $\forall x,y,z\in X:d(x,z)\leq d(x,y)+d(y,z)$
