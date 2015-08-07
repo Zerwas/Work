@@ -158,4 +158,31 @@ Sei $(X,d)$ ein metrischer Raum. Dann sind \"aquivalent:
 \item $X$ ist folgenkompakt (i.e. jede Folge besitzt eine konvergente Teilfolge). 
 \end{enumerate}
 \end{satz}
+
+\section*{Konvergenz, Potenzreihen}
+\begin{definition}[konvergenz]
+Sei $K$ eine Menge, $(M,d)$ ein metrischer Raum. F\"ur $n\in\N$ $f_n:K\to M$, $f:K\to M$.
+
+$f_n\to f$ punktweise
+\[\Leftrightarrow \forall x\in K : \lim\limits_{n\to\infty}f_n(x)=f(x)\]
+
+$f_n\to f$ gleichm\"a\ss ig
+\[\Leftrightarrow \forall \varepsilon>0 : \exists N\in\N:\forall n>N : \forall x\in K: d(f_n(x),f(x))\leq\varepsilon\]
+\end{definition}
+
+\begin{definition}[Potenzreihe]
+Eine Potenzreihe ist eine Reihe
+\[\sum\limits^\infty_{n=0}c_n(x-a)^n\]
+mit $a$ in $\mathbb{K}$, $(c_n)$ in $\mathbb{K}$ f\"ur $x$ in $\mathbb{K}$.
+\end{definition}
+
+\begin{satz}[Konvergenzradius]
+\[r:=(\lim_{n\to\infty}\sup{|c_n|^{\frac{1}{n}}})^{-1}\]
+\[r:=\lim_{n\to\infty}\left|\frac{c_n}{c_{n+1}}\right|\]
+\end{satz}
+
+\begin{satz}[Integralvergleichskriterium]
+Sei $f:\left[0,\infty\right)\to \left[0,\infty\right)$ monoton fallend. Dann gilt:
+\[\sum\limits^\infty_{n=1}f(n) \text{ konvergent}\Leftrightarrow \int_{1}^{\infty}f(x) dx\text{ konvergent.}\]
+\end{satz}
 \end{document}
