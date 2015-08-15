@@ -25,6 +25,7 @@
 
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\grad}{\text{grad}}
 
 \makeatletter
 \newtheoremstyle{def}%
@@ -117,7 +118,7 @@ Lipschitz-stetig
 
 \section*{Differentation}
 \begin{definition}[Differenzierbar]
-Sei $D\subseteq\R$, $f\colon D\to\R$, $x\in D$. $f$ hei\ss t in $x$ differezierbar
+Sei $D\subseteq\R$, $f\colon D\to\R$, $x\in D$. $f$ hei\ss t in $x$ differenzierbar
 \[\Leftrightarrow\exists f'(x):=\lim\limits_{\xi\to x,\xi\in D\setminus\{x\}}\frac{f(\xi)-f(x)}{\xi-x}.\]
 \end{definition}
 
@@ -212,5 +213,8 @@ Dann existieren $V_1\subseteq X$ offene Umgebung von $a$ und $V_2\subseteq U$ of
 \end{satz}
 
 \section*{Lagrange-Multiplikatoren}
+Sei $U\subseteq\R^n$ offen, $1\leq m\leq n$, $f\colon U\to\R^m$ stetig differenzierbar, und $f'(x)$ habe Rang $m$ f\"ur alle $x\in U$. Sei $h\colon U\to\R$ stetig differenzierbar, $a\in U$ mit $f(a)=0$ und $h$ habe in $a$ ein lokales Maximum unter Nebenbedingung $f=0$, d.h. es gibt Umgebung $V\subseteq U$ von $a$ mit $h(a)\geq h(x)$ f\"ur alle $x\in V\cap M$ wobei $M:=\{x\in U\mid f(x)=0\}$.
 
+Dann gibt es $\lambda\in\R^m$, sodass
+\[\grad\,h(a)=\sum\limits^m_{i=1}\lambda_i\,\grad\,f_i(a).\]
 \end{document}
