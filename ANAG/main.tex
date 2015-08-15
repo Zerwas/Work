@@ -189,7 +189,28 @@ Sei $f\colon \left[0,\infty\right)\to \left[0,\infty\right)$ monoton fallend. Da
 \section*{Implizite Funktionen}
 
 \begin{satz}[Banach'scher Fixpuntsatz]
-Sei $(X,d)$ ein vollst\"andiger metrischer Raum mit $x\neq\emptyset$. Und $\varphi\colon X\to X$ ein Kontraktum ,d.h. \[\exists k\in\left[0,1\right)\colon\forall x,y\in X\colon k\cdot d(\varphi(x),\varphi(y)\leq d(x,y)\]
+Sei $(X,d)$ ein vollst\"andiger metrischer Raum mit $X\neq\emptyset$. Und $\varphi\colon X\to X$ ein Kontraktum ,d.h. \[\exists k\in\left[0,1\right)\colon\forall x,y\in X\colon  d(\varphi(x),\varphi(y)\leq k\cdot d(x,y)\]
 dann existiert genau ein Fixpunkt $x\in X$ sodass $\varphi(x)=x$.
 \end{satz}
+
+\begin{satz}[1. Auflösunssatz]
+Sei $(X,d)$ ein metrischer Raum, $U\subseteq\R^n$ offen, und $F\colon X\times U\to\R^n$.
+Wenn
+\begin{itemize}
+\item $F$ stetig bzgl. der Metrik $\tilde{d}$ (mit $\tilde{d}((x_1,y_1),(x_2,y_2)):=d(x_1,x_2)+|y_1-y_2|$) ist,
+\item $F$ differenzierbar nach $y$-Variablen (d.h. f\"ur alle $x\in X$ ist $F(x,.)\colon U\to\R^n$ differenzierbar).
+\item Sei $a\in X$ und $b\in U$ mit $F(a,b)=0$ und
+\item $\frac{\partial F(a,b)}{\partial y}$ invertierbar, und
+\item $\frac{\partial F}{\partial y}$ in $(a,b)$ differenzierbar.
+\end{itemize} 
+
+Dann existieren $V_1\subseteq X$ offene Umgebung von $a$ und $V_2\subseteq U$ offene Umgebung von $b$ und $g\colon V_1\to V_2$ stetig sodass
+\begin{itemize}
+\item f\"ur alle $x\in V_1\colon F(x,g(x))=0$ und
+\item aus $(x,y)\in V_1\times V_2$ und $F(x,y)=0$ folgt $g(x)=y$.
+\end{itemize}
+\end{satz}
+
+\section*{Lagrange-Multiplikatoren}
+
 \end{document}
