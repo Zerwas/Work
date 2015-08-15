@@ -52,33 +52,33 @@
 	\relpenalty=10000
 \section*{Metrische R\"aume}
 \begin{definition}[Metrischer Raum]
-Sei $X$ eine Menge. Eine Metrik auf $X$ ist eine Abbildung\\$d:X\times X\to\left[0,\infty\right)$ mit
+Sei $X$ eine Menge. Eine Metrik auf $X$ ist eine Abbildung\\$d\colon X\times X\to\left[0,\infty\right)$ mit
 \begin{enumerate}
-\item $\forall x,y\in X:d(x,y)=d(y,x)$
-\item $\forall x,y,z\in X:d(x,z)\leq d(x,y)+d(y,z)$
-\item $\forall x\in X:d(x,x)=0$
-\item $\forall x,y\in X:d(x,y)=0\Rightarrow x=y$
+\item $\forall x,y\in X\colon d(x,y)=d(y,x)$
+\item $\forall x,y,z\in X\colon d(x,z)\leq d(x,y)+d(y,z)$
+\item $\forall x\in X\colon d(x,x)=0$
+\item $\forall x,y\in X\colon d(x,y)=0\Rightarrow x=y$
 \end{enumerate}
 Das Paar $(X,d)$ ist ein metrischer Raum.
 \end{definition}
 
 \begin{definition}[Cauchy-Folge]
 Sei $(X,d)$ ein metrischer Raum. Eine Folge $(a_n)_{n\in\N}$ in $X$ hei\ss t Cauchy-Folge
-\[\Leftrightarrow\forall\varepsilon>0:\exists N\in\N:\forall n,m\geq N:d(a_n,a_m)<\varepsilon\]
+\[\Leftrightarrow\forall\varepsilon>0\colon \exists N\in\N\colon \forall n,m\geq N\colon d(a_n,a_m)<\varepsilon\]
 \end{definition}
 
 \begin{definition}[offen, abgeschlossen]
 Sei $(X,d)$ ein metrischer Raum.
 
 $U\subseteq X$ hei\ss t offen
-\[\Leftrightarrow\forall x\in U:\exists s>0:B(x,s)\subseteq U.\]
+\[\Leftrightarrow\forall x\in U\colon \exists s>0\colon B(x,s)\subseteq U.\]
 
 $A\subseteq X$ hei\ss t abgeschlossen \[\Leftrightarrow X\setminus A\text{ offen.}\]
 \end{definition}
 
 \begin{satz}
 Sei $(X,d)$ ein metrischer Raum. $A\subseteq X$ abgeschlossen
-\[\Leftrightarrow\forall (a_n)_{n\in\N}\text{ in }A:a_n\to a\text{ in }X\Rightarrow x\in A\]
+\[\Leftrightarrow\forall (a_n)_{n\in\N}\text{ in }A\colon a_n\to a\text{ in }X\Rightarrow x\in A\]
 \end{satz}
 
 \begin{definition}[vollst\"andig]
@@ -88,16 +88,16 @@ Sei $(X,d)$ ein metrischer Raum. $X$ hei\ss t vollst\"andig
 
 \section*{Stetigkeit}
 \begin{definition}[Stetigkeit]
-Seien $(X,d)$ und $(Y,e)$ metrische R\"aume, $f:X\to Y$, $a\in X$. Dann ist $f$ stetig in $a$
+Seien $(X,d)$ und $(Y,e)$ metrische R\"aume, $f\colon X\to Y$, $a\in X$. Dann ist $f$ stetig in $a$
 \begin{align*}
-&\Leftrightarrow\forall\varepsilon>0:\exists\delta>0:\forall x\in X:d(a,x)<\delta\Rightarrow e(f(a),f(x))<\varepsilon.\\
-&\Leftrightarrow\forall\varepsilon>0:\exists\delta>0:f(B_X(a,\delta))\subseteq B_Y(f(a),\varepsilon).
+&\Leftrightarrow\forall\varepsilon>0\colon \exists\delta>0\colon \forall x\in X\colon d(a,x)<\delta\Rightarrow e(f(a),f(x))<\varepsilon.\\
+&\Leftrightarrow\forall\varepsilon>0\colon \exists\delta>0\colon f(B_X(a,\delta))\subseteq B_Y(f(a),\varepsilon).
 \end{align*}
 \end{definition}
 
 \begin{satz}[Zwischenwertsatz]
-Seien $a,b\in\R$, $a<b$, $f:\left[a,b\right]\to\R$ stetig. Dann gilt:
-\[\forall A\in\R:f(a)\leq A\leq f(b)\text{ oder } f(b)\leq A\leq f(a) \Rightarrow \exists x\in\left[a,b\right]:f(x)=A\]
+Seien $a,b\in\R$, $a<b$, $f\colon \left[a,b\right]\to\R$ stetig. Dann gilt:
+\[\forall A\in\R\colon f(a)\leq A\leq f(b)\text{ oder } f(b)\leq A\leq f(a) \Rightarrow \exists x\in\left[a,b\right]\colon f(x)=A\]
 \end{satz}
 
 \begin{definition}[Folgenkompakt]
@@ -106,29 +106,29 @@ Sei $(X,d)$ ein metrischer Raum. $X$ hei\ss t folgenkompakt
 \end{definition}
 
 \begin{definition}[Lipschitz-Stetigkeit und gleichm\"a\ss ige Stetigkeit]
-Seien $(X,d)$ und $(Y,e)$ metrische R\"aume, $f:X\to Y$, $a\in X$. Dann hei\ss t $f$
+Seien $(X,d)$ und $(Y,e)$ metrische R\"aume, $f\colon X\to Y$, $a\in X$. Dann hei\ss t $f$
 
 gleichm\"a\ss ig stetig
-\[\Leftrightarrow\forall\varepsilon>0:\exists\delta>0:\forall x,x'\in X:d(x,x')<\delta\Rightarrow e(f(x),f(x'))<\varepsilon.\]
+\[\Leftrightarrow\forall\varepsilon>0\colon \exists\delta>0\colon \forall x,x'\in X\colon d(x,x')<\delta\Rightarrow e(f(x),f(x'))<\varepsilon.\]
 
 Lipschitz-stetig
-\[\Leftrightarrow\exists L>0:\forall x,x'\in X:e(f(x),f(x'))\leq L\cdot d(x,x').\]
+\[\Leftrightarrow\exists L>0\colon \forall x,x'\in X\colon e(f(x),f(x'))\leq L\cdot d(x,x').\]
 \end{definition}
 
 \section*{Differentation}
 \begin{definition}[Differenzierbar]
-Sei $D\subseteq\R$, $f:D\to\R$, $x\in D$. $f$ hei\ss t in $x$ differezierbar
+Sei $D\subseteq\R$, $f\colon D\to\R$, $x\in D$. $f$ hei\ss t in $x$ differezierbar
 \[\Leftrightarrow\exists f'(x):=\lim\limits_{\xi\to x,\xi\in D\setminus\{x\}}\frac{f(\xi)-f(x)}{\xi-x}.\]
 \end{definition}
 
 \begin{satz}[von Rolle]
-Sei $a<b$, $f:\left[a,b\right]\to\R$ stetig, $f(a)=f(b)=0$, $f$ in $(a,b)$ differenzierbar. Dann gilt:
-\[\exists x\in(a,b):f'(x)=0.\]
+Sei $a<b$, $f\colon \left[a,b\right]\to\R$ stetig, $f(a)=f(b)=0$, $f$ in $(a,b)$ differenzierbar. Dann gilt:
+\[\exists x\in(a,b)\colon f'(x)=0.\]
 \end{satz}
 
 \begin{satz}[Mittelwertsatz]
-Sei $a<b$, $f:\left[a,b\right]\to\R$ stetig, $f$ in $(a,b)$ differenzierbar. Dann gilt:
-\[\exists x\in(a,b):f'(x)=\frac{f(b)-f(a)}{b-a}.\]
+Sei $a<b$, $f\colon \left[a,b\right]\to\R$ stetig, $f$ in $(a,b)$ differenzierbar. Dann gilt:
+\[\exists x\in(a,b)\colon f'(x)=\frac{f(b)-f(a)}{b-a}.\]
 \end{satz}
 
 %TODO integrale reihen
@@ -137,10 +137,10 @@ Sei $a<b$, $f:\left[a,b\right]\to\R$ stetig, $f$ in $(a,b)$ differenzierbar. Dan
 Sei $(X,d)$ ein metrischer Raum. $Y\subseteq X$. Dann ist
 
 das Innere von $Y$ gleich
-\[\dot{Y}(=\text{int}(Y))=\{x\in Y\mid \exists\varepsilon>0:B(x,\varepsilon)\subseteq Y\}.\]
+\[\dot{Y}(=\text{int}(Y))=\{x\in Y\mid \exists\varepsilon>0\colon B(x,\varepsilon)\subseteq Y\}.\]
 
 der Abschluss von $Y$ gleich
-\[\overline{Y}(=\text{cl}(Y))=\{x\in X\mid \forall r>0:B(x,r)\cap Y\neq\emptyset\}.\]
+\[\overline{Y}(=\text{cl}(Y))=\{x\in X\mid \forall r>0\colon B(x,r)\cap Y\neq\emptyset\}.\]
 
 der Rand von $Y$ gleich
 \[\partial(Y)=\overline{Y}\setminus\dot{Y}.\]
@@ -161,13 +161,13 @@ Sei $(X,d)$ ein metrischer Raum. Dann sind \"aquivalent:
 
 \section*{Konvergenz, Potenzreihen}
 \begin{definition}[konvergenz]
-Sei $K$ eine Menge, $(M,d)$ ein metrischer Raum. F\"ur $n\in\N$ $f_n:K\to M$, $f:K\to M$.
+Sei $K$ eine Menge, $(M,d)$ ein metrischer Raum. F\"ur $n\in\N$ $f_n\colon K\to M$, $f\colon K\to M$.
 
 $f_n\to f$ punktweise
-\[\Leftrightarrow \forall x\in K : \lim\limits_{n\to\infty}f_n(x)=f(x)\]
+\[\Leftrightarrow \forall x\in K \colon  \lim\limits_{n\to\infty}f_n(x)=f(x)\]
 
 $f_n\to f$ gleichm\"a\ss ig
-\[\Leftrightarrow \forall \varepsilon>0 : \exists N\in\N:\forall n>N : \forall x\in K: d(f_n(x),f(x))\leq\varepsilon\]
+\[\Leftrightarrow \forall \varepsilon>0 \colon  \exists N\in\N\colon \forall n>N \colon  \forall x\in K\colon  d(f_n(x),f(x))\leq\varepsilon\]
 \end{definition}
 
 \begin{definition}[Potenzreihe]
@@ -182,7 +182,14 @@ mit $a$ in $\mathbb{K}$, $(c_n)$ in $\mathbb{K}$ f\"ur $x$ in $\mathbb{K}$.
 \end{satz}
 
 \begin{satz}[Integralvergleichskriterium]
-Sei $f:\left[0,\infty\right)\to \left[0,\infty\right)$ monoton fallend. Dann gilt:
-\[\sum\limits^\infty_{n=1}f(n) \text{ konvergent}\Leftrightarrow \int_{1}^{\infty}f(x) dx\text{ konvergent.}\]
+Sei $f\colon \left[0,\infty\right)\to \left[0,\infty\right)$ monoton fallend. Dann gilt:
+\[\sum\limits^\infty_{n=1}f(n) \text{ konvergent}\Leftrightarrow \int_{1}^{\infty}f(x)\, dx\text{ konvergent.}\]
+\end{satz}
+
+\section*{Implizite Funktionen}
+
+\begin{satz}[Banach'scher Fixpuntsatz]
+Sei $(X,d)$ ein vollst\"andiger metrischer Raum mit $x\neq\emptyset$. Und $\varphi\colon X\to X$ ein Kontraktum ,d.h. \[\exists k\in\left[0,1\right)\colon\forall x,y\in X\colon k\cdot d(\varphi(x),\varphi(y)\leq d(x,y)\]
+dann existiert genau ein Fixpunkt $x\in X$ sodass $\varphi(x)=x$.
 \end{satz}
 \end{document}
