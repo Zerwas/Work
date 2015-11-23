@@ -33,10 +33,10 @@ function[] = NUME_Prak1(f,N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df 
 		dy = df(x);
 		intPlot = [];
 		j = 1;
-		for i = 1:length(x)-1 %should be -1
+		for i = 1:length(x)-1
 			h = x(i+1)-x(i);
-			a = -2/h^3*(y(i+1)-y(i))+1/h^2*(dy(i)+dy(i+1));
-			b =  3/h^2*(y(i+1)-y(i))-1/h*(dy(i)+dy(i+1));
+			a = -2/h^3*(y(i+1)-y(i)) + 1/h^2*(  dy(i)+dy(i+1));
+			b =  3/h^2*(y(i+1)-y(i)) - 1/h  *(2*dy(i)+dy(i+1));
 			c = dy(i);
 			d = y(i);
 			%s = vertcat(s,[a,b,dy(i),y(i)]);
