@@ -2,12 +2,12 @@
 % #1 function
 % #2 number of grid intervalls
 % #3 0 for aequidistant zeros, 1 for Tschepyschow zeros
-% #4 0 plot f and g_N, 1 plot f - g_N
+% #4 0 plot f and g_N, 1 plot f - g_N, 3 plot nothing
 % #5 0 interpolate with polynom, 1 interpolate with spline
 % #6 derivation of f for splineinterpolation
 % example call: NUME_Prak1(runge,12,0,0,1,rungeDerivation)
 
-function[] = NUME_Prak1(f,N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df = @(x) x)
+function[EhN] = NUME_Prak1(f,N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df = @(x) x)
 	%fR = @(x) 1./(1.+25.*x.^2);
 	%f1 = @(x) (1.+cos(3/2.*pi.*x)).^(2/3);
 	aequiInt = @(left,right,n) [left:(right-left)/n:right];
@@ -52,7 +52,8 @@ function[] = NUME_Prak1(f,N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df 
 
 	if (plotThis == 0) % plot the funktion and its interpolation
 		plot(xPlot,intPlot,xPlot,f(xPlot));
-	else % plot the error
+	elseif (plotThis == 1)% plot the error
 		plot(xPlot,f(xPlot)-intPlot)
 	end
+	EhN = max(abs(f(xPlot)-intPlot));
 endfunction
