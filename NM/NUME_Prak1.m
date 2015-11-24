@@ -15,7 +15,7 @@ function[] = NUME_Prak1(f,N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df 
 		x = [-1:2/N:1];
 		xPlot = aequiInt(-1,1,10*N);
 	else %Tschepyschow zeros
-		T  = @(k) cos((2.*k.-1)./(2*(N+1)).*pi);
+		T = @(k) cos((2.*k.-1)./(2*(N+1)).*pi);
 		x = T([N+1:-1:1]);
 		xPlot = aequiInt(-1,x(1),10);
 		for i = 1:N
@@ -34,12 +34,14 @@ function[] = NUME_Prak1(f,N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df 
 		intPlot = [];
 		j = 1;
 		for i = 1:length(x)-1
+			% for the ith interval calculate the coefficients of s_i
 			h = x(i+1)-x(i);
 			a = -2/h^3*(y(i+1)-y(i)) + 1/h^2*(  dy(i)+dy(i+1));
 			b =  3/h^2*(y(i+1)-y(i)) - 1/h  *(2*dy(i)+dy(i+1));
 			c = dy(i);
 			d = y(i);
-			%s = vertcat(s,[a,b,dy(i),y(i)]);
+
+			% evaluate the calculated polnomial
 			while j <= length(xPlot) && xPlot(j) <= x(i+1)
 				intPlot = horzcat(intPlot,polyval([a,b,c,d],[xPlot(j)-x(i)]));
 				j = j+1;
@@ -47,11 +49,10 @@ function[] = NUME_Prak1(f,N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df 
 		end
 		
 	end
-	length(xPlot)
-	length(intPlot)
-	if (plotThis == 0)
+
+	if (plotThis == 0) % plot the funktion and its interpolation
 		plot(xPlot,intPlot,xPlot,f(xPlot));
-	else
+	else % plot the error
 		plot(xPlot,f(xPlot)-intPlot)
 	end
 endfunction
