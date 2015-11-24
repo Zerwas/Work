@@ -5,9 +5,9 @@
 % #4 0 plot f and g_N, 1 plot f - g_N, 3 plot nothing
 % #5 0 interpolate with polynom, 1 interpolate with spline
 % #6 derivation of f for splineinterpolation
-% example call: NUME_Prak1(runge,12,0,0,1,rungeDerivation)
+% example call: interpolate(runge,12,0,0,1,rungeDerivation)
 
-function[EhN] = NUME_Prak1(f,N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df = @(x) x)
+function[EhN] = interpolate(f = @(x) 1./(1.+25.*x.^2),N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df = @(x) (-50).*x./((25.*x.^2.+1).^2))
 	%fR = @(x) 1./(1.+25.*x.^2);
 	%f1 = @(x) (1.+cos(3/2.*pi.*x)).^(2/3);
 	aequiInt = @(left,right,n) [left:(right-left)/n:right];
