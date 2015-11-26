@@ -50,10 +50,19 @@ function[EhN] = interpolate(f = @(x) 1./(1.+25.*x.^2),N = 12,gridZeros = 0,plotT
 		
 	end
 
+	% to save plot enter "print -djpg filename.jpg"
 	if (plotThis == 0) % plot the funktion and its interpolation
-		plot(xPlot,intPlot,xPlot,f(xPlot));
+		plot(xPlot,intPlot,'r',xPlot,f(xPlot),'b');
+		xlabel('x','Fontsize',15);
+		ylabel('f(x)','Fontsize',15);
+		set(gca,'Fontsize',15);
+		legend('g','f');
 	elseif (plotThis == 1)% plot the error
 		plot(xPlot,f(xPlot)-intPlot)
+		xlabel('x','Fontsize',15);
+		ylabel('err(x)','Fontsize',15);
+		set(gca,'Fontsize',15);
+		legend('err');
 	end
 	EhN = max(abs(f(xPlot)-intPlot));
 endfunction
