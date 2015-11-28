@@ -7,6 +7,15 @@
 \usepackage{graphicx}
 \usepackage[ngerman, german]{babel}
 \usepackage{caption}
+\usepackage{array}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\makeatother
+
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
@@ -80,4 +89,21 @@
 		\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_3}
 		\caption{$N_3$\label{Abb.9}}
  	\end{figure}
+ 	
+ 	\renewcommand{\arraystretch}{1.2}
+ 	\begin{tabular}{|c|c|c|}\hline
+ 	$k$  & $E(h_{N_k})$ & $\operatorname{EOC}(h_{N_k},h_{N_{k+1}})$\\\thickhline
+ 	$1$  & $4.8928\times10^{-1}$ & $1.1572$\\\hline
+ 	$2$  & $2.1938\times10^{-1}$ & $2.6272$\\\hline
+ 	$3$  & $3.5509\times10^{-2}$ & $4.3901$\\\hline
+ 	$4$  & $1.6935\times10^{-3}$ & $2.1237$\\\hline
+ 	$5$  & $3.8860\times10^{-4}$ & $3.5334$\\\hline
+ 	$6$  & $3.3560\times10^{-5}$ & $3.8869$\\\hline
+ 	$7$  & $2.2686\times10^{-6}$ & $3.9719$\\\hline
+ 	$8$  & $1.4917\times10^{-7}$ & $3.9930$\\\hline
+ 	$9$  & $9.0802\times10^{-9}$ & $3.9982$\\\hline
+ 	$10$ & $5.6820\times10^{-10}$ & $3.9996$\\\hline
+ 	$11$ & $3.5523\times10^{-11}$ & $3.9999$\\\hline
+ 	$12$ & $2.2204\times10^{-12}$ & $-$\\\hline
+ 	\end{tabular} 
 \end{document}
