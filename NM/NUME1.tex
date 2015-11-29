@@ -23,6 +23,7 @@
 \title{Modulbegleitende Aufgabe II}
 \author{Shanshan Huang, Florian Starke}
 \begin{document}
+\def\smooth{_smooth}
 	\maketitle
 	Gegeben seien $N\in\N$, eine Zerlegung $\Delta_N$ des Intervalls $[-1,1]$ durch die Stützstellen $-1\leq x_0\leq x_1\leq\dots\leq x_N\leq1$, und die Funktionen $f_R,f_1\colon\R\to\R$ mit
 	\[f_R(x):=\frac{1}{1+25x^2},\]
@@ -33,27 +34,27 @@
 	\begin{figure}[h]
 		\centering
 		\begin{minipage}{0.5\textwidth}
-			\includegraphics[width=8cm,keepaspectratio]{runge_aequidistant}
+			\includegraphics[width=8cm,keepaspectratio]{runge_aequidistant\smooth}
 			\caption{\label{Abb.1}}
 		\end{minipage}
 		\begin{minipage}{0.49\textwidth}
-			\includegraphics[width=8cm,keepaspectratio]{runge_err}
+			\includegraphics[width=8cm,keepaspectratio]{runge_err\smooth}
 			\caption{\label{Abb.2}}
 		\end{minipage}
 	\end{figure}
 	
 	In Abbildung \ref{Abb.1} ist $f_R$ und das interpolierte Polynom $g_{12}$ abgebildet. Wie erwartet ist bei einer Gleichverteilung der Stützstellen ....
 	\subsection{Tschebyschow-Stützstellen}
-	Als Stützstellen werden die Nullstellen des Tschebyschow-Polynoms $T_{N+1}$ gewählt. Also definieren wir $x_i:=\cos(\frac{2k-1}{2N+2}\pi)$ für $i=0,\dots,N$.
+	Als Stützstellen werden die Nullstellen des Tschebyschow-Polynoms $T_{N+1}$ gewählt. Also definieren wir $x_i:=\cos(\frac{2i+1}{2N+2}\pi)$ für $i=0,\dots,N$.
 	
 	\begin{figure}[h]
 		\centering
 		\begin{minipage}{0.5\textwidth}
-			\includegraphics[width=8cm,keepaspectratio]{runge_tscheb}
+			\includegraphics[width=8cm,keepaspectratio]{runge_tscheb\smooth}
 			\caption{\label{Abb.3}}
 		\end{minipage}
 		\begin{minipage}{0.49\textwidth}
-			\includegraphics[width=8cm,keepaspectratio]{runge_tscheb_err}
+			\includegraphics[width=8cm,keepaspectratio]{runge_tscheb_err\smooth}
 			\caption{\label{Abb.4}}
 		\end{minipage}
 	\end{figure}
@@ -62,11 +63,11 @@
 	\begin{figure}[h]
 		\centering
 		\begin{minipage}{0.5\textwidth}
-			\includegraphics[width=8cm,keepaspectratio]{runge_spline}
+			\includegraphics[width=8cm,keepaspectratio]{runge_spline\smooth}
 			\caption{\label{Abb.5}}
 		\end{minipage}
 		\begin{minipage}{0.49\textwidth}
-			\includegraphics[width=8cm,keepaspectratio]{runge_spline_err}
+			\includegraphics[width=8cm,keepaspectratio]{runge_spline_err\smooth}
 			\caption{\label{Abb.6}}
 		\end{minipage}
 	\end{figure}
@@ -75,18 +76,18 @@
 	 \begin{figure}[h]
  		\centering
  		\begin{minipage}{0.5\textwidth}
- 			\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_1}
+ 			\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_1\smooth}
  			\caption{$N_1$\label{Abb.7}}
  		\end{minipage}
  		\begin{minipage}{0.49\textwidth}
- 			\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_2}
+ 			\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_2\smooth}
  			\caption{$N_2$\label{Abb.8}}
  		\end{minipage}
  	\end{figure}
  	
  	\begin{figure}[h]
  		\centering
-		\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_3}
+		\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_3\smooth}
 		\caption{$N_3$\label{Abb.9}}
  	\end{figure}
  	
