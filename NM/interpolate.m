@@ -13,15 +13,15 @@ function[EhN] = interpolate(f = @(x) 1./(1.+25.*x.^2),N = 12,gridZeros = 0,plotT
 	aequiInt = @(left,right,n) [left:(right-left)/n:right];
 	if (gridZeros == 0) %aequidistant zeros
 		x = aequiInt(-1,1,N);
-		xPlot = aequiInt(-1,1,100*N);
+		xPlot = aequiInt(-1,1,10*N);
 	else %Tschepyschow zeros
 		T = @(k) cos((2.*k.+1)./(2*(N+1)).*pi);
 		x = T([N:-1:0]);
-		xPlot = aequiInt(-1,x(1),100);
+		xPlot = aequiInt(-1,x(1),10);
 		for i = 1:N
-			xPlot = horzcat(xPlot,aequiInt(x(i),x(i+1),100)(2:end));
+			xPlot = horzcat(xPlot,aequiInt(x(i),x(i+1),10)(2:end));
 		end
-		xPlot = horzcat(xPlot,aequiInt(x(N+1),1,100)(2:end));
+		xPlot = horzcat(xPlot,aequiInt(x(N+1),1,10)(2:end));
 	end
 
 	y = f(x); % calculate grid points
