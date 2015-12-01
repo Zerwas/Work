@@ -10,18 +10,18 @@
 function[EhN] = interpolate(N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, f = @(x) 1./(1.+25.*x.^2), df = @(x) (-50).*x./((25.*x.^2.+1).^2))
 	%fR = @(x) 1./(1.+25.*x.^2);
 	%f1 = @(x) (1.+cos(3/2.*pi.*x)).^(2/3);
-	aequiInt = @(left,right,n) [left:(right-left)/n:right];
+	aequiInt = @(left,n,right) [left:(right-left)/n:right];
 	if (gridZeros == 0) %aequidistant zeros
-		x = aequiInt(-1,1,N);
-		xPlot = aequiInt(-1,1,10*N);
+		x = aequiInt(-1,N,1);
+		xPlot = aequiInt(-1,10*N,1);
 	else %Tschepyschow zeros
 		T = @(k) cos((2.*k.+1)./(2*(N+1)).*pi);
 		x = T([N:-1:0]);
-		xPlot = aequiInt(-1,x(1),10);
+		xPlot = aequiInt(-1,10,x(1));
 		for i = 1:N
-			xPlot = horzcat(xPlot,aequiInt(x(i),x(i+1),10)(2:end));
+			xPlot = horzcat(xPlot,aequiInt(x(i),10,x(i+1))(2:end));
 		end
-		xPlot = horzcat(xPlot,aequiInt(x(N+1),1,10)(2:end));
+		xPlot = horzcat(xPlot,aequiInt(x(N+1),10,1)(2:end));
 	end
 
 	y = f(x); % calculate grid points
