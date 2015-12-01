@@ -1,13 +1,13 @@
 % Parameters: 
-% #1 function
-% #2 number of grid intervalls
-% #3 0 for aequidistant zeros, 1 for Tschepyschow zeros
-% #4 0 plot f and g_N, 1 plot f - g_N, 3 plot nothing
-% #5 0 interpolate with polynom, 1 interpolate with spline
+% #1 number of grid intervalls
+% #2 0 for aequidistant zeros, 1 for Tschepyschow zeros
+% #3 0 plot f and g_N, 1 plot f - g_N, 3 plot nothing
+% #4 0 interpolate with polynom, 1 interpolate with spline
+% #5 function
 % #6 derivation of f for splineinterpolation
-% example call: interpolate(runge,12,0,0,1,rungeDerivation)
+% example call: interpolate(12,0,0,1,runge,rungeDerivation)
 
-function[EhN] = interpolate(f = @(x) 1./(1.+25.*x.^2),N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, df = @(x) (-50).*x./((25.*x.^2.+1).^2))
+function[EhN] = interpolate(N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, f = @(x) 1./(1.+25.*x.^2), df = @(x) (-50).*x./((25.*x.^2.+1).^2))
 	%fR = @(x) 1./(1.+25.*x.^2);
 	%f1 = @(x) (1.+cos(3/2.*pi.*x)).^(2/3);
 	aequiInt = @(left,right,n) [left:(right-left)/n:right];
