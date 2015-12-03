@@ -13,7 +13,7 @@ function[EhN] = interpolate(N = 12,gridZeros = 0,plotThis = 0,interpolate = 0, f
 	aequiInt = @(left,n,right) [left:(right-left)/n:right];
 	if (gridZeros == 0) %aequidistant zeros
 		x = aequiInt(-1,N,1);
-		xPlot = aequiInt(-1,10*N,1);
+		xPlot = aequiInt(-1,100*N,1);
 	else %Tschepyschow zeros
 		T = @(k) cos((2.*k.+1)./(2*(N+1)).*pi);
 		x = T([N:-1:0]);

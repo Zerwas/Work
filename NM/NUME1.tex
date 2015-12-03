@@ -8,7 +8,7 @@
 \usepackage[ngerman, german]{babel}
 \usepackage{caption}
 \usepackage{array}
-\usepackage{lipsum}
+\usepackage{float}
 
 \makeatletter
 \newcommand{\thickhline}{%
@@ -32,7 +32,7 @@
 	\section{Polynominterpolation}
 	\subsection{Gleichverteilte Stützstellen}
 	Die $N+1$ Stützstellen sind äquidistant verteilt. Es folgt $x_i:=-1+2i/N$ für $i=0,\dots,N$.
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.5\textwidth}
 			\includegraphics[width=8cm,keepaspectratio]{runge_aequidistant\smooth}
@@ -44,26 +44,36 @@
 		\end{minipage}
 	\end{figure}
 	
-	In Abbildung \ref{Abb.1} ist $f_R$ und das interpolierte Polynom $g_{12}$ abgebildet. Wie erwartet ist bei einer Gleichverteilung der Stützstellen ....
+	In Abbildung \ref{Abb.1} ist $f_R$ und das interpolierte Polynom $g_{12}$ im Intervall $I$ abgebildet. Wie erwartet ist bei einer Gleichverteilung der Stützstellen der Fehler am Rand sehr groß.
 	
-	Dasselbe für $f_1$:
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.5\textwidth}
 			\includegraphics[width=8cm,keepaspectratio]{f1_aequidistant\smooth}
-			\caption{}
+			\caption{\label{Abb.f1.1}}
 		\end{minipage}
 		\begin{minipage}{0.49\textwidth}
 			\includegraphics[width=8cm,keepaspectratio]{f1_err\smooth}
-			\caption{}
+			\caption{\label{Abb.f1.2}}
 		\end{minipage}
 	\end{figure}
+	In den Abbildungen \ref{Abb.f1.1} und \ref{Abb.f1.2} sieht man die Funktion $f_1$ zusammen mit entsprechendem $g_{12}$ bzw. $F_{12}$.
+	
+	
+	Begründung des Fehlerverhaltens:
+	
+	Wenn wir mehr Stützstellen hinzufügen, kann es sein ,dass die Polynomfunktion im Allgemeinen die zu interpolierenden Funktion nicht besser approximiert. Da der Interpolationsfehler wie folgt abgeschätzt werden kann.
+	
+	\[\lVert f(x)-g_N(x) \rVert\leq\frac{\lVert f^{(n+1)}\rVert}{(n+1)!}\lVert\omega\rVert\]
+	
+	Je höher der Grad ist, desto größer ist der Fehler, da bei der Runge Funktion die Ableitungen sehr groß werden. Der Fehler ist an den Intervallgrenzen am größten, da hier $|\omega|$ maximal ist. 
+	
 	\subsection{Tschebyschow-Stützstellen}
 	Als Stützstellen werden die Nullstellen des Tschebyschow-Polynoms $T_{N+1}$ gewählt. Also definieren wir $x_i:=\cos(\frac{2i+1}{2N+2}\pi)$ für $i=0,\dots,N$.
-	
-	$f_R$:
-	
-	\begin{figure}[h]
+
+	\newpage
+	Die Runge Funktion und $g_{12}$:
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.5\textwidth}
 			\includegraphics[width=8cm,keepaspectratio]{runge_tscheb\smooth}
@@ -74,11 +84,11 @@
 			\caption{\label{Abb.4}}
 		\end{minipage}
 	\end{figure}
-	\lipsum*[100]
 	
-	$f_1$:
+	Wie erwartet ist der Fehler an den Intervallgrenzen wesentlich geringer als bei äquidistanten Stützstellen.
 	
-	\begin{figure}[h]
+	Die Funktion $f_1$:
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.5\textwidth}
 			\includegraphics[width=8cm,keepaspectratio]{f1_tscheb\smooth}
@@ -90,9 +100,23 @@
 		\end{minipage}
 	\end{figure}
 	
-	\lipsum[10]
+	Begründung des Fehlerverhaltens:
+	
+	Bei Tschebyschow Stützstellen ist $\omega$ am Rand kleiner, dafür aber in der Intervallmittel größer, als bei äquidistanten Stützstellen. Dementsprechend auch der Fehler.
+	
 	\section{Spline-Interpolation}
-	\begin{figure}[h]
+	
+	Ziel ist es jetzt nicht mehr die Funktion  durch ein Polynom zu interpolieren sondern nur noch durch eine stückweise polynomielle Funktion (Spline). In diesem Fall geht es um Splines vom Grad 3 mit Glattheit 1. Wir kennen nicht nur die Funktion sondern auch die erste Ableitung der Funktion.
+	
+	Sei $s$ die gesuchte Spline Funktion. Dann ist $s_k:=s|_{[x_k,x_{k+1}]}$ ein Polynom dritten Grades mit $s$
+	
+	
+	Die erste Ableitung der Runge Funktion ist:
+	
+	\[\]
+	
+	
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.5\textwidth}
 			\includegraphics[width=8cm,keepaspectratio]{runge_spline\smooth}
@@ -105,7 +129,7 @@
 	\end{figure}
 	
 	Fehler für $N_1=2$, $N_2=4$, und $N_3=8$.
-	\begin{figure}[h]
+	\begin{figure}[H]
  		\centering
  		\begin{minipage}{0.5\textwidth}
  			\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_1\smooth}
@@ -117,7 +141,7 @@
  		\end{minipage}
  	\end{figure}
  	
- 	\begin{figure}[h]
+ 	\begin{figure}[H]
  		\centering
 		\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_3\smooth}
 		\caption{$N_3$\label{Abb.9}}
