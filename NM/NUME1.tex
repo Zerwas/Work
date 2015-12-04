@@ -22,13 +22,13 @@
 \newcommand{\N}{\mathbb{N}}
 
 \title{Modulbegleitende Aufgabe II}
-\author{Shanshan Huang, Florian Starke}
+\author{Florian Starke, Shanshan Huang}
 \begin{document}
 \def\smooth{_smooth}
 	\maketitle
 	Gegeben seien $N\in\N$, eine Zerlegung $\Delta_N$ des Intervalls $[-1,1]$ durch die Stützstellen $-1\leq x_0\leq x_1\leq\dots\leq x_N\leq1$, und die Funktionen $f_R,f_1\colon\R\to\R$ mit
 	\[f_R(x):=\frac{1}{1+25x^2},\]
-	\[f_1(x):=(1+\cos(\frac{3}{2}\pi x))^{2/3}.\]
+	\[f_1(x):=(1+\cos(\frac{3\pi}{2}x))^{2/3}.\]
 	\section{Polynominterpolation}
 	\subsection{Gleichverteilte Stützstellen}
 	Die $N+1$ Stützstellen sind äquidistant verteilt. Es folgt $x_i:=-1+2i/N$ für $i=0,\dots,N$.
@@ -44,7 +44,7 @@
 		\end{minipage}
 	\end{figure}
 	
-	In Abbildung \ref{Abb.1} ist $f_R$ und das interpolierte Polynom $g_{12}$ im Intervall $I$ abgebildet. Wie erwartet ist bei einer Gleichverteilung der Stützstellen der Fehler am Rand sehr groß.
+	In Abbildung \ref{Abb.1} ist $f_R$ und das interpolierte Polynom $g_{12}$ auf dem Intervall $I$ abgebildet. Wie erwartet ist bei einer Gleichverteilung der Stützstellen der Fehler am Rand sehr groß.
 	
 	\begin{figure}[H]
 		\centering
@@ -62,7 +62,7 @@
 	
 	Begründung des Fehlerverhaltens:
 	
-	Wenn wir mehr Stützstellen hinzufügen, kann es sein ,dass die Polynomfunktion im Allgemeinen die zu interpolierenden Funktion nicht besser approximiert. Da der Interpolationsfehler wie folgt abgeschätzt werden kann.
+	Wenn wir mehr Stützstellen hinzufügen, kann es sein, dass die Polynomfunktion im Allgemeinen die zu interpolierenden Funktion nicht besser approximiert. Da der Interpolationsfehler wie folgt abgeschätzt werden kann.
 	
 	\[\lVert f(x)-g_N(x) \rVert\leq\frac{\lVert f^{(n+1)}\rVert}{(n+1)!}\lVert\omega\rVert\]
 	
