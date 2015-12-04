@@ -148,24 +148,31 @@
  	\end{figure}
  	
  	\renewcommand{\arraystretch}{1.2}
- 	\begin{tabular}{|c|c|c|}\hline
- 	$k$  & $E(h_{N_k})$ & $\operatorname{EOC}(h_{N_k},h_{N_{k+1}})$\\\thickhline
- 	$1$  & $4,8928\times10^{-1}$ & $1,1572$\\\hline
- 	$2$  & $2,1938\times10^{-1}$ & $2,6272$\\\hline
- 	$3$  & $3,5509\times10^{-2}$ & $4,3901$\\\hline
- 	$4$  & $1,6935\times10^{-3}$ & $2,1237$\\\hline
- 	$5$  & $3,8860\times10^{-4}$ & $3,5334$\\\hline
- 	$6$  & $3,3560\times10^{-5}$ & $3,8869$\\\hline
- 	$7$  & $2,2686\times10^{-6}$ & $3,9719$\\\hline
- 	$8$  & $1,4458\times10^{-7}$ & $3,9930$\\\hline
- 	$9$  & $9,0802\times10^{-9}$ & $3,9982$\\\hline
- 	$10$ & $5,6820\times10^{-10}$ & $3,9996$\\\hline
- 	$11$ & $3,5523\times10^{-11}$ & $3,9999$\\\hline
- 	$12$ & $2,2204\times10^{-12}$ & $-$\\\hline
- 	\end{tabular}
+ 	\begin{figure}[H]
+ 		\centering
+	 	\begin{tabular}{|c|c|c|}\hline
+	 	$k$  & $E(h_{N_k})$ & $\operatorname{EOC}(h_{N_k},h_{N_{k+1}})$\\\thickhline
+	 	$1$  & $4,8928\times10^{-1}$ & $1,1572$\\\hline
+	 	$2$  & $2,1938\times10^{-1}$ & $2,6272$\\\hline
+	 	$3$  & $3,5509\times10^{-2}$ & $4,3901$\\\hline
+	 	$4$  & $1,6935\times10^{-3}$ & $2,1237$\\\hline
+	 	$5$  & $3,8860\times10^{-4}$ & $3,5334$\\\hline
+	 	$6$  & $3,3560\times10^{-5}$ & $3,8869$\\\hline
+	 	$7$  & $2,2686\times10^{-6}$ & $3,9719$\\\hline
+	 	$8$  & $1,4458\times10^{-7}$ & $3,9930$\\\hline
+	 	$9$  & $9,0802\times10^{-9}$ & $3,9982$\\\hline
+	 	$10$ & $5,6820\times10^{-10}$ & $3,9996$\\\hline
+	 	$11$ & $3,5523\times10^{-11}$ & $3,9999$\\\hline
+	 	$12$ & $2,2204\times10^{-12}$ & $-$\\\hline
+	 	\end{tabular}
+ 	\end{figure}
+ 	\newpage
  	
- 	Nochmal Spline-Interpolation für $f_1$:
-	\begin{figure}[h]
+ 	Die erste Ableitung für $f_1$ ist:
+ 	
+ 	\[ f_1'(x)=-\frac{\pi \sin(\frac{3\pi}{2}x)}{(\cos(\frac{3\pi}{2}x)+1)^{1/3}}\]
+ 	
+	\begin{figure}[H]
 		\centering
 		\begin{minipage}{0.5\textwidth}
 			\includegraphics[width=8cm,keepaspectratio]{f1_spline\smooth}
@@ -185,20 +192,25 @@
 		\caption{}
  	\end{figure}
  	
- 	\begin{tabular}{|c|c|c|}\hline
- 	$k$  & $E(h_{N_k})$ & $\operatorname{EOC}(h_{N_k},h_{N_{k+1}})$\\\thickhline
- 	$1$  & $6,2057\times10^{-1}$ & $1,6644$\\\hline
- 	$2$  & $1,9577\times10^{-1}$ & $1,4686$\\\hline
- 	$3$  & $7.0736\times10^{-2}$ & $1,3727$\\\hline
- 	$4$  & $2,7316\times10^{-2}$ & $1,3436$\\\hline
- 	$5$  & $1,0746\times10^{-2}$ & $1,3359$\\\hline
- 	$6$  & $4,2640\times10^{-3}$ & $1,3340$\\\hline
- 	$7$  & $1,6914\times10^{-3}$ & $1,3335$\\\hline
- 	$8$  & $6,7116\times10^{-4}$ & $1,3334$\\\hline
- 	$9$  & $2,6634\times10^{-4}$ & $1,3333$\\\hline
- 	$10$ & $1,0570\times10^{-4}$ & $1,3333$\\\hline
- 	$11$ & $4,1946\times10^{-5}$ & $1,3333$\\\hline
- 	$12$ & $1,6646\times10^{-5}$ & $-$\\\hline
- 	\end{tabular}
+ 	\begin{figure}[H]
+		\centering
+	 	\begin{tabular}{|c|c|c|}\hline
+	 	$k$  & $E(h_{N_k})$ & $\operatorname{EOC}(h_{N_k},h_{N_{k+1}})$\\\thickhline
+	 	$1$  & $6,2057\times10^{-1}$ & $1,6644$\\\hline
+	 	$2$  & $1,9577\times10^{-1}$ & $1,4686$\\\hline
+	 	$3$  & $7.0736\times10^{-2}$ & $1,3727$\\\hline
+	 	$4$  & $2,7316\times10^{-2}$ & $1,3436$\\\hline
+	 	$5$  & $1,0764\times10^{-2}$ & $1,3359$\\\hline
+	 	$6$  & $4,2640\times10^{-3}$ & $1,3340$\\\hline
+	 	$7$  & $1,6914\times10^{-3}$ & $1,3335$\\\hline
+	 	$8$  & $6,7116\times10^{-4}$ & $1,3334$\\\hline
+	 	$9$  & $2,6634\times10^{-4}$ & $1,3333$\\\hline
+	 	$10$ & $1,0570\times10^{-4}$ & $1,3333$\\\hline
+	 	$11$ & $4,1946\times10^{-5}$ & $1,3333$\\\hline
+	 	$12$ & $1,6646\times10^{-5}$ & $-$\\\hline
+ 		\end{tabular}
+ 	\end{figure}
  	
+ 	Von den Tabellen sieht man, dass der Fehler sich bei der Runge Funktion schneller verkleinert als bei $f_1$. Entsprechend ist auch die experimentelle Konvergenzordnung (EOC) bei der Runge Funktion größer als bei $f_1$.
+
 \end{document}
