@@ -106,14 +106,21 @@
 	
 	\section{Spline-Interpolation}
 	
-	Ziel ist es jetzt nicht mehr die Funktion  durch ein Polynom zu interpolieren sondern nur noch durch eine stückweise polynomielle Funktion (Spline). In diesem Fall geht es um Splines vom Grad 3 mit Glattheit 1. Wir kennen nicht nur die Funktion sondern auch die erste Ableitung der Funktion.
+	Ziel ist es jetzt nicht mehr die Funktion $f$ durch ein Polynom zu interpolieren sondern nur noch durch eine stückweise polynomielle Funktion (Spline). In diesem Fall geht es um Splines vom Grad 3 mit Glattheit 1. Wir kennen sowohl die Funktion als auch die erste Ableitung der Funktion.
 	
-	Sei $s$ die gesuchte Spline Funktion. Dann ist $s_k:=s|_{[x_k,x_{k+1}]}$ ein Polynom dritten Grades mit $s$
+	Sei $s$ die gesuchte Spline Funktion. Dann ist $s_k:=s|_{[x_k,x_{k+1}]}$ (für $k=0,\dots,N-1$) ein Polynom dritten Grades mit $s_k=a_k(x-x_k)^3 + b_k(x-x_k)^2 + c_k(x-x_k) + d_k$. Wobei die Koeffizienten aus den gegebenen Funktions- und Ableitungswerten wie folgt berechnet werden können.
 	
+	\begin{align*}
+		a_k&=\frac{-2}{h_k^3}\cdot(f(x_{k+1})-f(x_k)) + \frac{1}{h_k^2}\cdot(f'(x_k)+f'(x_{k+1}))\\
+		b_k&=\frac{3}{h_k^2}\cdot(f(x_{k+1})-f(x_k)) - \frac{1}{h_k} \cdot(2f'(x_k)+f'(x_{k+1}))\\
+		c_k&=f'(x_k)\\
+		d_k&=f(x_k)
+	\end{align*}
+	Mit $h_k:=x_{k+1}-x_k$. Für Herleitung siehe Vorlesung.
 	
 	Die erste Ableitung der Runge Funktion ist:
 	
-	\[\]
+	\[f_R'(x)=\frac{-50x}{(25x^2+1)^2}\]
 	
 	
 	\begin{figure}[H]
@@ -128,23 +135,16 @@
 		\end{minipage}
 	\end{figure}
 	
+	Wie man sieht ist die Spline Interpolation wesentlich genauer als die Polynominterpolation.
+	
+	\newpage
+	
 	Fehler für $N_1=2$, $N_2=4$, und $N_3=8$.
-	\begin{figure}[H]
- 		\centering
- 		\begin{minipage}{0.5\textwidth}
- 			\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_1\smooth}
- 			\caption{$N_1$\label{Abb.7}}
- 		\end{minipage}
- 		\begin{minipage}{0.49\textwidth}
- 			\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_2\smooth}
- 			\caption{$N_2$\label{Abb.8}}
- 		\end{minipage}
- 	\end{figure}
  	
  	\begin{figure}[H]
  		\centering
-		\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_3\smooth}
-		\caption{$N_3$\label{Abb.9}}
+		\includegraphics[width=8cm,keepaspectratio]{runge_spline_err_123\smooth}
+		\caption{\label{Abb.9}}
  	\end{figure}
  	
  	\renewcommand{\arraystretch}{1.2}
@@ -178,21 +178,10 @@
 	\end{figure} 
 	
 	Fehler für $N_1=2$, $N_2=4$, und $N_3=8$.
-	\begin{figure}[h]
- 		\centering
- 		\begin{minipage}{0.5\textwidth}
- 			\includegraphics[width=8cm,keepaspectratio]{f1_spline_err_1\smooth}
- 			\caption{$N_1$}
- 		\end{minipage}
- 		\begin{minipage}{0.49\textwidth}
- 			\includegraphics[width=8cm,keepaspectratio]{f1_spline_err_2\smooth}
- 			\caption{$N_2$}
- 		\end{minipage}
- 	\end{figure}
  	
- 	\begin{figure}[h]
+ 	\begin{figure}[H]
  		\centering
-		\includegraphics[width=8cm,keepaspectratio]{f1_spline_err_3\smooth}
-		\caption{$N_3$}
+		\includegraphics[width=8cm,keepaspectratio]{f1_spline_err_123\smooth}
+		\caption{}
  	\end{figure}
 \end{document}

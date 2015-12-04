@@ -2,7 +2,7 @@
 function[result] = EOC(N1, N2, f = @(x) 1./(1.+25.*x.^2), df = @(x) (-50).*x./((25.*x.^2.+1).^2))
 	result = [];
 	for i = 1:min(length(N1),length(N2))
-		result = horzcat(result,(log(interpolate(f,N1(i),0,3,1,df))-log(interpolate(f,N2(i),0,3,1,df)))/(log(2/N1(i))-log(2/N2(i))))
+		result = horzcat(result,(log(interpolate(N1(i),0,3,1,f,df))-log(interpolate(N2(i),0,3,1,f,df)))/(log(2/N1(i))-log(2/N2(i))))
 	end
 endfunction
 
