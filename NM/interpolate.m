@@ -1,3 +1,4 @@
+%Shanshan_Huang_Florian_Starke_2
 % Parameters: 
 % #1 number of grid intervalls
 % #2 0 for aequidistant zeros, 1 for Tschepyschow zeros

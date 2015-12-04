@@ -1,3 +1,4 @@
+%Shanshan_Huang_Florian_Starke_2
 %example call  EOC(2.^[1:11],2.^[2:12],f1,f1Derivation)
 function[result] = EOC(N1, N2, f = @(x) 1./(1.+25.*x.^2), df = @(x) (-50).*x./((25.*x.^2.+1).^2))
 	result = [];
